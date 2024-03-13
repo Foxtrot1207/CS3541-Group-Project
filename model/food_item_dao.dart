@@ -13,5 +13,10 @@ class FoodItemDAO {
     return querySnapshot.docs.map((doc) => FoodItem.fromMap(doc.data())).toList();
   }
 
-// Implement updateFoodItem and deleteFoodItem similarly
-}
+  Future<void> updateFoodItem(FoodItem foodItem) async {
+    await _db.collection('foodItems').doc(foodItem.id).update(foodItem.toMap());
+  }
+
+  Future<void> deleteFoodItem(String id) async {
+    await _db.collection('foodItems').doc(id).delete();
+  }
