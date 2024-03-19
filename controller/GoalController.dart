@@ -12,6 +12,7 @@ class GoalController {
     goal.goalName = newGoalName;
     goal.goalDescription = newGoalDescription;
     goal.deadline = newDeadline;
+    database.update('goals', goal.toMap(), where: 'id = ?', whereArgs: [goal.id]);
   }
 
 }
