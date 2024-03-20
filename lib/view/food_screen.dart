@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'food_item.dart';
-import 'food_item_controller.dart';
+import 'package:healthapp/model/food_item.dart';
+import 'package:healthapp/controller/food_item_controller.dart';
 import 'food_item_view.dart';
 
 class FoodItemScreen extends StatefulWidget {

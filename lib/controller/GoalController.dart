@@ -1,10 +1,11 @@
+import 'package:healthapp/goal.dart';
 
 
 class GoalController {
   final database = Placeholder;
   final notificationService = Placeholder;
 
-  void createGoal(string goalName, String goalDescription, DateTime deadline) {
+  void createGoal(String goalName, String goalDescription, DateTime deadline) {
     Goal newGoal = Goal(goalName: goalName, goalDescription: goalDescription, deadline: deadline);
     database.insert('goals', newGoal.toMap());
   }
