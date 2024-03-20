@@ -12,7 +12,7 @@ class FoodItemScreen extends StatefulWidget {
 class _FoodItemScreenState extends State<FoodItemScreen> {
   final _formKey = GlobalKey<FormState>();
   String _name = '';
-  int _calories = 0;
+  double _calories = 0;
   Map<String, double> _macros = {'protein': 0, 'carbs': 0, 'fat': 0};
 
   @override
@@ -53,7 +53,7 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                        _calories = int.parse(value!);
+                        _calories = double.parse(value!);
                       },
                     ),
                     // TextFormFields for macros
