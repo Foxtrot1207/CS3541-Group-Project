@@ -1,8 +1,10 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:healthapp/notification_controller.dart';
+import 'package:healthapp/app_notification_handler.dart';
 
-String channelKey = "defaultChannelGroup";
+
+String channelKey = AppNotificationHandler().getChannelKey();
 
 void main() async {
     await AwesomeNotifications().initialize(
