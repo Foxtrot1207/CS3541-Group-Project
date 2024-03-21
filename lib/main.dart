@@ -2,7 +2,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:healthapp/notification_controller.dart';
 import 'package:healthapp/app_notification_handler.dart';
-
+import 'GoalList.dart';
 
 String channelKey = AppNotificationHandler().getChannelKey();
 
