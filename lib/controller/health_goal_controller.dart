@@ -1,3 +1,5 @@
+import 'package:healthapp/model/health_goal_model.dart';
+
 class HealthGoalController {
   List<HealthGoal> healthGoals = [];
 
