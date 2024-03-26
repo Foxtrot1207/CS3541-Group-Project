@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'lib/model/food_item.dart';
 import 'lib/controller/food_item_controller.dart';
 import 'lib/view/food_item_view.dart';
+
 
 class FoodItemScreen extends StatefulWidget {
   @override

@@ -1,7 +1,10 @@
+
 class HealthGoalInputScreen extends StatefulWidget {
   @override
   _HealthGoalInputScreenState createState() => _HealthGoalInputScreenState();
 }
+
+import 'package:healthapp/model/health_goal_model.dart';
 
 class _HealthGoalInputScreenState extends State<HealthGoalInputScreen> {
   HealthGoalCadence? _selectedCadence;

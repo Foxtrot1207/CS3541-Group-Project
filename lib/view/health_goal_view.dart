@@ -14,8 +14,8 @@ class _HealthGoalViewState extends State<HealthGoalView> {
       itemBuilder: (context, index) {
         HealthGoal goal = controller.healthGoals[index];
         return ListTile(
-          title: Text('Goal Type: ${goal.goalType == 0 ? 'Daily Macro' : 'Weekly Weight'}'),
-          subtitle: Text('Macros Goal: ${goal.macrosGoal}, Weight Goal: ${goal.weightGoal}'),
+          title: Text('Goal Type: ${goal.goal_type == 0 ? 'Daily Macro' : 'Weekly Weight'}'),
+          subtitle: Text('Macros Goal: ${goal.macros_goal}, Weight Goal: ${goal.weight_goal}'),
           trailing: IconButton(
             icon: Icon(Icons.delete),
             onPressed: () => controller.removeHealthGoal(index),

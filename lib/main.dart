@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'lib/view/food_screen.dart';
 import 'lib/view/health_goal_view.dart';
 import 'lib/view/food_item_view.dart';
@@ -56,33 +57,4 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-}
-
-class FoodItemView extends StatefulWidget {
-  const FoodItemView({super.key});
-
-  @override
-  _FoodItemScreenState createState() => _FoodItemScreenState();
-}
-
-class _FoodItemViewState extends State<FoodItemView> {
-
-}
-
-class HealthGoalView extends StatefulWidget {
-  @override
-  _HealthGoalViewState createState() => _HealthGoalViewState();
-}
-
-class _HealthGoalViewState extends State<HealthGoalView> {
-
-}
-
-class FoodItemScreen extends StatefulWidget {
-  @override
-  _FoodItemScreenState createState() => _FoodItemScreenState();
-}
-
-class _FoodItemScreenState extends State<FoodItemScreen> {
-
 }
