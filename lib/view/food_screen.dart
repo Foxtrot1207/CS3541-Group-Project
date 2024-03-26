@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:healthapp/lib/model/food_item.dart';
-import 'package:healthapp/lib/controller/food_item_controller.dart';
-import 'package:healthapp/lib/view/food_item_view.dart';
+import 'package:healthapp/model/food_item.dart';
+import 'package:healthapp/controller/food_item_controller.dart';
+import 'package:healthapp/view/food_item_view.dart';
 
 
 class FoodItemScreen extends StatefulWidget {

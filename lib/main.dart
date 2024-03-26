@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'lib/view/food_screen.dart';
-import 'lib/view/health_goal_view.dart';
-import 'lib/view/food_item_view.dart';
+import 'package:healthapp/view/food_screen.dart';
+import 'package:healthapp/view/health_goal_view.dart';
+import 'package:healthapp/view/food_item_view.dart';
 
 
 void main() {
