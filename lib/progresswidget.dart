@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'goal.dart';
+import 'package:healthapp/model/health_goal.dart';
 
 class GoalProgressWidget extends StatefulWidget {
   GoalProgressWidget({super.key});
@@ -14,12 +14,12 @@ class _GoalProgressWidgetState extends State<GoalProgressWidget> {
     super.initState();
   }
 
-  TableRow buildRow(Goal goal) {
+  TableRow buildRow(HealthGoal goal) {
     return TableRow(
       children: <Widget>[
-        Text(goal.goalName),
+        Text(goal.attribute.name),
         LinearProgressIndicator(
-          value: goal.getProgress(),
+          value: (30.0 / goal.target.toDouble()), // Temporary value!
           semanticsLabel: 'Goal progress indicator',
         ),
       ],
@@ -36,8 +36,8 @@ class _GoalProgressWidgetState extends State<GoalProgressWidget> {
       },
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: <TableRow>[
-        buildRow(Goal( goalName: "test 1", goalDescription: "desc", deadline: DateTime(0), target: 100, current: 25)),
-        buildRow(Goal( goalName: "test 2", goalDescription: "desc", deadline: DateTime(0), target: 60, current: 20)),
+        buildRow(HealthGoal( cadence: HealthGoalCadence.daily, attribute: HealthGoalAttribute.fat, target: 100 )),
+        buildRow(HealthGoal( cadence: HealthGoalCadence.weekly, attribute: HealthGoalAttribute.protein, target: 60 )),
       ],
     );
   }

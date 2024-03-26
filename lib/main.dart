@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:healthapp/view/food_screen.dart';
 import 'package:healthapp/view/health_goal_view.dart';
 import 'package:healthapp/view/food_item_view.dart';
-
+import 'package:healthapp/model/food_item.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,8 +16,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _currentIndex = 0;
+
   final List<Widget> _children = [
-    FoodItemView(),
+    FoodItemView(
+      foodItems: [
+        FoodItem(name: "banana", calories: 100, macros: {} ),
+        FoodItem(name: "apple", calories: 200, macros: {} ),
+      ]
+    ),
     HealthGoalView(),
     FoodItemScreen(),
   ];

@@ -98,7 +98,7 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
                         _macros['fat'] = double.parse(value!);
                       },
                     ),
-                    RaisedButton(
+                    ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
