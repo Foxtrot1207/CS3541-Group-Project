@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-
-import 'package:healthapp/model/health_goal_model.dart';
-import 'package:healthapp/controller/health_goal_controller.dart';
-
+import 'package:healthapp/model/health_goal_model';
 class HealthGoalView extends StatefulWidget {
   @override
   _HealthGoalViewState createState() => _HealthGoalViewState();
