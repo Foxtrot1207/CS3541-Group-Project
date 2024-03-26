@@ -1,4 +1,6 @@
-import 'package:healthapp/model/health_goal_model.dart';
+import 'package:flutter/material.dart';
+import 'package:healthapp/model/health_goal.dart';
+
 class HealthGoalInputScreen extends StatefulWidget {
   @override
   _HealthGoalInputScreenState createState() => _HealthGoalInputScreenState();
