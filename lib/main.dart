@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'food_screen.dart';
-import 'health_goal_view.dart';
-import 'food_item_view.dart'; // Assuming you have a screen for inputting food items
+import 'lib/view/food_screen.dart';
+import 'lib/view/health_goal_view.dart';
+import 'lib/view/food_item_view.dart';
 
 
 void main() {
@@ -18,7 +18,7 @@ class _MyAppState extends State<MyApp> {
   final List<Widget> _children = [
     FoodItemView(),
     HealthGoalView(),
-    FoodItemScreen(), // Placeholder for the food item input screen
+    FoodItemScreen(),
   ];
 
   void onTabTapped(int index) {
@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
         bottomNavigationBar: BottomNavigationBar(
           onTap: onTabTapped,
           currentIndex: _currentIndex,
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.fastfood),
               label: 'Food Items',
@@ -59,12 +59,14 @@ class _MyAppState extends State<MyApp> {
 }
 
 class FoodItemView extends StatefulWidget {
+  const FoodItemView({super.key});
+
   @override
   _FoodItemScreenState createState() => _FoodItemScreenState();
 }
 
 class _FoodItemViewState extends State<FoodItemView> {
-  // Implementation of FoodItemView
+
 }
 
 class HealthGoalView extends StatefulWidget {
@@ -73,7 +75,7 @@ class HealthGoalView extends StatefulWidget {
 }
 
 class _HealthGoalViewState extends State<HealthGoalView> {
-  // Implementation of HealthGoalView
+
 }
 
 class FoodItemScreen extends StatefulWidget {
@@ -82,5 +84,5 @@ class FoodItemScreen extends StatefulWidget {
 }
 
 class _FoodItemScreenState extends State<FoodItemScreen> {
-  // Placeholder implementation for FoodItemScreen
+
 }
