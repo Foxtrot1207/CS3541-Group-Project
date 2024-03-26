@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'package:healthapp/model/food_item.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
-import 'food_item_view.dart';
+import 'package:healthapp/view/food_item_view.dart';
+
 
 class FoodItemScreen extends StatefulWidget {
   @override
@@ -12,7 +14,7 @@ class FoodItemScreen extends StatefulWidget {
 class _FoodItemScreenState extends State<FoodItemScreen> {
   final _formKey = GlobalKey<FormState>();
   String _name = '';
-  int _calories = 0;
+  double _calories = 0;
   Map<String, double> _macros = {'protein': 0, 'carbs': 0, 'fat': 0};
 
   @override
@@ -53,7 +55,7 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                        _calories = int.parse(value!);
+                        _calories = double.parse(value!);
                       },
                     ),
                     // TextFormFields for macros

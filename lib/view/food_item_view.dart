@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:healthapp/model/food_item.dart';
+
 
 class FoodItemView extends StatelessWidget {
   final List<FoodItem> foodItems;
