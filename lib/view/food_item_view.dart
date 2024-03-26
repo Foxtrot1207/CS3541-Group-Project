@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'lib/model/food_item.dart';
+import 'package:healthapp/lib/model/food_item.dart';
 
 
 class FoodItemView extends StatelessWidget {

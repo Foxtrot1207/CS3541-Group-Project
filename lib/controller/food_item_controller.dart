@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'lib/model/food_item.dart';
+import 'package:healthapp/lib/model/food_item.dart';
 
 class FoodItemController with ChangeNotifier {
   final FirebaseFirestore _db = FirebaseFirestore.instance;

@@ -1,4 +1,4 @@
-import 'lib/model/health_goal_model';
+import 'package:healthapp/lib/model/health_goal_model';
 class HealthGoalView extends StatefulWidget {
   @override
   _HealthGoalViewState createState() => _HealthGoalViewState();
