@@ -49,7 +49,7 @@ class _HealthGoalInputScreenState extends State<HealthGoalInputScreen> {
               items: HealthGoalAttribute.values.map((HealthGoalAttribute attribute) {
                 return DropdownMenuItem<HealthGoalAttribute>(
                   value: attribute,
-                  child: Text(attribute.toString().split('.').last),
+                  child: Text(attribute.title),
                 );
               }).toList(),
             ),

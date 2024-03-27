@@ -18,7 +18,7 @@ class _GoalProgressWidgetState extends State<GoalProgressWidget> {
   TableRow buildRow(HealthGoal goal) {
     return TableRow(
       children: <Widget>[
-        Text(goal.attribute.name),
+        Text(goal.attribute.title),
         LinearProgressIndicator(
           value: (30.0 / goal.target.toDouble()), // Temporary value!
           semanticsLabel: 'Goal progress indicator',

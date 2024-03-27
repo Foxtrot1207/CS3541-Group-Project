@@ -5,12 +5,16 @@ enum HealthGoalCadence {
 }
 
 enum HealthGoalAttribute {
-  weight(),
-  protein(),
-  fat(),
-  carbs(),
-  sugar(),
-  water(),
+  weight(title: "Weight"),
+  protein(title: "Protein"),
+  fat(title: "Fat"),
+  carbs(title: "Carbs"),
+  sugar(title: "Sugar"),
+  water(title: "Water");
+
+  const HealthGoalAttribute({required this.title});
+
+  final String title;
 }
 
 class HealthGoal {
