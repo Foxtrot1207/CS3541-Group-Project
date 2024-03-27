@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:healthapp/model/food_item.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
@@ -7,6 +6,9 @@ import 'package:healthapp/view/food_item_view.dart';
 
 
 class FoodItemScreen extends StatefulWidget {
+  FoodItemController controller;
+  FoodItemScreen({required this.controller});
+
   @override
   _FoodItemScreenState createState() => _FoodItemScreenState();
 }
@@ -103,7 +105,8 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           // Call the function to add the food item
-                          Provider.of<FoodItemController>(context, listen: false).addNewFoodItemViaInput(_name, _calories, _macros);
+
+                          widget.controller.addFoodItem(FoodItem(name: _name, calories: _calories, macros: _macros));
                           // Clear the form fields
                           _formKey.currentState!.reset();
                         }
@@ -113,14 +116,6 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
                   ],
                 ),
               ),
-            ),
-          ),
-          // UI for displaying the list of food items
-          Expanded(
-            child: Consumer<FoodItemController>(
-              builder: (context, controller, child) {
-                return FoodItemView(foodItems: controller.foodItems);
-              },
             ),
           ),
         ],

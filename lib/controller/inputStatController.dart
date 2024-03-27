@@ -3,10 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import '../model/inputStatModel.dart';
 import '../view/inputStatView.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
+/*
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -24,7 +21,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.brown,
             ),
-            home: MyHomePageContainer(),
+            home: InputStatContainer(),
           );
         }
         return MaterialApp();
@@ -32,14 +29,15 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+*/
 
 
-class MyHomePageContainer extends StatelessWidget {
-  const MyHomePageContainer({super.key});
+class InputStatContainer extends StatelessWidget {
+  const InputStatContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MyHomePage(
+    return InputStatView(
       title: 'Input Stat about My Food',
       addStatCallback: (String day, String calories, String nutrition) {
         StatModel().addStat(day, calories, nutrition);

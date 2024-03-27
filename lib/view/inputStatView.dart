@@ -1,23 +1,23 @@
 
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget {
+class InputStatView extends StatefulWidget {
   final String title;
   final TextEditingController caloriesController = TextEditingController();
   final TextEditingController nutritionController = TextEditingController();
   final Function(String, String, String) addStatCallback;
 
-  MyHomePage({
+  InputStatView({
     Key? key,
     required this.title,
     required this.addStatCallback,
   }) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _InputStatViewState createState() => _InputStatViewState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _InputStatViewState extends State<InputStatView> {
   String selectedDay = 'Monday';
   String caloriesToday = '';
   @override
