@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class GoalInput extends StatefulWidget {
   final String goal;
 
-  GoalInput({this.goal});
+  GoalInput({required this.goal});
 
   @override
   _GoalInputState createState() => _GoalInputState();
 }
 
 class _GoalInputState extends State<GoalInput> {
-  TextEditingController controller;
+  late TextEditingController controller;
 
   @override
   void initState() {
