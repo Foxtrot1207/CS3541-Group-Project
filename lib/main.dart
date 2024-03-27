@@ -11,6 +11,7 @@ import 'package:healthapp/controller/person_info_controller.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/model/food_item.dart';
 import 'package:healthapp/model/person_info.dart';
+import 'package:healthapp/BMICalc.dart';
 
 void main() {
   runApp(MyApp());
@@ -45,6 +46,7 @@ class _MyAppState extends State<MyApp> {
       HealthGoalInputScreen(controller: _personInfoController),
       InputStatContainer(controller: _personInfoController),
       GoalProgressView(controller: _personInfoController),
+      CalcBMIController(),
     ];
   }
 
@@ -90,6 +92,10 @@ class _MyAppState extends State<MyApp> {
             BottomNavigationBarItem(
               icon: Icon(Icons.numbers),
               label: 'Progress',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.scale),
+              label: 'Calc BMI',
             ),
           ],
         ),
