@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthapp/controller/person_info_controller.dart';
 import 'package:healthapp/model/health_goal.dart';
 
 class GoalProgressWidget extends StatefulWidget {
