@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 import '../model/inputStatModel.dart';
 import '../view/inputStatView.dart';
 
@@ -28,11 +27,12 @@ class MyApp extends StatelessWidget {
             home: MyHomePageContainer(),
           );
         }
-        return MaterialApp(); // Placeholder for loading state
+        return MaterialApp();
       },
     );
   }
 }
+
 
 class MyHomePageContainer extends StatelessWidget {
   const MyHomePageContainer({super.key});
@@ -41,8 +41,8 @@ class MyHomePageContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return MyHomePage(
       title: 'Input Stat about My Food',
-      addStatCallback: (String calories, String nutrition) {
-        StatModel().addStat(calories, nutrition);
+      addStatCallback: (String day, String calories, String nutrition) {
+        StatModel().addStat(day, calories, nutrition);
       },
     );
   }
