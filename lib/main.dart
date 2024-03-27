@@ -23,8 +23,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _currentIndex = 0;
 
-  // TODO: Remove this later!
-  final FoodItemController _foodItemController =  FoodItemController(
+  // TODO: Remove these two later!
+  PersonInfoController _personInfoController = PersonInfoController(
+    personInfo: PersonInfo()
+  );
+  final FoodItemController _foodItemController = FoodItemController(
      foodItems: [
       FoodItem(name: "banana", calories: 100, macros: {} ),
       FoodItem(name: "apple", calories: 200, macros: {} ),
@@ -37,8 +40,8 @@ class _MyAppState extends State<MyApp> {
     _children = [
       FoodItemView(controller: _foodItemController),
       FoodItemScreen(controller: _foodItemController),
-      HealthGoalView(controller: PersonInfoController(personInfo: PersonInfo())),
-      HealthGoalInputScreen(),
+      HealthGoalView(controller: _personInfoController),
+      HealthGoalInputScreen(controller: _personInfoController),
       InputStatContainer(),
     ];
   }
