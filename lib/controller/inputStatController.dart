@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/model/health_goal.dart';
+import 'package:healthapp/model/person_info.dart';
+
 import '../model/inputStatModel.dart';
 import '../view/inputStatView.dart';
 
@@ -33,14 +37,17 @@ class MyApp extends StatelessWidget {
 
 
 class InputStatContainer extends StatelessWidget {
-  const InputStatContainer({super.key});
+  final PersonInfoController controller;
+  const InputStatContainer({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return InputStatView(
       title: 'Input Stat about My Food',
-      addStatCallback: (String day, String calories, String nutrition) {
-        StatModel().addStat(day, calories, nutrition);
+      addStatCallback: (String day, HealthGoalAttribute attribute, double nutrition) {
+        // StatModel().addStat(day, calories, nutrition);
+        // TODO: Remove this later
+        controller.addStat(attribute, nutrition);
       },
     );
   }

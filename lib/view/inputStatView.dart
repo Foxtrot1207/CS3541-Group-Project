@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:healthapp/model/health_goal.dart';
 
 class InputStatView extends StatefulWidget {
   final String title;
-  final TextEditingController caloriesController = TextEditingController();
   final TextEditingController nutritionController = TextEditingController();
-  final Function(String, String, String) addStatCallback;
+  final Function(String, HealthGoalAttribute, double) addStatCallback;
 
   InputStatView({
     Key? key,
@@ -20,6 +20,8 @@ class InputStatView extends StatefulWidget {
 class _InputStatViewState extends State<InputStatView> {
   String selectedDay = 'Monday';
   String caloriesToday = '';
+  HealthGoalAttribute? _selectedAttribute;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,19 +61,23 @@ class _InputStatViewState extends State<InputStatView> {
                 );
               }).toList(),
             ),
-            SizedBox(height: 16),
-            Text(
-              'Enter the how much calories you took today:',
+            const Text(
+              'Enter the nutrition attribute:',
               style: TextStyle(fontSize: 16),
             ),
-            TextField(
-              controller: widget.caloriesController,
-              keyboardType: TextInputType.number,
-              onChanged: (value){
+            DropdownButton<HealthGoalAttribute>(
+              value: _selectedAttribute,
+              onChanged: (HealthGoalAttribute? newValue) {
                 setState(() {
-                  caloriesToday = value;
+                  _selectedAttribute = newValue;
                 });
               },
+              items: HealthGoalAttribute.values.map((HealthGoalAttribute attribute) {
+                return DropdownMenuItem<HealthGoalAttribute>(
+                  value: attribute,
+                  child: Text(attribute.title),
+                );
+              }).toList(),
             ),
             SizedBox(height: 16),
             Text(
@@ -87,19 +93,20 @@ class _InputStatViewState extends State<InputStatView> {
               onPressed: () {
                 widget.addStatCallback(
                   selectedDay,
-                  widget.caloriesController.text,
-                  widget.nutritionController.text,
+                  _selectedAttribute ?? HealthGoalAttribute.water,
+                  double.tryParse(widget.nutritionController.text) ?? 0,
                 );
-                widget.caloriesController.clear();
                 widget.nutritionController.clear();
               },
               child: Text('Submit'),
             ),
+/*
             SizedBox(height: 32),
             Text(
               'Calories today: $caloriesToday',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
+*/
           ],
         ),
       ),

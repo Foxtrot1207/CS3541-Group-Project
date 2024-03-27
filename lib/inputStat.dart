@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/model/person_info.dart';
 import 'controller/inputStatController.dart';
 
-
+/*
 void main() {
   runApp(AppInitializer());
 }
+*/
 
 class AppInitializer extends StatelessWidget {
   Future<FirebaseApp> initializeFirebase() async {
@@ -49,7 +52,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.brown,
       ),
-      home: InputStatContainer(),
+      home: InputStatContainer(controller: PersonInfoController(personInfo: PersonInfo())),
     );
   }
 }

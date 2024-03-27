@@ -24,5 +24,14 @@ class PersonInfoController {
   void removeHealthGoalAt(int index) {
     personInfo.currentGoals.removeAt(index);
   }
+
+  double getStat(HealthGoalAttribute attribute) {
+    return personInfo.currentAttributes[attribute]??0;
+  }
+
+  void addStat(HealthGoalAttribute attribute, double value) {
+    // Is there a nicer way to do this in dart?
+    personInfo.currentAttributes[attribute] = (personInfo.currentAttributes[attribute]??0) + value;
+  }
   
 }

@@ -6,6 +6,7 @@ import 'package:healthapp/view/health_goal_input.dart';
 import 'package:healthapp/view/health_goal_view.dart';
 import 'package:healthapp/view/food_item_view.dart';
 import 'package:healthapp/view/inputStatView.dart';
+import 'package:healthapp/view/progresswidget.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/model/food_item.dart';
@@ -29,8 +30,8 @@ class _MyAppState extends State<MyApp> {
   );
   final FoodItemController _foodItemController = FoodItemController(
      foodItems: [
-      FoodItem(name: "banana", calories: 100, macros: {} ),
-      FoodItem(name: "apple", calories: 200, macros: {} ),
+      FoodItem(name: "Banana", calories: 105, macros: {} ),
+      FoodItem(name: "Apple", calories: 95, macros: {} ),
      ]
   );
   
@@ -42,7 +43,8 @@ class _MyAppState extends State<MyApp> {
       FoodItemScreen(controller: _foodItemController),
       HealthGoalView(controller: _personInfoController),
       HealthGoalInputScreen(controller: _personInfoController),
-      InputStatContainer(),
+      InputStatContainer(controller: _personInfoController),
+      GoalProgressView(controller: _personInfoController),
     ];
   }
 
@@ -84,6 +86,10 @@ class _MyAppState extends State<MyApp> {
             BottomNavigationBarItem(
               icon: Icon(Icons.fitness_center),
               label: 'Input Stats',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.numbers),
+              label: 'Progress',
             ),
           ],
         ),
