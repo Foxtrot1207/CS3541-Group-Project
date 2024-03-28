@@ -1,6 +1,6 @@
 class FoodItem {
   final String name;
-  final int calories;
+  final double calories;
   final Map<String, double> macros; // Example: {'protein': 10, 'carbs': 20, 'fat': 5}
 
   FoodItem({required this.name, required this.calories, required this.macros});

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:healthapp/controller/food_item_controller.dart';
 
 import 'package:healthapp/model/food_item.dart';
 
 
 class FoodItemView extends StatelessWidget {
-  final List<FoodItem> foodItems;
+  final FoodItemController controller;
 
-  FoodItemView({required this.foodItems});
+  FoodItemView({required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: foodItems.length,
+      itemCount: controller.foodItems.length,
       itemBuilder: (context, index) {
         return ListTile(
-          title: Text(foodItems[index].name),
-          subtitle: Text('Calories: ${foodItems[index].calories}'),
+          title: Text(controller.foodItems[index].name),
+          subtitle: Text('Calories: ${controller.foodItems[index].calories}'),
         );
       },
     );

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/model/health_goal.dart';
+import 'package:healthapp/controller/person_info_controller.dart';
 
 class HealthGoalInputScreen extends StatefulWidget {
+  PersonInfoController controller;
+  HealthGoalInputScreen({required this.controller});
+
   @override
   _HealthGoalInputScreenState createState() => _HealthGoalInputScreenState();
 }
@@ -45,7 +49,7 @@ class _HealthGoalInputScreenState extends State<HealthGoalInputScreen> {
               items: HealthGoalAttribute.values.map((HealthGoalAttribute attribute) {
                 return DropdownMenuItem<HealthGoalAttribute>(
                   value: attribute,
-                  child: Text(attribute.toString().split('.').last),
+                  child: Text(attribute.title),
                 );
               }).toList(),
             ),
@@ -63,7 +67,9 @@ class _HealthGoalInputScreenState extends State<HealthGoalInputScreen> {
             ElevatedButton(
               onPressed: () {
                 // Handle the submission of the health goal
-                // For example, you could add the new goal to a list or save it to a database
+                if (_selectedCadence != null && _selectedAttribute != null) {
+                  widget.controller.addHealthGoal(HealthGoal(cadence: _selectedCadence??HealthGoalCadence.daily, attribute: _selectedAttribute??HealthGoalAttribute.water, target: _target));
+                }
               },
               child: Text('Submit'),
             ),
