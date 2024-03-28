@@ -2,32 +2,36 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'goal_notification.dart';
 
 class AppNotificationHandler {
-    final _channelKey = "defaultChannelGroup";
+    static const _channelKey = "defaultChannelGroup";
     static final idList = <String, int>{};
+
+    AppNotificationHandler(){
+        print("the fucking hell");
+    }
 
     void createNotification ( GoalNotification goal ) {
         String goalTitle;
-        String goalDescription = goal.goalDescription;
+        String goalDescription = goal.description;
 
-        switch ( goal.goalStatus ) {
+        switch ( goal.status ) {
             case -1:            
-                goalTitle = "You did not meet your goal of " + goal.goalName;
+                goalTitle = "You did not meet your goal of " + goal.name;
                 break;
             case 0:
-                goalTitle = "You achieved your goal of " + goal.goalName;
+                goalTitle = "You achieved your goal of " + goal.name;
                 break;
             case 1:
-                goalTitle = "You surpassed your goal of " + goal.goalName;
+                goalTitle = "You surpassed your goal of " + goal.name;
                 break;
             default:
                 goalTitle = "Something went wrong here goalStatus was wrong";
-                goalDescription = goal.goalStatus.toString();
+                goalDescription = goal.status.toString();
                 break;
         }
 
         AwesomeNotifications().createNotification(
             content: NotificationContent(
-                id: _idMaker( goal.goalName ),
+                id: _idMaker( goal.name ),
                 channelKey: _channelKey,
                 title: goalTitle,
                 body: goalDescription,
@@ -59,8 +63,8 @@ class AppNotificationHandler {
     Future<void> updateNotification ( GoalNotification goal ) async {
         final notificationList = await AwesomeNotifications().listScheduledNotifications();
         int? idToUpdate;
-        if ( AppNotificationHandler.idList.containsKey( goal.goalName ) ) {
-            idToUpdate = AppNotificationHandler.idList[ goal.goalName ];
+        if ( AppNotificationHandler.idList.containsKey( goal.name ) ) {
+            idToUpdate = AppNotificationHandler.idList[ goal.name ];
             int? idToCancel = (notificationList.where((x) => x.content?.id == idToUpdate)).elementAt( 0 ).content?.id;
             AwesomeNotifications().cancel( idToCancel! );
             createNotification( goal );

@@ -1,11 +1,15 @@
 class GoalNotification {
-    String goalName;
-    String goalDescription;
+    String name;
+    String description;
     DateTime deadline;
-    int goalStatus;
+    int status;
 
     //GoalNotification( Goal goal ) {
     //}
-    GoalNotification ( required this.goalName, required this.goalDescription, required this.deadline, required this.goalStatus ) {
-    }
+    GoalNotification ( 
+    {
+        required this.name, 
+        required this.description, 
+        required this.deadline, 
+        required this.status} ); 
 }

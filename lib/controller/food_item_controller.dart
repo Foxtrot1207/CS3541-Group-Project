@@ -1,8 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:healthapp/model/food_item.dart';
 
 class FoodItemController with ChangeNotifier {
+  // Temporary stub code until the DB work is completed!
+  List<FoodItem> foodItems;
+  FoodItemController({required this.foodItems});
+  void addFoodItem(FoodItem foodItem) {
+    foodItems.add(foodItem);
+  }
+
+
+/*
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   List<FoodItem> _foodItems = [];
 
@@ -30,4 +39,5 @@ class FoodItemController with ChangeNotifier {
     _foodItems = await getFoodItems();
     notifyListeners();
   }
+*/
 }
