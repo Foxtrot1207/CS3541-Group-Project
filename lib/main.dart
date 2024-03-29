@@ -27,15 +27,15 @@ class _MyAppState extends State<MyApp> {
 
   // TODO: Remove these two later!
   PersonInfoController _personInfoController = PersonInfoController(
-    personInfo: PersonInfo()
+      personInfo: PersonInfo()
   );
   final FoodItemController _foodItemController = FoodItemController(
-     foodItems: [
-      FoodItem(name: "Banana", calories: 105, macros: {} ),
-      FoodItem(name: "Apple", calories: 95, macros: {} ),
-     ]
+      foodItems: [
+        FoodItem(name: "Banana", calories: 105, servingSize: 1, macros: {} ),
+        FoodItem(name: "Apple", calories: 95, servingSize: 2, macros: {} ),
+      ]
   );
-  
+
   late List<Widget> _children;
 
   _MyAppState() {
@@ -103,6 +103,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-
-
