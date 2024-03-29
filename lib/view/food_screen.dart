@@ -17,7 +17,9 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
   final _formKey = GlobalKey<FormState>();
   String _name = '';
   double _calories = 0;
+  double _servingSize = 0;
   Map<String, double> _macros = {'protein': 0, 'carbs': 0, 'fat': 0};
+  //double _sugar = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +47,19 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
                       },
                       onSaved: (value) {
                         _name = value!;
+                      },
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(labelText: 'Serving Size'),
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the serving size';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _servingSize = double.parse(value!);
                       },
                     ),
                     TextFormField(
@@ -106,7 +121,7 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
                           _formKey.currentState!.save();
                           // Call the function to add the food item
 
-                          widget.controller.addFoodItem(FoodItem(name: _name, calories: _calories, macros: _macros));
+                          widget.controller.addFoodItem(FoodItem(name: _name, calories: _calories, macros: _macros, servingSize: _servingSize));
                           // Clear the form fields
                           _formKey.currentState!.reset();
                         }
