@@ -12,6 +12,7 @@ dependencies:
   firebase_core: ^1.17.1
   firebase_database: ^9.0.16
   firebase_core_platform_interface: 4.5.1
+  syncfusion_flutter_charts: 25.1.37
 
   sqflite: ^2.3.0
   path: any
