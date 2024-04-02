@@ -1,43 +1,24 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 import 'package:healthapp/model/food_item.dart';
 
+/// A controller for managing a list of FoodItem objects.
+///
+/// This controller is designed to be used with Flutter's ChangeNotifierProvider for state management.
 class FoodItemController with ChangeNotifier {
-  // Temporary stub code until the DB work is completed!
+  /// A list of FoodItem objects managed by this controller.
   List<FoodItem> foodItems;
+
+  /// Creates a new FoodItemController with the given list of FoodItem objects.
+  ///
+  /// @param foodItems The initial list of FoodItem objects to manage.
   FoodItemController({required this.foodItems});
+
+  /// Adds a new FoodItem to the list of food items managed by this controller.
+  ///
+  /// @param foodItem The FoodItem to add.
   void addFoodItem(FoodItem foodItem) {
     foodItems.add(foodItem);
   }
-
-
-/*
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
-  List<FoodItem> _foodItems = [];
-
-  List<FoodItem> get foodItems => _foodItems;
-
-  Future<void> addFoodItem(FoodItem foodItem) async {
-    await _db.collection('foodItems').add(foodItem.toMap());
-    fetchFoodItems(); // Refresh the list after adding a new item
-  }
-
-  Future<List<FoodItem>> getFoodItems() async {
-    QuerySnapshot querySnapshot = await _db.collection('foodItems').get();
-    _foodItems = querySnapshot.docs.map((doc) => FoodItem.fromMap(doc.data())).toList();
-    notifyListeners();
-    return _foodItems;
-  }
-
-
-  Future<void> deleteFoodItem(String id) async {
-    await _db.collection('foodItems').doc(id).delete();
-    fetchFoodItems(); // Refresh the list after deleting an item
-  }
-
-  Future<void> fetchFoodItems() async {
-    _foodItems = await getFoodItems();
-    notifyListeners();
-  }
-*/
 }

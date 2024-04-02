@@ -4,23 +4,26 @@ import 'package:healthapp/model/food_item.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/view/food_item_view.dart';
 
-
+/// A stateful widget class that represents a screen for food items.
 class FoodItemScreen extends StatefulWidget {
   FoodItemController controller;
+
+  /// Constructor that requires a FoodItemController object.
   FoodItemScreen({required this.controller});
 
   @override
   _FoodItemScreenState createState() => _FoodItemScreenState();
 }
 
+/// The state class for the FoodItemScreen widget.
 class _FoodItemScreenState extends State<FoodItemScreen> {
   final _formKey = GlobalKey<FormState>();
   String _name = '';
   double _calories = 0;
   double _servingSize = 0;
   Map<String, double> _macros = {'protein': 0, 'carbs': 0, 'fat': 0};
-  //double _sugar = 0;
 
+  /// Builds the widget and returns a Scaffold object.
   @override
   Widget build(BuildContext context) {
     return Scaffold(

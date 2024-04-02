@@ -7,39 +7,21 @@ import 'package:healthapp/model/person_info.dart';
 import 'package:healthapp/model/stat_model.dart';
 import 'package:healthapp/view/stat_input_view.dart';
 
-/*
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Firebase.initializeApp(),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          print("couldn't connect");
-        }
-        if (snapshot.connectionState == ConnectionState.done) {
-          return MaterialApp(
-            title: 'Input Stat',
-            theme: ThemeData(
-              primarySwatch: Colors.brown,
-            ),
-            home: InputStatContainer(),
-          );
-        }
-        return MaterialApp();
-      },
-    );
-  }
-}
-*/
-
-
+/// A stateless widget that serves as a container for the InputStatView.
+///
+/// It uses a PersonInfoController to handle adding stats.
 class InputStatContainer extends StatelessWidget {
   final PersonInfoController controller;
+
+  /// Creates an instance of InputStatContainer.
+  ///
+  /// Requires a [PersonInfoController] to handle adding stats.
   const InputStatContainer({super.key, required this.controller});
 
+  /// Builds the widget tree.
+  ///
+  /// Returns an instance of [InputStatView] with a given title and a callback
+  /// for adding stats.
   @override
   Widget build(BuildContext context) {
     return InputStatView(

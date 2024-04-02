@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
 import 'package:healthapp/model/health_goal.dart';
 
+/// A widget that displays the progress of health goals.
+///
+/// This widget requires a [PersonInfoController] to function.
 class GoalProgressView extends StatefulWidget {
+  /// The [PersonInfoController] that this widget will use to retrieve health goal data.
   final PersonInfoController controller;
 
+  /// Creates a new [GoalProgressView].
+  ///
+  /// The [controller] argument must not be null.
   GoalProgressView({super.key, required this.controller});
 
   @override
@@ -17,6 +24,9 @@ class _GoalProgressWidgetState extends State<GoalProgressView> {
     super.initState();
   }
 
+  /// Builds a table row for a given health goal.
+  ///
+  /// The row contains the title of the goal and a progress indicator.
   TableRow buildRow(HealthGoal goal) {
     return TableRow(
       children: <Widget>[
@@ -29,6 +39,7 @@ class _GoalProgressWidgetState extends State<GoalProgressView> {
     );
   }
 
+  /// Builds the widget tree for this widget.
   @override
   Widget build(BuildContext context) {
 
@@ -39,16 +50,16 @@ class _GoalProgressWidgetState extends State<GoalProgressView> {
     }
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Table(
-        border: TableBorder(),
-        columnWidths: const <int, TableColumnWidth>{
-          0: FlexColumnWidth(0.2),
-          1: FlexColumnWidth(0.8),
-        },
-        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-        children: children
-      )
+        padding: const EdgeInsets.all(8.0),
+        child: Table(
+            border: TableBorder(),
+            columnWidths: const <int, TableColumnWidth>{
+              0: FlexColumnWidth(0.2),
+              1: FlexColumnWidth(0.8),
+            },
+            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+            children: children
+        )
     );
   }
 }
