@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Food and Health App'),
+          title: const Text('GitHealthy'),
         ),
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
@@ -70,12 +70,8 @@ class _MyAppState extends State<MyApp> {
           currentIndex: _currentIndex,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.fastfood),
-              label: 'Food Items',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.add_box),
-              label: 'Add Food',
+              icon: Icon(Icons.healing),
+              label: 'Health info',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.fitness_center),
@@ -83,19 +79,15 @@ class _MyAppState extends State<MyApp> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.add_box),
-              label: 'Add Goal',
+              label: 'Add Food',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.fitness_center),
-              label: 'Input Stats',
+              icon: Icon(Icons.add_chart),
+              label: 'Stats',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.numbers),
-              label: 'Progress',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.scale),
-              label: 'Calc BMI',
+              icon: Icon(Icons.book),
+              label: 'Resources',
             ),
           ],
         ),
