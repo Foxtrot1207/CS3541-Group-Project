@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'GoalInput.dart';
+import 'goal_input.dart';
 
 class GoalList extends StatefulWidget {
   @override

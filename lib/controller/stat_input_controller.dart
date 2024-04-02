@@ -4,8 +4,8 @@ import 'package:healthapp/controller/person_info_controller.dart';
 import 'package:healthapp/model/health_goal.dart';
 import 'package:healthapp/model/person_info.dart';
 
-import '../model/inputStatModel.dart';
-import '../view/inputStatView.dart';
+import 'package:healthapp/model/stat_model.dart';
+import 'package:healthapp/view/stat_input_view.dart';
 
 /*
 class MyApp extends StatelessWidget {
