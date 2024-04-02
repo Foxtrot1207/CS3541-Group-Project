@@ -1,4 +1,4 @@
-import 'package:healthapp/view/nutrient_graph.dart';
+import 'package:healthapp/model/nutrient_graph.dart';
 import 'package:flutter/material.dart';
 
 class NutrientGraphController {

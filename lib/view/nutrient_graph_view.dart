@@ -1,12 +1,13 @@
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/model/nutrient_graph.dart';
 import 'package:healthapp/model/health_goal.dart';
 
-// Assuming HealthGoalAttribute is an enum or a list of strings representing nutrient types
-// enum HealthGoalAttribute { protein, carbohydrates, fats } // Example
+//File for generating and viewing graphs of the different nutrients that are tracked in goals
 
+
+//ToDo add in stub comment code for using SQL query to pull the nutrient data
 class NutrientGraphView extends StatefulWidget {
   final NutrientGraphController controller;
 
