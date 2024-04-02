@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:healthapp/controller/input_stat_controller.dart';
+import 'package:healthapp/controller/stat_input_controller.dart';
 
 import 'package:healthapp/view/food_screen.dart';
 import 'package:healthapp/view/health_goal_input.dart';
 import 'package:healthapp/view/health_goal_view.dart';
 import 'package:healthapp/view/food_item_view.dart';
-import 'package:healthapp/view/input_stat_view.dart';
+import 'package:healthapp/view/stat_input_view.dart';
 import 'package:healthapp/view/progress_widget.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
