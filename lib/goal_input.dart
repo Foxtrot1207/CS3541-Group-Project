@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
+/// A StatefulWidget that allows the user to input a goal.
 class GoalInput extends StatefulWidget {
+  /// The initial goal text.
   final String goal;
 
+  /// Creates a new GoalInput widget.
+  ///
+  /// The [goal] argument must not be null.
   GoalInput({required this.goal});
 
   @override
   _GoalInputState createState() => _GoalInputState();
 }
 
+/// The state for a [GoalInput] widget.
 class _GoalInputState extends State<GoalInput> {
   late TextEditingController controller;
 
@@ -18,6 +24,7 @@ class _GoalInputState extends State<GoalInput> {
     controller = TextEditingController(text: widget.goal);
   }
 
+  /// Builds the widget tree for the [GoalInput] widget.
   @override
   Widget build(BuildContext context) {
     return Scaffold(

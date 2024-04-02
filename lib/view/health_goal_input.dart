@@ -2,19 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:healthapp/model/health_goal.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
 
+/// A screen that allows the user to input their health goals.
 class HealthGoalInputScreen extends StatefulWidget {
+  /// The controller for the person's information.
   PersonInfoController controller;
+
+  /// Creates a new health goal input screen that uses the given controller.
+  ///
+  /// The controller must not be null.
   HealthGoalInputScreen({required this.controller});
 
   @override
   _HealthGoalInputScreenState createState() => _HealthGoalInputScreenState();
 }
 
+/// The state for a [HealthGoalInputScreen].
 class _HealthGoalInputScreenState extends State<HealthGoalInputScreen> {
   HealthGoalCadence? _selectedCadence;
   HealthGoalAttribute? _selectedAttribute;
   int _target = 0;
 
+  /// Builds the widget tree for this screen.
   @override
   Widget build(BuildContext context) {
     return Scaffold(

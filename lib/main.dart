@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:healthapp/controller/stat_input_controller.dart';
+import 'package:healthapp/controller/input_stat_controller.dart';
 
 import 'package:healthapp/view/food_screen.dart';
 import 'package:healthapp/view/health_goal_input.dart';
 import 'package:healthapp/view/health_goal_view.dart';
 import 'package:healthapp/view/food_item_view.dart';
-import 'package:healthapp/view/stat_input_view.dart';
+import 'package:healthapp/view/input_stat_view.dart';
 import 'package:healthapp/view/progress_widget.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/model/food_item.dart';
 import 'package:healthapp/model/person_info.dart';
-import 'package:healthapp/bmi_calc.dart';
+import 'package:healthapp/bmi_Calc.dart';
 
+/// Entry point of the application.
 void main() {
   runApp(MyApp());
 }
 
+/// This is the main application widget.
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
 
+/// This is the private State class that goes with MyApp.
 class _MyAppState extends State<MyApp> {
   int _currentIndex = 0;
 
@@ -38,6 +41,7 @@ class _MyAppState extends State<MyApp> {
 
   late List<Widget> _children;
 
+  /// Constructor for _MyAppState
   _MyAppState() {
     _children = [
       FoodItemView(controller: _foodItemController),
@@ -50,12 +54,14 @@ class _MyAppState extends State<MyApp> {
     ];
   }
 
+  /// Function to handle tab tap event
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
   }
 
+  /// Builds the widget tree for the application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

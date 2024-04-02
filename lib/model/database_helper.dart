@@ -4,6 +4,7 @@ import 'package:path/path.dart';
 
 import 'food_item.dart';
 
+/// A helper class to manage database operations.
 class DatabaseHelper {
   static final _databaseName = "NutritionDatabase.db";
   static final _databaseVersion = 1;
@@ -19,12 +20,16 @@ class DatabaseHelper {
   static final columnProtein = 'protein';
   static final columnSugar = 'sugar';
 
-  // Make this a singleton class
+  /// Make this a singleton class
   DatabaseHelper._privateConstructor();
+
+  /// The singleton instance of the DatabaseHelper.
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
   // Only have a single app-wide reference to the database
   static Database? _database;
+
+  /// Returns a reference to the app-wide database.
   Future<Database> get database async {
     if (_database != null) return _database!;
     _database = await _initDatabase();
@@ -39,6 +44,7 @@ class DatabaseHelper {
         onCreate: _onCreate);
   }
 
+  /// Creates the database with the given version.
   Future _onCreate(Database db, int version) async {
     await db.execute('''
           CREATE TABLE $table (

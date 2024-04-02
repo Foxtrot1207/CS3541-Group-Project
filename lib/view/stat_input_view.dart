@@ -1,12 +1,15 @@
-
 import 'package:flutter/material.dart';
 import 'package:healthapp/model/health_goal.dart';
 
+/// A widget for inputting health stats.
 class InputStatView extends StatefulWidget {
   final String title;
   final TextEditingController nutritionController = TextEditingController();
   final Function(String, HealthGoalAttribute, double) addStatCallback;
 
+  /// Creates an InputStatView widget.
+  ///
+  /// Requires a [title] and a callback function [addStatCallback] to add the stat.
   InputStatView({
     Key? key,
     required this.title,
@@ -17,11 +20,13 @@ class InputStatView extends StatefulWidget {
   _InputStatViewState createState() => _InputStatViewState();
 }
 
+/// The state for the [InputStatView] widget.
 class _InputStatViewState extends State<InputStatView> {
   String selectedDay = 'Monday';
   String caloriesToday = '';
   HealthGoalAttribute? _selectedAttribute;
-  
+
+  /// Builds the widget.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
