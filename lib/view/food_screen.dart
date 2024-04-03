@@ -22,6 +22,7 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
   double _calories = 0;
   double _servingSize = 0;
   Map<String, double> _macros = {'protein': 0, 'carbs': 0, 'fat': 0};
+  double _caffeine = 0;
 
   /// Builds the widget and returns a Scaffold object.
   @override
@@ -118,13 +119,26 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
                         _macros['fat'] = double.parse(value!);
                       },
                     ),
+                    TextFormField(
+                      decoration: InputDecoration(labelText: 'Caffeine'),
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the Caffeine amount';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _caffeine = double.parse(value!);
+                      },
+                    ),
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           // Call the function to add the food item
 
-                          widget.controller.addFoodItem(FoodItem(name: _name, calories: _calories, macros: _macros, servingSize: _servingSize));
+                          widget.controller.addFoodItem(FoodItem(name: _name, calories: _calories, macros: _macros, servingSize: _servingSize, caffeine: _caffeine));
                           // Clear the form fields
                           _formKey.currentState!.reset();
                         }
