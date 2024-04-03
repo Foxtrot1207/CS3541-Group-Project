@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
 
-class LogScreen extends StatefulWidget {
+class HealthGoalCreateScreen extends StatefulWidget {
   PersonInfoController controller;
-  LogScreen({required this.controller});
+  HealthGoalCreateScreen({required this.controller});
 
   @override
-  _LogScreenState createState() => _LogScreenState();
+  _HealthGoalCreateScreenState createState() => _HealthGoalCreateScreenState();
 }
 
-class _LogScreenState extends State<LogScreen> {
+class _HealthGoalCreateScreenState extends State<HealthGoalCreateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
         children: [
-          Placeholder( //Food Log Placeholder
+          Placeholder( //Create Health Goals Placeholder
             fallbackHeight:500, //size of box
-            color: Colors.black!, //color of box
+            color: Colors.pink!, //color of box
           ),
         ],
       ),
