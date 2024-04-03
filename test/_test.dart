@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:healthapp/BMICalc.dart';
+import 'package:healthapp/bmi_calc.dart';
 
 void main() {
   final model = CalcBMIModel();
