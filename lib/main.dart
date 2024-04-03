@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/controller/stat_input_controller.dart';
+import 'package:healthapp/pages/home_page.dart';
+
 import 'package:healthapp/model/health_goal.dart';
 import 'package:tuple/tuple.dart';
 import 'package:healthapp/view/food_screen.dart';
@@ -32,7 +34,7 @@ class MyApp extends StatefulWidget {
 
 /// This is the private State class that goes with MyApp.
 class _MyAppState extends State<MyApp> {
-  int _currentIndex = 0;
+  int _currentIndex = 2;
 
   // TODO: Remove these two later!
   PersonInfoController _personInfoController = PersonInfoController(
@@ -56,6 +58,15 @@ class _MyAppState extends State<MyApp> {
   /// Constructor for _MyAppState
   _MyAppState() {
     _children = [
+      GoalProgressView(controller: _personInfoController), //Profile Controller
+      HealthGoalInputScreen(controller: _personInfoController),
+      HomeScreen(controller: _personInfoController),
+      InputStatContainer(controller: _personInfoController),
+      HealthGoalView(controller: _personInfoController), //Log Controller
+    ];
+  }
+  //Old Nav Bar
+  /*
       FoodItemView(controller: _foodItemController),
       FoodItemScreen(controller: _foodItemController),
       HealthGoalView(controller: _personInfoController),
@@ -64,8 +75,7 @@ class _MyAppState extends State<MyApp> {
       GoalProgressView(controller: _personInfoController),
       NutrientGraphView(controller: _nutrientGraphController),
       CalcBMIController(),
-    ];
-  }
+  */
 
   /// Function to handle tab tap event
   void onTabTapped(int index) {
@@ -80,7 +90,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('GitHealthy'),
+          title: const Text('Git Healthy'),
         ),
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
@@ -89,16 +99,16 @@ class _MyAppState extends State<MyApp> {
           currentIndex: _currentIndex,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.healing),
-              label: 'Health info',
+              icon: Icon(Icons.person),
+              label: 'Profile',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.fitness_center),
               label: 'Health Goals',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.add_box),
-              label: 'Add Food',
+              icon: Icon(Icons.home),
+              label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.add_chart),
@@ -106,7 +116,7 @@ class _MyAppState extends State<MyApp> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.book),
-              label: 'Resources',
+              label: 'Log',
             ),
           ],
         ),
