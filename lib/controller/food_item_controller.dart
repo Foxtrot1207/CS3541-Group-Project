@@ -21,4 +21,11 @@ class FoodItemController with ChangeNotifier {
   void addFoodItem(FoodItem foodItem) {
     foodItems.add(foodItem);
   }
+
+  /// Removes a FoodItem from the list of food items managed by this controller.
+  ///
+  /// @param foodItem The FoodItem to remove.
+  void removeFoodItem(FoodItem foodItem) {
+    foodItems.remove(foodItem);
+  }
 }
