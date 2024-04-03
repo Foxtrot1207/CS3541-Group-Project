@@ -17,17 +17,15 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: [
           Placeholder( //Health Goals Placeholder
-            //size of box
-            fallbackHeight:200, // Specifies a fallback height
-            //color of box
-            color: Colors.black!, // Placeholder color
+            fallbackHeight:200, //size of box
+            color: Colors.black!, //color of box
           ),
+
           SizedBox(height: 100), //Space between placeholders
+
           Placeholder( //Quick Add Placeholder
-            //size of box
-            fallbackHeight:350, // Specifies a fallback height
-            //color of box
-            color: Colors.red!, // Placeholder color
+            fallbackHeight:350,  //size of box
+            color: Colors.red!,  //color of box
           ),
         ],
       ),

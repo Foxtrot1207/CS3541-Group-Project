@@ -1,40 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
 
-class ProfileScreen extends StatefulWidget {
+class StatsGraphScreen extends StatefulWidget {
   PersonInfoController controller;
-  ProfileScreen({required this.controller});
+  StatsGraphScreen({required this.controller});
 
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  _StatsGraphScreenState createState() => _StatsGraphScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _StatsGraphScreenState extends State<StatsGraphScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
         children: [
-          Placeholder( //User info
+          Placeholder( //Drop down bar and page display
             //size of box
-            fallbackHeight:100,
+            fallbackHeight:50,
             fallbackWidth:10,
             //color of box
-            color: Colors.blue!,
+            color: Colors.black!,
           ),
 
           const SizedBox(height: 100), //Space between placeholders
 
-          Placeholder( //BMI and Weight
+          Placeholder( //Graph 1 Placeholder
             fallbackHeight:200, //size of box
             color: Colors.red!, //color of box
           ),
 
           const SizedBox(height: 100), //Space between placeholders
 
-          Placeholder( //Resource List
-            fallbackHeight:150, //size of box
+          Placeholder( //Graph 2 Placeholder
+            fallbackHeight:200, //size of box
             color: Colors.green!, //color of box
           ),
         ],

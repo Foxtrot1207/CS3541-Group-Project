@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/stat_input_controller.dart';
+import 'package:healthapp/pages/health_goal_page.dart';
 import 'package:healthapp/pages/home_page.dart';
+import 'package:healthapp/pages/log_page.dart';
+import 'package:healthapp/pages/profile_page.dart';
+import 'package:healthapp/pages/stats_page_overview.dart';
 
 import 'package:healthapp/view/food_screen.dart';
 import 'package:healthapp/view/health_goal_input.dart';
@@ -41,11 +45,12 @@ class _MyAppState extends State<MyApp> {
 
   _MyAppState() {
     _children = [
-      GoalProgressView(controller: _personInfoController), //Profile Controller
-      HealthGoalInputScreen(controller: _personInfoController),
+      ProfileScreen(controller: _personInfoController),
+      HealthGoalScreen(controller: _personInfoController),
       HomeScreen(controller: _personInfoController),
-      InputStatContainer(controller: _personInfoController),
-      HealthGoalView(controller: _personInfoController), //Log Controller
+      StatsScreen(controller: _personInfoController),
+      LogScreen(controller: _personInfoController),
+
     ];
   }
   //Old Nav Bar

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileBMIScreen extends StatefulWidget {
   PersonInfoController controller;
-  ProfileScreen({required this.controller});
+  ProfileBMIScreen({required this.controller});
 
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  _ProfileBMIScreenState createState() => _ProfileBMIScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileBMIScreenState extends State<ProfileBMIScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,16 +26,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
           const SizedBox(height: 100), //Space between placeholders
 
-          Placeholder( //BMI and Weight
-            fallbackHeight:200, //size of box
+          Placeholder( //BMI Calc
+            fallbackHeight:400, //size of box
             color: Colors.red!, //color of box
-          ),
-
-          const SizedBox(height: 100), //Space between placeholders
-
-          Placeholder( //Resource List
-            fallbackHeight:150, //size of box
-            color: Colors.green!, //color of box
           ),
         ],
       ),
