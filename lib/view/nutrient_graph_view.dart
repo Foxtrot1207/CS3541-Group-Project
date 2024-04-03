@@ -8,6 +8,7 @@ import 'package:healthapp/model/health_goal.dart';
 
 
 //ToDo add in stub comment code for using SQL query to pull the nutrient data
+
 class NutrientGraphView extends StatefulWidget {
   final NutrientGraphController controller;
 
@@ -56,15 +57,70 @@ class _NutrientGraphViewState extends State<NutrientGraphView> {
           // Graph display code
           Expanded(
             child: Container(
-              child: SfCartesianChart(
-                primaryXAxis: DateTimeAxis(),
-                series: <CartesianSeries>[
-                  LineSeries<NutrientData, DateTime>(
-                    dataSource: widget.controller.getNutrientData().where((data) => _selections.values.contains(true)).toList(),
-                    xValueMapper: (NutrientData nutrient, _) => nutrient.date,
-                    yValueMapper: (NutrientData nutrient, _) => nutrient.value,
-                  )
-                ],
+              child: LineChart(
+                LineChartData(
+                  gridData: FlGridData(
+                    show: true,
+                    drawVerticalLine: true,
+                    getDrawingHorizontalLine: (value) {
+                      return FlLine(
+                        color: Colors.grey,
+                        strokeWidth: 1,
+                      );
+                    },
+                    getDrawingVerticalLine: (value) {
+                      return FlLine(
+                        color: Colors.grey,
+                        strokeWidth: 1,
+                      );
+                    },
+                  ),
+                  titlesData: FlTitlesData(
+                    bottomTitles: SideTitles(
+                      showTitles: true,
+                      getTextStyles: (value) => const TextStyle(
+                        color: Colors.black,
+                        fontSize: 10,
+                      ),
+                      getTitles: (value) {
+                        // Format your date here
+                        return '${value.toInt()}';
+                      },
+                    ),
+                    leftTitles: SideTitles(
+                      showTitles: true,
+                      getTextStyles: (value) => const TextStyle(
+                        color: Colors.black,
+                        fontSize: 10,
+                      ),
+                      getTitles: (value) {
+                        return '${value.toInt()}';
+                      },
+                    ),
+                  ),
+                  borderData: FlBorderData(
+                    border: Border.all(color: Colors.black, width: 1),
+                  ),
+                  lineBarsData: [
+                    LineChartBarData(
+                      spots: widget.controller.getNutrientData()
+                          .where((data) => _selections.values.contains(true))
+                          .map((data) => FlSpot(data.date.millisecondsSinceEpoch.toDouble(), data.value))
+                          .toList(),
+                      isCurved: true,
+                      colors: [Colors.blue],
+                      barWidth: 2,
+                      isStrokeCapRound: true,
+                      dotData: FlDotData(
+                        show: false,
+                      ),
+                      belowBarData: BarAreaData(
+                        show: true,
+                        colors: [Colors.blue.withOpacity(0.3)],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -73,3 +129,4 @@ class _NutrientGraphViewState extends State<NutrientGraphView> {
     );
   }
 }
+
