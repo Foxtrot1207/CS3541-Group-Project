@@ -11,7 +11,8 @@ enum HealthGoalAttribute {
   fat(title: "Fat"),
   carbs(title: "Carbs"),
   sugar(title: "Sugar"),
-  water(title: "Water");
+  water(title: "Water"),
+  caffeine(title: "Caffeine");
 
   /// Constructor for HealthGoalAttribute enum.
   ///
