@@ -78,7 +78,7 @@ class _NutrientGraphViewState extends State<NutrientGraphView> {
                   titlesData: FlTitlesData(
                     bottomTitles: SideTitles(
                       showTitles: true,
-                      getTextStyles: (value) => const TextStyle(
+                      getTextStyles: (BuildContext context, double value) => const TextStyle(
                         color: Colors.black,
                         fontSize: 10,
                       ),
@@ -89,7 +89,7 @@ class _NutrientGraphViewState extends State<NutrientGraphView> {
                     ),
                     leftTitles: SideTitles(
                       showTitles: true,
-                      getTextStyles: (value) => const TextStyle(
+                      getTextStyles: (BuildContext context, double value) => const TextStyle(
                         color: Colors.black,
                         fontSize: 10,
                       ),
