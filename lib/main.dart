@@ -11,7 +11,7 @@ import 'package:healthapp/controller/person_info_controller.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/model/food_item.dart';
 import 'package:healthapp/model/person_info.dart';
-import 'package:healthapp/bmi_Calc.dart';
+import 'package:healthapp/bmi_calc.dart';
 
 /// Entry point of the application.
 void main() {
@@ -34,8 +34,8 @@ class _MyAppState extends State<MyApp> {
   );
   final FoodItemController _foodItemController = FoodItemController(
       foodItems: [
-        FoodItem(name: "Banana", calories: 105, servingSize: 1, macros: {} ),
-        FoodItem(name: "Apple", calories: 95, servingSize: 2, macros: {} ),
+        FoodItem(name: "Banana", calories: 105, servingSize: 1, macros: {}, ozWater: 0,),
+        FoodItem(name: "Apple", calories: 95, servingSize: 2, macros: {}, ozWater: 0,),
       ]
   );
 

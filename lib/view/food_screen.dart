@@ -21,7 +21,8 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
   String _name = '';
   double _calories = 0;
   double _servingSize = 0;
-  Map<String, double> _macros = {'protein': 0, 'carbs': 0, 'fat': 0};
+  double _ozWater = 0;
+  Map<String, double> _macros = {'protein': 0, 'carbs': 0, 'fat': 0, 'sugar': 0};
 
   /// Builds the widget and returns a Scaffold object.
   @override
@@ -106,6 +107,33 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
                       },
                     ),
                     TextFormField(
+                      decoration: InputDecoration(labelText: 'Water'),
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          value = '0.0';
+                          return null;
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                         _ozWater = double.parse(value!);
+                      },
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(labelText: 'Sugar'),
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the sugar amount';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _macros['sugar'] = double.parse(value!);
+                      },
+                    ),
+                    TextFormField(
                       decoration: InputDecoration(labelText: 'Fat'),
                       keyboardType: TextInputType.number,
                       validator: (value) {
@@ -124,7 +152,7 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
                           _formKey.currentState!.save();
                           // Call the function to add the food item
 
-                          widget.controller.addFoodItem(FoodItem(name: _name, calories: _calories, macros: _macros, servingSize: _servingSize));
+                          widget.controller.addFoodItem(FoodItem(name: _name, calories: _calories, macros: _macros, servingSize: _servingSize, ozWater: _ozWater,));
                           // Clear the form fields
                           _formKey.currentState!.reset();
                         }
