@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/controller/stat_input_controller.dart';
+import 'package:healthapp/model/health_goal.dart';
 
 import 'package:healthapp/view/food_screen.dart';
 import 'package:healthapp/view/health_goal_input.dart';
@@ -11,6 +13,10 @@ import 'package:healthapp/controller/person_info_controller.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/model/food_item.dart';
 import 'package:healthapp/model/person_info.dart';
+
+import 'package:healthapp/model/nutrient_graph.dart';
+import 'package:healthapp/view/nutrient_graph_view.dart';
+import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/bmi_Calc.dart';
 
 /// Entry point of the application.
@@ -38,6 +44,12 @@ class _MyAppState extends State<MyApp> {
         FoodItem(name: "Apple", calories: 95, servingSize: 2, macros: {}, caffeine: 0 ),
       ]
   );
+  final NutrientGraphController _nutrientGraphController = NutrientGraphController(
+      nutrientData: [
+        NutrientData(DateTime(2024, 4, 4), 100, HealthGoalAttribute.protein),
+        NutrientData(DateTime(2024, 4, 2), 50, HealthGoalAttribute.carbs),
+      ]
+  );
 
   late List<Widget> _children;
 
@@ -50,6 +62,7 @@ class _MyAppState extends State<MyApp> {
       HealthGoalInputScreen(controller: _personInfoController),
       InputStatContainer(controller: _personInfoController),
       GoalProgressView(controller: _personInfoController),
+      NutrientGraphView(controller: _nutrientGraphController),
       CalcBMIController(),
     ];
   }

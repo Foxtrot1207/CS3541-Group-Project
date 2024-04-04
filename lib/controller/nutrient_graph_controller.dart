@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class NutrientGraphController {
   List<NutrientData> nutrientData = [];
-
+  NutrientGraphController({required this.nutrientData});
   void addNutrientData(NutrientData data) {
     nutrientData.add(data);
   }
