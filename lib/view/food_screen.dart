@@ -21,7 +21,7 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
   String _name = '';
   double _calories = 0;
   double _servingSize = 0;
-  double _ozWater = 0;
+  double _flMlWater = 0;
   double _caffeine = 0;
   Map<String, double> _macros = {'protein': 0, 'carbs': 0, 'fat': 0, 'sugar': 0};
 
@@ -118,7 +118,7 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                         _ozWater = double.parse(value!);
+                         _flMlWater = double.parse(value!);
                       },
                     ),
                     TextFormField(
@@ -165,7 +165,7 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           // Call the function to add the food item
-                          widget.controller.addFoodItem(FoodItem(name: _name, calories: _calories, macros: _macros, servingSize: _servingSize, ozWater: _ozWater, caffeine: _caffeine));
+                          widget.controller.addFoodItem(FoodItem(name: _name, calories: _calories, macros: _macros, servingSize: _servingSize, flMLWater: _flMlWater, caffeine: _caffeine));
                           // Clear the form fields
                           _formKey.currentState!.reset();
                         }
