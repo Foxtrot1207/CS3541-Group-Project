@@ -1,132 +1,111 @@
-import 'package:fl_chart/fl_chart.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:healthapp/controller/nutrient_graph_controller.dart';
-import 'package:healthapp/model/nutrient_graph.dart';
-import 'package:healthapp/model/health_goal.dart';
 
-//File for generating and viewing graphs of the different nutrients that are tracked in goals
-
-
-//ToDo add in stub comment code for using SQL query to pull the nutrient data
-
-class NutrientGraphView extends StatefulWidget {
+class NutrientGraphView extends StatelessWidget {
   final NutrientGraphController controller;
 
-  NutrientGraphView({required this.controller});
-
-  @override
-  _NutrientGraphViewState createState() => _NutrientGraphViewState();
-}
-
-class _NutrientGraphViewState extends State<NutrientGraphView> {
-  List<HealthGoalAttribute> nutrientTypes = HealthGoalAttribute.values;
-  Map<HealthGoalAttribute, bool> _selections = {};
-
-  @override
-  void initState() {
-    super.initState();
-    for (var nutrient in nutrientTypes) {
-      _selections[nutrient] = false;
-    }
-  }
+  const NutrientGraphView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
+    // Assuming you have a method in your controller to get the attribute name
+    String attributeName = controller.getAttributeName(1);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nutrient Graph'),
+        title: const Text('Nutrient Graph'),
+        centerTitle: true,
+        bottom: PreferredSize(
+            preferredSize: Size.zero,
+            child: Text(attributeName)),
+
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: nutrientTypes.length,
-              itemBuilder: (context, index) {
-                return CheckboxListTile(
-                  title: Text(nutrientTypes[index].toString().split('.').last), // Convert enum to string and get the last part
-                  value: _selections[nutrientTypes[index]],
-                  onChanged: (bool? value) {
-                    setState(() {
-                      _selections[nutrientTypes[index]] = value!;
-                    });
-                  },
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: LineChart(
+          LineChartData(
+            gridData: FlGridData(
+              show: true,
+              drawVerticalLine: true,
+              getDrawingHorizontalLine: (value) {
+                return const FlLine(
+                  color: Colors.grey,
+                  strokeWidth: 1,
+                );
+              },
+              getDrawingVerticalLine: (value) {
+                return const FlLine(
+                  color: Colors.grey,
+                  strokeWidth: 1,
                 );
               },
             ),
-          ),
-          // Graph display code
-          Expanded(
-            child: Container(
-              child: LineChart(
-                LineChartData(
-                  gridData: FlGridData(
-                    show: true,
-                    drawVerticalLine: true,
-                    getDrawingHorizontalLine: (value) {
-                      return FlLine(
-                        color: Colors.grey,
-                        strokeWidth: 1,
-                      );
-                    },
-                    getDrawingVerticalLine: (value) {
-                      return FlLine(
-                        color: Colors.grey,
-                        strokeWidth: 1,
-                      );
-                    },
-                  ),
-                  titlesData: FlTitlesData(
-                    bottomTitles: SideTitles(
-                      showTitles: true,
-                      getTextStyles: (BuildContext context, double value) => const TextStyle(
-                        color: Colors.black,
-                        fontSize: 10,
+            titlesData: FlTitlesData(
+              bottomTitles: AxisTitles(
+                sideTitles: SideTitles(
+                  showTitles: true,
+                  reservedSize: 22,
+                  getTitlesWidget: (value, meta) {
+                    return Transform.rotate(
+                      angle: -pi / 6, // 60 degrees
+                      child: Text(
+                        '${value.toInt()}',
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 10,
+                        ),
                       ),
-                      getTitles: (value) {
-                        // Format your date here
-                        return '${value.toInt()}';
-                      },
-                    ),
-                    leftTitles: SideTitles(
-                      showTitles: true,
-                      getTextStyles: (BuildContext context, double value) => const TextStyle(
-                        color: Colors.black,
-                        fontSize: 10,
-                      ),
-                      getTitles: (value) {
-                        return '${value.toInt()}';
-                      },
-                    ),
-                  ),
-                  borderData: FlBorderData(
-                    border: Border.all(color: Colors.black, width: 1),
-                  ),
-                  lineBarsData: [
-                    LineChartBarData(
-                      spots: widget.controller.getNutrientData()
-                          .where((data) => _selections.values.contains(true))
-                          .map((data) => FlSpot(data.date.millisecondsSinceEpoch.toDouble(), data.value))
-                          .toList(),
-                      isCurved: true,
-                      colors: [Colors.blue],
-                      barWidth: 2,
-                      isStrokeCapRound: true,
-                      dotData: FlDotData(
-                        show: false,
-                      ),
-                      belowBarData: BarAreaData(
-                        show: true,
-                        colors: [Colors.blue.withOpacity(0.3)],
-                      ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
+              leftTitles: AxisTitles(
+                sideTitles: SideTitles(
+                  showTitles: false,
+                  reservedSize: 22,
+                  getTitlesWidget: (value, meta) {
+                    return Text(
+                      '${value.toInt()}', // Assuming this is the attribute being displayed
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 10,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              topTitles: const AxisTitles(
+                sideTitles: SideTitles(
+                  showTitles: false,
+                ),),
             ),
+            borderData: FlBorderData(
+              border: Border.all(color: Colors.black, width: 1),
+            ),
+            lineBarsData: [
+              LineChartBarData(
+                spots: controller.getNutrientData().map((data) {
+                  return FlSpot(data.item1.millisecondsSinceEpoch.toDouble(), data.item2);
+                }).toList(),
+                isCurved: true,
+                color: Colors.blue, // Updated to use 'color' instead of 'colors'
+                barWidth: 2,
+                isStrokeCapRound: true,
+                dotData: const FlDotData(
+                  show: false,
+                ),
+                belowBarData: BarAreaData(
+                  show: true,
+                  color: Colors.blue.withOpacity(0.3), // Updated to use 'color' instead of 'colors'
+                ),
+              ),
+            ],
+            // Add a legend
           ),
-        ],
+        ),
       ),
     );
   }
 }
-

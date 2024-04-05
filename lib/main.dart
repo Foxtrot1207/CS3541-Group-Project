@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/controller/stat_input_controller.dart';
 import 'package:healthapp/model/health_goal.dart';
-
+import 'package:tuple/tuple.dart';
 import 'package:healthapp/view/food_screen.dart';
 import 'package:healthapp/view/health_goal_input.dart';
 import 'package:healthapp/view/health_goal_view.dart';
@@ -46,8 +46,8 @@ class _MyAppState extends State<MyApp> {
   );
   final NutrientGraphController _nutrientGraphController = NutrientGraphController(
       nutrientData: [
-        NutrientData(DateTime(2024, 4, 4), 100, HealthGoalAttribute.protein),
-        NutrientData(DateTime(2024, 4, 2), 50, HealthGoalAttribute.carbs),
+        Tuple3<DateTime, double, HealthGoalAttribute>(DateTime(2024, 4, 4), 100, HealthGoalAttribute.protein),
+        Tuple3<DateTime, double, HealthGoalAttribute>(DateTime(2024, 4, 2), 50, HealthGoalAttribute.carbs),
       ]
   );
 
@@ -111,6 +111,10 @@ class _MyAppState extends State<MyApp> {
             BottomNavigationBarItem(
               icon: Icon(Icons.numbers),
               label: 'Progress',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.line_axis),
+              label: 'Graph'
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.scale),
