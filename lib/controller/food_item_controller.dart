@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:healthapp/model/food_item.dart';
+import 'package:healthapp/model/nutrition_tracker.dart';
 
 /// A controller for managing a list of FoodItem objects.
 ///
@@ -9,6 +10,7 @@ import 'package:healthapp/model/food_item.dart';
 class FoodItemController with ChangeNotifier {
   /// A list of FoodItem objects managed by this controller.
   List<FoodItem> foodItems;
+  NutritionTracker nutritonTracker = NutritionTracker();
 
   /// Creates a new FoodItemController with the given list of FoodItem objects.
   ///
@@ -20,6 +22,8 @@ class FoodItemController with ChangeNotifier {
   /// @param foodItem The FoodItem to add.
   void addFoodItem(FoodItem foodItem) {
     foodItems.add(foodItem);
+    nutritonTracker.logFood(foodItem);
+    notifyListeners();
   }
 
   /// Removes a FoodItem from the list of food items managed by this controller.
@@ -27,5 +31,7 @@ class FoodItemController with ChangeNotifier {
   /// @param foodItem The FoodItem to remove.
   void removeFoodItem(FoodItem foodItem) {
     foodItems.remove(foodItem);
+    nutritonTracker.removeFood(foodItem);
+    notifyListeners();
   }
 }
