@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/controller/stat_input_controller.dart';
-
+import 'package:healthapp/model/health_goal.dart';
+import 'package:tuple/tuple.dart';
 import 'package:healthapp/view/food_screen.dart';
 import 'package:healthapp/view/health_goal_input.dart';
 import 'package:healthapp/view/health_goal_view.dart';
@@ -11,6 +13,10 @@ import 'package:healthapp/controller/person_info_controller.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/model/food_item.dart';
 import 'package:healthapp/model/person_info.dart';
+
+import 'package:healthapp/model/nutrient_graph.dart';
+import 'package:healthapp/view/nutrient_graph_view.dart';
+import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/bmi_Calc.dart';
 
 /// Entry point of the application.
@@ -38,6 +44,12 @@ class _MyAppState extends State<MyApp> {
         FoodItem(name: "Scrambled Eggs", servingSize: '2 eggs', calories: 192, fat: 15.8, protein: 11.6, carbohydrates: 1, sugar: 0, water: 0, caffeine: 0),
       ]
   );
+  final NutrientGraphController _nutrientGraphController = NutrientGraphController(
+      nutrientData: [
+        Tuple3<DateTime, double, HealthGoalAttribute>(DateTime(2024, 4, 4), 100, HealthGoalAttribute.protein),
+        Tuple3<DateTime, double, HealthGoalAttribute>(DateTime(2024, 4, 2), 50, HealthGoalAttribute.carbs),
+      ]
+  );
 
   late List<Widget> _children;
 
@@ -50,6 +62,7 @@ class _MyAppState extends State<MyApp> {
       HealthGoalInputScreen(controller: _personInfoController),
       InputStatContainer(controller: _personInfoController),
       GoalProgressView(controller: _personInfoController),
+      NutrientGraphView(controller: _nutrientGraphController),
       CalcBMIController(),
     ];
   }
@@ -98,6 +111,10 @@ class _MyAppState extends State<MyApp> {
             BottomNavigationBarItem(
               icon: Icon(Icons.numbers),
               label: 'Progress',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.line_axis),
+              label: 'Graph'
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.scale),
