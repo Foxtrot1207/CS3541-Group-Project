@@ -1,7 +1,7 @@
 /// Represents a food item with its name, serving size, calories, and macros.
 class FoodItem {
   final String name;
-  final double servingSize;
+  final String servingSize;
   final double calories;
   final double fat;
   final double protein;

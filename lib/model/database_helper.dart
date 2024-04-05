@@ -44,6 +44,21 @@ class DatabaseHelper {
     onCreate: _onCreate);
   }
 
+  _onCreate(Database db, int version) async {
+    await db.execute('''
+    CREATE TABLE $table (
+      $columnName TEXT PRIMARY KEY,
+      $columnServingSize REAL,
+      $columnCalories REAL,
+      $columnFat REAL,
+      $columnProtein REAL,
+      $columnCarbs REAL,
+      $columnSugar REAL,
+      $columnCaffeine REAL,
+      $columnWater REAL
+    )
+  ''');
+  }
 
 
   /* helper methods */

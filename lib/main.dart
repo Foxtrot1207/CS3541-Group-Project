@@ -34,8 +34,8 @@ class _MyAppState extends State<MyApp> {
   );
   final FoodItemController _foodItemController = FoodItemController(
       foodItems: [
-        FoodItem(name: "Banana", calories: 105, servingSize: 1, macros: {} ),
-        FoodItem(name: "Apple", calories: 95, servingSize: 2, macros: {} ),
+        FoodItem(name: "Apple", servingSize: '1 apple', calories: 122, fat: 0, protein: 0, carbohydrates: 30, sugar: 24.2, water: 0, caffeine: 0),
+        FoodItem(name: "Scrambled Eggs", servingSize: '2 eggs', calories: 192, fat: 15.8, protein: 11.6, carbohydrates: 1, sugar: 0, water: 0, caffeine: 0),
       ]
   );
 

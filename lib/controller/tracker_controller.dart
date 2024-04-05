@@ -1,4 +1,4 @@
-import 'package:healthapp/model/tracker_item.dart';
+import 'package:healthapp/model/nutrition_tracker.dart';
 
 class TrackerController {
   List<Tracker> trackers; // A list of all trackers
