@@ -1,64 +1,77 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+
+import 'package:flutter/material.dart';
 
 import 'food_item.dart';
 
 /// A helper class to manage database operations.
 class DatabaseHelper {
-  static final _databaseName = "NutritionDatabase.db";
+  static final _databaseName = "nutrition.db";
   static final _databaseVersion = 1;
 
-  static final table = 'food_item_table';
+  static final table = 'nutrition';
 
-  static final columnId = '_id';
   static final columnName = 'name';
-  static final columnServingSize = 'servingSize';
+  static final columnServingSize = 'serving_size';
   static final columnCalories = 'calories';
-  static final columnCarbs = 'carbs';
-  static final columnFat = 'fat';
-  static final columnProtein = 'protein';
-  static final columnSugar = 'sugar';
+  static final columnFat = 'fat_g';
+  static final columnProtein = 'protein_g';
+  static final columnCarbs = 'carbohydrates_g';
+  static final columnSugar = 'sugar_g';
+  static final columnCaffeine = 'caffeine_mg';
+  static final columnWater = 'water_ml';
 
-  /// Make this a singleton class
+  /* make this a single class */
   DatabaseHelper._privateConstructor();
-
-  /// The singleton instance of the DatabaseHelper.
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
-  // Only have a single app-wide reference to the database
+  /* single app-wide reference to database only */
   static Database? _database;
-
-  /// Returns a reference to the app-wide database.
   Future<Database> get database async {
     if (_database != null) return _database!;
     _database = await _initDatabase();
     return _database!;
   }
 
-  // Open the database and create it if it doesn't exist
+  /* open database */
   _initDatabase() async {
     String path = join(await getDatabasesPath(), _databaseName);
     return await openDatabase(path,
-        version: _databaseVersion,
-        onCreate: _onCreate);
+    version: _databaseVersion,
+    onCreate: _onCreate);
   }
 
-  /// Creates the database with the given version.
-  Future _onCreate(Database db, int version) async {
-    await db.execute('''
-          CREATE TABLE $table (
-            $columnId INTEGER PRIMARY KEY,
-            $columnName TEXT NOT NULL,
-            $columnServingSize REAL NOT NULL,
-            $columnCalories REAL NOT NULL,
-            $columnCarbs REAL NOT NULL,
-            $columnFat REAL NOT NULL,
-            $columnProtein REAL NOT NULL,
-            $columnSugar REAL NOT NULL
-          )
-          ''');
+
+
+  /* helper methods */
+Future<int> insert(FoodItem item) async {
+  Database db = await instance.database;
+  return await db.insert(table, item.toMap());
+}
+
+Future<List<Map<String, dynamic>>> queryAllRows() async {
+  Database db = await instance.database;
+  return await db.query(table);
+}
+
+  Future<int?> queryRowCount() async {
+    Database db = await instance.database;
+    return Sqflite.firstIntValue(
+        await db.rawQuery('SELECT COUNT(*) FROM $table'));
   }
 
-// All of the other database helper methods
+  Future<int> update(FoodItem item) async {
+    Database db = await instance.database;
+    int id = item.toMap()[columnName];
+    return await db.update(table, item.toMap(), where: '$columnName = ?', whereArgs: [id]);
+  }
+
+  Future<int> delete(int id) async {
+    Database db = await instance.database;
+    return await db.delete(table, where: '$columnName = ?', whereArgs: [id]);
+  }
+
 }
