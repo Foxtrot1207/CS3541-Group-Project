@@ -162,12 +162,24 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
                         _water = double.parse(value!);
                       },
                     ),
+                    TextFormField(
+                      decoration: InputDecoration(labelText: 'Caffeine'),
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the Caffeine amount';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _caffeine = double.parse(value!);
+                      },
+                    ),
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           // Call the function to add the food item
-
                           widget.controller.addFoodItem(FoodItem(name: _name, calories: _calories, fat: _fat, protein: _protein, carbohydrates: _carbohydrates, servingSize: _servingSize, sugar: _sugar, caffeine: _caffeine, water: _water));
                           // Clear the form fields
                           _formKey.currentState!.reset();

@@ -9,8 +9,6 @@ class FoodItem {
   final double sugar;
   final double water;
   final double caffeine;
-  
-  /// final Map<String, double> macros; // Example: {'protein': 10, 'carbs': 20, 'fat': 5}
 
   /// Creates a new FoodItem with the specified name, serving size, calories, and macros.
   ///
