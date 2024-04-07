@@ -16,20 +16,10 @@ class _StatsComparisonScreenState extends State<StatsComparisonScreen> {
       appBar: AppBar(),
       body: Column(
         children: [
-          Placeholder( //Drop down bar and page display
-            //size of box
-            fallbackHeight:50,
-            fallbackWidth:10,
-            //color of box
-            color: Colors.black!,
-          ),
-
-          const SizedBox(height: 100), //Space between placeholders
-
-          Placeholder( // Placeholder
-            fallbackHeight:400, //size of box
-            color: Colors.red!, //color of box
-          ),
+        Container(
+        alignment: Alignment.center,
+        child: Text('Comparison '),
+          )
         ],
       ),
     );
