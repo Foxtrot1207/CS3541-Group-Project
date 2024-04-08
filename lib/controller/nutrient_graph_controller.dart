@@ -21,8 +21,7 @@ class NutrientGraphController {
   }
 
   String getAttributeName(int index) {
-    String tempString = nutrientData[index].item3.toString();
-    return tempString.replaceAll("HealthGoalAttribute.", "");
+    return nutrientData[index].item3.name;
   }
 }
 
