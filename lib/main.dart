@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healthapp/controller/nutrient_graph_controller.dart';
-import 'package:healthapp/controller/stat_input_controller.dart';
 import 'package:healthapp/pages/health_goal_page.dart';
 import 'package:healthapp/pages/home_page.dart';
 import 'package:healthapp/pages/log_page.dart';
@@ -9,12 +7,6 @@ import 'package:healthapp/pages/stats_page_overview.dart';
 
 import 'package:healthapp/model/health_goal.dart';
 import 'package:tuple/tuple.dart';
-import 'package:healthapp/view/food_screen.dart';
-import 'package:healthapp/view/health_goal_input.dart';
-import 'package:healthapp/view/health_goal_view.dart';
-import 'package:healthapp/view/food_item_view.dart';
-import 'package:healthapp/view/stat_input_view.dart';
-import 'package:healthapp/view/progress_widget.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/model/food_item.dart';
@@ -99,6 +91,7 @@ class _MyAppState extends State<MyApp> {
         ),
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
+          selectedFontSize: 10,
           type: BottomNavigationBarType.fixed,
           onTap: onTabTapped,
           currentIndex: _currentIndex,
