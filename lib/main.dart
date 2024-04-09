@@ -62,18 +62,7 @@ class _MyAppState extends State<MyApp> {
       StatsOverviewScreen(controller: _personInfoController)
     ];
   }
-  //Old Nav Bar
-  /*
-      FoodItemView(controller: _foodItemController),
-      FoodItemScreen(controller: _foodItemController),
-      HealthGoalView(controller: _personInfoController),
-      HealthGoalInputScreen(controller: _personInfoController),
-      InputStatContainer(controller: _personInfoController),
-      GoalProgressView(controller: _personInfoController),
-      NutrientGraphView(controller: _nutrientGraphController),
-      CalcBMIController(),
-  */
-
+  
   /// Function to handle tab tap event
   void onTabTapped(int index) {
     setState(() {
@@ -85,34 +74,34 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(useMaterial3: true),
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Git Healthy'),
         ),
+        
         body: _children[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          selectedFontSize: 10,
-          type: BottomNavigationBarType.fixed,
-          onTap: onTabTapped,
-          currentIndex: _currentIndex,
-          items: const [
-            BottomNavigationBarItem(
+        bottomNavigationBar: NavigationBar(
+          onDestinationSelected: onTabTapped,
+          selectedIndex: _currentIndex,
+          destinations: const <Widget>[
+            NavigationDestination(
               icon: Icon(Icons.person),
               label: 'Profile',
             ),
-            BottomNavigationBarItem(
+            NavigationDestination(
               icon: Icon(Icons.fitness_center),
               label: 'Health Goals',
             ),
-            BottomNavigationBarItem(
+            NavigationDestination(
               icon: Icon(Icons.home),
               label: 'Home',
             ),
-            BottomNavigationBarItem(
+            NavigationDestination(
               icon: Icon(Icons.add_chart),
               label: 'Stats',
             ),
-            BottomNavigationBarItem(
+            NavigationDestination(
               icon: Icon(Icons.book),
               label: 'Log',
             ),
