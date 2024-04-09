@@ -26,7 +26,7 @@ class InputStatContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return InputStatView(
       title: 'Input Stat about My Food',
-      addStatCallback: (String day, HealthGoalAttribute attribute, double nutrition) {
+      addStatCallback: (WeekDay day, HealthGoalAttribute attribute, double nutrition) {
         // StatModel().addStat(day, calories, nutrition);
         // TODO: Remove this later
         controller.addStat(attribute, nutrition);

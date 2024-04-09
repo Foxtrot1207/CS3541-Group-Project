@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/model/health_goal.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/view/enum_selector.dart';
 
 /// A screen that allows the user to input their health goals.
 class HealthGoalInputScreen extends StatefulWidget {
@@ -18,8 +19,8 @@ class HealthGoalInputScreen extends StatefulWidget {
 
 /// The state for a [HealthGoalInputScreen].
 class _HealthGoalInputScreenState extends State<HealthGoalInputScreen> {
-  HealthGoalCadence? _selectedCadence;
-  HealthGoalAttribute? _selectedAttribute;
+  final ValueNotifier<HealthGoalCadence?> _selectedCadence = ValueNotifier<HealthGoalCadence?>(null);
+  final ValueNotifier<HealthGoalAttribute?> _selectedAttribute = ValueNotifier<HealthGoalAttribute?>(null);
   int _target = 0;
 
   /// Builds the widget tree for this screen.
@@ -33,33 +34,13 @@ class _HealthGoalInputScreenState extends State<HealthGoalInputScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            DropdownButton<HealthGoalCadence>(
-              value: _selectedCadence,
-              onChanged: (HealthGoalCadence? newValue) {
-                setState(() {
-                  _selectedCadence = newValue;
-                });
-              },
-              items: HealthGoalCadence.values.map((HealthGoalCadence cadence) {
-                return DropdownMenuItem<HealthGoalCadence>(
-                  value: cadence,
-                  child: Text(cadence.toString().split('.').last),
-                );
-              }).toList(),
+            EnumSelector<HealthGoalCadence>(
+              selected: _selectedCadence,
+              options: { for(var v in HealthGoalCadence.values) v.name: v }
             ),
-            DropdownButton<HealthGoalAttribute>(
-              value: _selectedAttribute,
-              onChanged: (HealthGoalAttribute? newValue) {
-                setState(() {
-                  _selectedAttribute = newValue;
-                });
-              },
-              items: HealthGoalAttribute.values.map((HealthGoalAttribute attribute) {
-                return DropdownMenuItem<HealthGoalAttribute>(
-                  value: attribute,
-                  child: Text(attribute.title),
-                );
-              }).toList(),
+            EnumSelector<HealthGoalAttribute>(
+              selected: _selectedAttribute,
+              options: { for(var v in HealthGoalAttribute.values) v.title: v }
             ),
             TextField(
               keyboardType: TextInputType.number,
@@ -75,8 +56,8 @@ class _HealthGoalInputScreenState extends State<HealthGoalInputScreen> {
             ElevatedButton(
               onPressed: () {
                 // Handle the submission of the health goal
-                if (_selectedCadence != null && _selectedAttribute != null) {
-                  widget.controller.addHealthGoal(HealthGoal(cadence: _selectedCadence??HealthGoalCadence.daily, attribute: _selectedAttribute??HealthGoalAttribute.water, target: _target));
+                if (_selectedCadence.value != null && _selectedAttribute.value != null) {
+                  widget.controller.addHealthGoal(HealthGoal(cadence: _selectedCadence.value??HealthGoalCadence.daily, attribute: _selectedAttribute.value??HealthGoalAttribute.water, target: _target));
                 }
               },
               child: Text('Submit'),

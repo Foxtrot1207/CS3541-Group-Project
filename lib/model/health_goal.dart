@@ -1,3 +1,21 @@
+
+enum WeekDay {
+  sunday("Sunday"),
+  monday("Monday"),
+  tuesday("Tuesday"),
+  wednesday("Wednesday"),
+  thursday("Thursday"),
+  friday("Friday"),
+  saturday("Saturday");
+
+  /// Constructor for WeekDay enum.
+  ///
+  /// @param title The title of the day.
+  const WeekDay(this.title);
+
+  final String title;
+}
+
 /// Enum representing the cadence of a health goal.
 enum HealthGoalCadence {
   daily(),
@@ -6,18 +24,18 @@ enum HealthGoalCadence {
 
 /// Enum representing the attribute of a health goal.
 enum HealthGoalAttribute {
-  weight(title: "Weight"),
-  protein(title: "Protein"),
-  fat(title: "Fat"),
-  carbs(title: "Carbs"),
-  sugar(title: "Sugar"),
-  water(title: "Water"),
-  caffeine(title: "Caffeine");
+  weight("Weight"),
+  protein("Protein"),
+  fat("Fat"),
+  carbs("Carbs"),
+  sugar("Sugar"),
+  water("Water"),
+  caffeine("Caffeine");
 
   /// Constructor for HealthGoalAttribute enum.
   ///
   /// @param title The title of the attribute.
-  const HealthGoalAttribute({required this.title});
+  const HealthGoalAttribute(this.title);
 
   final String title;
 }
