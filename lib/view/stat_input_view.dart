@@ -67,12 +67,16 @@ class _InputStatViewState extends State<InputStatView> {
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                widget.addStatCallback(
-                  _selectedDay.value ?? WeekDay.monday,
-                  _selectedAttribute.value ?? HealthGoalAttribute.water,
-                  double.tryParse(widget.nutritionController.text) ?? 0,
-                );
-                widget.nutritionController.clear();
+                if(_selectedAttribute.value != null && _selectedDay.value != null) {
+                  widget.addStatCallback(
+                    _selectedDay.value ?? WeekDay.monday,
+                    _selectedAttribute.value ?? HealthGoalAttribute.water,
+                    double.tryParse(widget.nutritionController.text) ?? 0,
+                  );
+                  widget.nutritionController.clear();
+                  _selectedDay.value = null;
+                  _selectedAttribute.value = null;
+                }
               },
               child: Text('Submit'),
             ),

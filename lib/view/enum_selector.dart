@@ -12,24 +12,29 @@ class EnumSelector<T> extends StatefulWidget {
 }
 
 class _EnumSelectorState<T extends Enum> extends State<EnumSelector> {
+
   @override
   Widget build(BuildContext context) {
-    HealthGoalAttribute.values;
-    return DropdownButton<T>(
-      value: widget.selected.value,
-      onChanged: (T? newValue) {
-        setState(() {
-          widget.selected.value = newValue;
-        });
+    return ListenableBuilder(
+      listenable: widget.selected,
+      builder: (BuildContext context, Widget? child) {
+        return DropdownButton<T>(
+          value: widget.selected.value,
+          onChanged: (T? newValue) {
+            setState(() {
+              widget.selected.value = newValue;
+            });
+          },
+          items: List<DropdownMenuItem<T>>.from(widget.options.entries.map(
+            (MapEntry<String, dynamic> entry) {
+              return DropdownMenuItem<T>(
+                value: entry.value,
+                child: Text(entry.key),
+              );
+            }
+          ).toList()),
+        );
       },
-      items: List<DropdownMenuItem<T>>.from(widget.options.entries.map(
-        (MapEntry<String, dynamic> entry) {
-          return DropdownMenuItem<T>(
-            value: entry.value,
-            child: Text(entry.key),
-          );
-        }
-      ).toList()),
     );
   }
 }

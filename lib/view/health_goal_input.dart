@@ -52,6 +52,8 @@ class _HealthGoalInputScreenState extends State<HealthGoalInputScreen> {
                 // Handle the submission of the health goal
                 if (_selectedCadence.value != null && _selectedAttribute.value != null) {
                   widget.controller.addHealthGoal(HealthGoal(cadence: _selectedCadence.value??HealthGoalCadence.daily, attribute: _selectedAttribute.value??HealthGoalAttribute.water, target: _target));
+                  _selectedCadence.value = null;
+                  _selectedAttribute.value = null;
                 }
               },
               child: Text('Submit'),
