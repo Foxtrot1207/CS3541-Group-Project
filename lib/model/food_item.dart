@@ -16,7 +16,17 @@ class FoodItem {
   /// The [servingSize] parameter specifies the serving size of the food item.
   /// The [calories] parameter specifies the calories of the food item.
   /// The [macros] parameter specifies the macros of the food item.
-  FoodItem({required this.name, required this.servingSize, required this.calories, required this.fat, required this.protein, required this.carbohydrates, required this.sugar, required this.water, required this.caffeine});
+  FoodItem({
+    required this.name,
+    required this.servingSize,
+    required this.calories,
+    required this.fat,
+    required this.protein,
+    required this.carbohydrates,
+    required this.sugar,
+    required this.water,
+    required this.caffeine
+  });
 
   /// Converts the FoodItem object into a Map.
   ///
