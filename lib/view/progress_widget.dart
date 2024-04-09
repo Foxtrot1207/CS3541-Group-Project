@@ -39,9 +39,19 @@ class _GoalProgressWidgetState extends State<GoalProgressView> {
     );
   }
 
-  /// Builds the widget tree for this widget.
+  /// Rebuild whenever the controller is updated
   @override
   Widget build(BuildContext context) {
+    return ListenableBuilder(
+      listenable: widget.controller,
+      builder: (BuildContext context, Widget? child) {
+        return rebuild(context);
+      },
+    );
+  }
+
+  /// Builds the widget tree for this widget.
+  Widget rebuild(BuildContext context) {
 
     List<TableRow> children = <TableRow>[];
     for(int i = 0; i < widget.controller.getHealthGoalCount(); i++) {

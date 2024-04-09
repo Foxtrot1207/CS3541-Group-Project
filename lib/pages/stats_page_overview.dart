@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
 import 'package:healthapp/pages/stats_comparison_page.dart';
 import 'package:healthapp/pages/stats_graphs_page.dart';
 
 class StatsOverviewScreen extends StatefulWidget {
-  final PersonInfoController controller;
+  final NutrientGraphController controller;
   StatsOverviewScreen({required this.controller});
 
   @override

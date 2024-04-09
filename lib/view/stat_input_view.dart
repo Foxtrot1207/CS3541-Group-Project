@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/model/health_goal.dart';
+import 'package:healthapp/view/enum_selector.dart';
 
 /// A widget for inputting health stats.
 class InputStatView extends StatefulWidget {
   final String title;
   final TextEditingController nutritionController = TextEditingController();
-  final Function(String, HealthGoalAttribute, double) addStatCallback;
+  final Function(WeekDay, HealthGoalAttribute, double) addStatCallback;
 
   /// Creates an InputStatView widget.
   ///
@@ -22,9 +23,9 @@ class InputStatView extends StatefulWidget {
 
 /// The state for the [InputStatView] widget.
 class _InputStatViewState extends State<InputStatView> {
-  String selectedDay = 'Monday';
   String caloriesToday = '';
-  HealthGoalAttribute? _selectedAttribute;
+  final ValueNotifier<HealthGoalAttribute?> _selectedAttribute = ValueNotifier<HealthGoalAttribute?>(null);
+  final ValueNotifier<WeekDay?> _selectedDay = ValueNotifier<WeekDay?>(null);
 
   /// Builds the widget.
   @override
@@ -42,47 +43,17 @@ class _InputStatViewState extends State<InputStatView> {
               'Select the day:',
               style: TextStyle(fontSize: 16),
             ),
-            DropdownButton<String>(
-              value: selectedDay,
-              onChanged: (String? newValue) {
-                if (newValue != null) {
-                  setState(() {
-                    selectedDay = newValue;
-                  });
-                }
-              },
-              items: <String>[
-                'Monday',
-                'Tuesday',
-                'Wednesday',
-                'Thursday',
-                'Friday',
-                'Saturday',
-                'Sunday',
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
+            EnumSelector<WeekDay>(
+              selected: _selectedDay,
+              options: { for(var v in WeekDay.values) v.title: v }
             ),
             const Text(
               'Enter the nutrition attribute:',
               style: TextStyle(fontSize: 16),
             ),
-            DropdownButton<HealthGoalAttribute>(
-              value: _selectedAttribute,
-              onChanged: (HealthGoalAttribute? newValue) {
-                setState(() {
-                  _selectedAttribute = newValue;
-                });
-              },
-              items: HealthGoalAttribute.values.map((HealthGoalAttribute attribute) {
-                return DropdownMenuItem<HealthGoalAttribute>(
-                  value: attribute,
-                  child: Text(attribute.title),
-                );
-              }).toList(),
+            EnumSelector<HealthGoalAttribute>(
+              selected: _selectedAttribute,
+              options: { for(var v in HealthGoalAttribute.values) v.title: v }
             ),
             SizedBox(height: 16),
             Text(
@@ -96,12 +67,16 @@ class _InputStatViewState extends State<InputStatView> {
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                widget.addStatCallback(
-                  selectedDay,
-                  _selectedAttribute ?? HealthGoalAttribute.water,
-                  double.tryParse(widget.nutritionController.text) ?? 0,
-                );
-                widget.nutritionController.clear();
+                if(_selectedAttribute.value != null && _selectedDay.value != null) {
+                  widget.addStatCallback(
+                    _selectedDay.value!,
+                    _selectedAttribute.value!,
+                    double.tryParse(widget.nutritionController.text) ?? 0,
+                  );
+                  widget.nutritionController.clear();
+                  _selectedDay.value = null;
+                  _selectedAttribute.value = null;
+                }
               },
               child: Text('Submit'),
             ),

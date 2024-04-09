@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/controller/food_item_controller.dart';
+import 'package:healthapp/view/food_screen.dart';
 
 class LogCreateItemScreen extends StatefulWidget {
-  PersonInfoController controller;
+  FoodItemController controller;
   LogCreateItemScreen({required this.controller});
 
   @override
@@ -14,21 +15,7 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Column(
-        children: [
-
-        Placeholder( //Item Info Placeholder
-        fallbackHeight:100, //size of box
-        color: Colors.black!, //color of box
-      ),
-          const SizedBox(height: 100), //Space between placeholders
-
-          Placeholder( //Item Info Placeholder
-            fallbackHeight:200, //size of box
-            color: Colors.yellow!, //color of box
-          ),
-        ],
-      ),
+      body: FoodItemScreen(controller: widget.controller),
     );
   }
 }

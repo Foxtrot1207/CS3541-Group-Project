@@ -13,18 +13,7 @@ class NutrientGraphView extends StatelessWidget {
   Widget build(BuildContext context) {
     // Assuming you have a method in your controller to get the attribute name
     String attributeName = controller.getAttributeName(1);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Nutrient Graph'),
-        centerTitle: true,
-        bottom: PreferredSize(
-            preferredSize: Size.zero,
-            child: Text(attributeName)),
-
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: LineChart(
+    return LineChart(
           LineChartData(
             gridData: FlGridData(
               show: true,
@@ -104,8 +93,6 @@ class NutrientGraphView extends StatelessWidget {
             ],
             // Add a legend
           ),
-        ),
-      ),
     );
   }
 }

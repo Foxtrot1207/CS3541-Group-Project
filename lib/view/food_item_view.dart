@@ -21,6 +21,15 @@ class FoodItemView extends StatelessWidget {
   /// It returns a [ListView] that displays the food items provided by the [controller].
   @override
   Widget build(BuildContext context) {
+    return ListenableBuilder(
+      listenable: controller,
+      builder: (BuildContext context, Widget? child) {
+        return rebuild(context);
+      },
+    );
+  }
+
+  Widget rebuild(BuildContext context) {
     return ListView.builder(
       itemCount: controller.foodItems.length,
       itemBuilder: (context, index) {
