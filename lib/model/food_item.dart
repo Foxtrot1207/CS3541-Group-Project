@@ -5,7 +5,7 @@ class FoodItem {
   final double calories;
   final double fat_g;
   final double protein_g;
-  final double carbohydrates_g_g;
+  final double carbohydrates_g;
   final double sugar_g;
   final double water_ml;
   final double caffeine_mg;
@@ -21,7 +21,7 @@ class FoodItem {
     required this.servingSize,
     required this.calories,
     required this.fat_g,
-    required this.protein_g_g,
+    required this.protein_g,
     required this.carbohydrates_g,
     required this.sugar_g,
     required this.water_ml,
@@ -40,7 +40,7 @@ class FoodItem {
     'protein_g': protein_g,
     'carbohydrates_g': carbohydrates_g,
     'sugar_g': sugar_g,
-    'water_ml_ml': water_ml_ml,
+    'water_ml_ml': water_ml,
     'caffeine_mg': caffeine_mg
   };
   }

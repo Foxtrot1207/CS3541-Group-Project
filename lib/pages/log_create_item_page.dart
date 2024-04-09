@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
+import 'package:healthapp/model/food_item.dart';
 import 'package:healthapp/view/food_screen.dart';
 
 class LogCreateItemScreen extends StatefulWidget {
@@ -41,12 +42,12 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
                     name: name,
                     servingSize: servingSize,
                     calories: calories,
-                    protein: protein,
-                    fat: fat,
-                    carbohydrates: carbohydrates,
-                    sugar: sugar,
-                    caffeine: caffeine,
-                    water: water,
+                    protein_g: protein,
+                    fat_g: fat,
+                    carbohydrates_g: carbohydrates,
+                    sugar_g: sugar,
+                    caffeine_mg: caffeine,
+                    water_ml: water,
                   ));
                   Navigator.pop(context);
                 }
