@@ -69,8 +69,8 @@ class _InputStatViewState extends State<InputStatView> {
               onPressed: () {
                 if(_selectedAttribute.value != null && _selectedDay.value != null) {
                   widget.addStatCallback(
-                    _selectedDay.value ?? WeekDay.monday,
-                    _selectedAttribute.value ?? HealthGoalAttribute.water,
+                    _selectedDay.value!,
+                    _selectedAttribute.value!,
                     double.tryParse(widget.nutritionController.text) ?? 0,
                   );
                   widget.nutritionController.clear();

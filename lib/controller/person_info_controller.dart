@@ -47,8 +47,7 @@ class PersonInfoController extends ChangeNotifier {
   /// Adds a [value] to the stat for a particular [attribute].
   void addStat(HealthGoalAttribute attribute, double value) {
     // Is there a nicer way to do this in dart?
-    personInfo.currentAttributes[attribute] = (personInfo.currentAttributes[attribute]??0) + value;
+    personInfo.currentAttributes[attribute] = (personInfo.currentAttributes[attribute]!) + value;
     notifyListeners();
   }
-
 }
