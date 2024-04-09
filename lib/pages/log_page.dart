@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/pages/log_add_food_page.dart';
 
 class LogScreen extends StatefulWidget {
-  PersonInfoController controller;
+  FoodItemController controller;
   LogScreen({required this.controller});
 
   @override

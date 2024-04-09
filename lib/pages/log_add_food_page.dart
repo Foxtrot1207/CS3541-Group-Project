@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/controller/food_item_controller.dart';
+import 'package:healthapp/view/food_item_view.dart';
 
 import 'log_create_item_page.dart';
 
 class LogAddFoodScreen extends StatefulWidget {
-  PersonInfoController controller;
+  FoodItemController controller;
   LogAddFoodScreen({required this.controller});
 
   @override
@@ -35,9 +36,10 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
 
           const SizedBox(height: 100), //Space between placeholders
 
-          Placeholder( //Saved Item Placeholder
-            fallbackHeight:400, //size of box
-            color: Colors.yellow!, //color of box
+          Expanded(
+            child: FoodItemView(
+              controller: widget.controller,
+            ),
           ),
         ],
       ),
