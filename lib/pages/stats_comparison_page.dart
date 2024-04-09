@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
 
 class StatsComparisonScreen extends StatefulWidget {
-  PersonInfoController controller;
+  NutrientGraphController controller;
   StatsComparisonScreen({required this.controller});
 
   @override

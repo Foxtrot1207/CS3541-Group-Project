@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/view/nutrient_graph_view.dart';
 
 class StatsGraphScreen extends StatefulWidget {
-  PersonInfoController controller;
+  NutrientGraphController controller;
+  
   StatsGraphScreen({required this.controller});
 
   @override
@@ -14,14 +17,7 @@ class _StatsScreenState extends State<StatsGraphScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Column(
-        children: [
-        Container(
-        alignment: Alignment.center,
-        child: Text('Graph'),
-          )
-        ],
-      ),
+      body: NutrientGraphView(controller: widget.controller),
     );
   }
 }
