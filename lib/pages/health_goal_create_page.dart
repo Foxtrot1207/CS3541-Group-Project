@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/view/health_goal_input.dart';
 
 class HealthGoalCreateScreen extends StatefulWidget {
   PersonInfoController controller;
@@ -14,14 +15,10 @@ class _HealthGoalCreateScreenState extends State<HealthGoalCreateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Column(
-        children: [
-          Placeholder( //Create Health Goals Placeholder
-            fallbackHeight:500, //size of box
-            color: Colors.pink!, //color of box
-          ),
-        ],
-      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: HealthGoalInputScreen(controller: widget.controller)
+      )
     );
   }
 }

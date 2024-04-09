@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/view/health_goal_view.dart';
+import 'package:healthapp/view/progress_widget.dart';
 import 'health_goal_create_page.dart';
 
 class HealthGoalScreen extends StatefulWidget {
@@ -16,6 +18,7 @@ class _HealthGoalScreenState extends State<HealthGoalScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Align(
             alignment: Alignment.centerRight, //Centered right like wireframe
@@ -31,16 +34,17 @@ class _HealthGoalScreenState extends State<HealthGoalScreen> {
               child: Text('Create Health Goal'), // Button text
             ),
           ),
-          Placeholder( //Active Health Goals Placeholder
-            fallbackHeight:200, //size of box
-            color: Colors.lightBlue, //color of box
+          
+          Expanded(
+            child: HealthGoalView(
+              controller: widget.controller,
+            ),
           ),
 
           SizedBox(height: 100), //Space between placeholders
 
-          Placeholder( //Progress Bar Placeholder
-            fallbackHeight:200,  //size of box
-            color: Colors.purple,  //color of box
+          GoalProgressView( 
+            controller: widget.controller,
           ),
         ],
       ),

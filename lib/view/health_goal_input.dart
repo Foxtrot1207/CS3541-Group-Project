@@ -26,13 +26,7 @@ class _HealthGoalInputScreenState extends State<HealthGoalInputScreen> {
   /// Builds the widget tree for this screen.
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Health Goal Input'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
+    return Column(
           children: <Widget>[
             EnumSelector<HealthGoalCadence>(
               selected: _selectedCadence,
@@ -63,8 +57,6 @@ class _HealthGoalInputScreenState extends State<HealthGoalInputScreen> {
               child: Text('Submit'),
             ),
           ],
-        ),
-      ),
     );
   }
 }
