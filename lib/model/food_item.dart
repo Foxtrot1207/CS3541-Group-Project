@@ -3,12 +3,12 @@ class FoodItem {
   final String name;
   final String servingSize;
   final double calories;
-  final double fat;
-  final double protein;
-  final double carbohydrates;
-  final double sugar;
-  final double water;
-  final double caffeine;
+  final double fat_g;
+  final double protein_g;
+  final double carbohydrates_g_g;
+  final double sugar_g;
+  final double water_ml;
+  final double caffeine_mg;
 
   /// Creates a new FoodItem with the specified name, serving size, calories, and macros.
   ///
@@ -20,12 +20,12 @@ class FoodItem {
     required this.name,
     required this.servingSize,
     required this.calories,
-    required this.fat,
-    required this.protein,
-    required this.carbohydrates,
-    required this.sugar,
-    required this.water,
-    required this.caffeine
+    required this.fat_g,
+    required this.protein_g_g,
+    required this.carbohydrates_g,
+    required this.sugar_g,
+    required this.water_ml,
+    required this.caffeine_mg
   });
 
   /// Converts the FoodItem object into a Map.
@@ -36,12 +36,12 @@ class FoodItem {
     'name': name,
     'servingSize': servingSize,
     'calories': calories,
-    'fat': fat,
-    'protein': protein,
-    'carbohydrates': carbohydrates,
-    'sugar': sugar,
-    'water': water,
-    'caffeine': caffeine
+    'fat_g': fat_g,
+    'protein_g': protein_g,
+    'carbohydrates_g': carbohydrates_g,
+    'sugar_g': sugar_g,
+    'water_ml_ml': water_ml_ml,
+    'caffeine_mg': caffeine_mg
   };
   }
 }

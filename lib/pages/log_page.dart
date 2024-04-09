@@ -49,7 +49,8 @@ class _LogScreenState extends State<LogScreen> {
                   itemBuilder: (context, index) {
                     DocumentSnapshot foodItem = snapshot.data!.docs[index];
                     return ListTile(
-                      title: Text(foodItem['name','servingSize']),
+                      title: Text(foodItem['name']),
+                      subtitle: Text('Calories: ${foodItem['calories']}'),
                     );
                   },
                 );
