@@ -16,14 +16,11 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
       appBar: AppBar(),
       body: Column(
         children: [
-          Placeholder( //Item Entry Placeholder
-            //size of box
-            fallbackHeight:150,
-            fallbackWidth:10,
-            //color of box
-            color: Colors.black!,
-          ),
 
+        Placeholder( //Item Info Placeholder
+        fallbackHeight:100, //size of box
+        color: Colors.black!, //color of box
+      ),
           const SizedBox(height: 100), //Space between placeholders
 
           Placeholder( //Item Info Placeholder

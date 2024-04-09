@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
 
+import 'log_create_item_page.dart';
+
 class LogAddFoodScreen extends StatefulWidget {
   PersonInfoController controller;
   LogAddFoodScreen({required this.controller});
@@ -16,12 +18,19 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
       appBar: AppBar(),
       body: Column(
         children: [
-          Placeholder( //Menu Button Placeholder
-            //size of box
-            fallbackHeight:50,
-            fallbackWidth:10,
-            //color of box
-            color: Colors.black!,
+          Align(
+            alignment: Alignment.centerRight, //Centered right like wireframe
+            child: TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LogCreateItemScreen(controller: widget.controller),
+                  ),
+                );
+              },
+              child: Text('Create Item'), // Button text
+            ),
           ),
 
           const SizedBox(height: 100), //Space between placeholders
