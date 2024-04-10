@@ -21,7 +21,9 @@ import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/bmi_Calc.dart';
 
 /// Entry point of the application.
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
