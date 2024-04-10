@@ -57,9 +57,11 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
           const SizedBox(height: 20), //Space between placeholders
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance.collection('/default')
+              stream: FirebaseFirestore.instance
+                  .collection('/default')
                   .orderBy('name') // Order by field name
                   .where('name', isGreaterThanOrEqualTo: search) // Search functionality
+                  .where('name', )
                   .snapshots(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
@@ -75,7 +77,7 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
                     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
                     return ListTile(
                       title: Text(data['name']),
-                      subtitle: Text('Calories: ${data['calories']}, Serving: ${data['servingSize']}'),
+                      subtitle: Text('Calories: ${data['calories']}, Serving: ${data['serving_size']}'),
                       onTap: () {
                         // Interactive action when tapping the item
                         // Navigator.push(
