@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 import 'package:healthapp/pages/health_goal_page.dart';
 import 'package:healthapp/pages/home_page.dart';
 import 'package:healthapp/pages/log_page.dart';
@@ -105,8 +108,4 @@ class _MyAppState extends State<MyApp> {
               label: 'Log',
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
+  
