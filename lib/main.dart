@@ -41,14 +41,32 @@ class _MyAppState extends State<MyApp> {
   );
   final FoodItemController _foodItemController = FoodItemController(
       foodItems: [
-        FoodItem(name: "Apple", servingSize: '1 apple', calories: 122, fat_g: 0, protein_g: 0, carbohydrates_g: 30, sugar_g: 24.2, water_ml: 0, caffeine_mg: 0),
-        FoodItem(name: "Scrambled Eggs", servingSize: '2 eggs', calories: 192, fat_g: 15.8, protein_g: 11.6, carbohydrates_g: 1, sugar_g: 0, water_ml: 0, caffeine_mg: 0),
+        FoodItem(name: "Apple",
+            servingSize: '1 apple',
+            calories: 122,
+            fat_g: 0,
+            protein_g: 0,
+            carbohydrates_g: 30,
+            sugar_g: 24.2,
+            water_ml: 0,
+            caffeine_mg: 0),
+        FoodItem(name: "Scrambled Eggs",
+            servingSize: '2 eggs',
+            calories: 192,
+            fat_g: 15.8,
+            protein_g: 11.6,
+            carbohydrates_g: 1,
+            sugar_g: 0,
+            water_ml: 0,
+            caffeine_mg: 0),
       ]
   );
   final NutrientGraphController _nutrientGraphController = NutrientGraphController(
       nutrientData: [
-        Tuple3<DateTime, double, HealthGoalAttribute>(DateTime(2024, 4, 4), 100, HealthGoalAttribute.protein),
-        Tuple3<DateTime, double, HealthGoalAttribute>(DateTime(2024, 4, 2), 50, HealthGoalAttribute.carbs),
+        Tuple3<DateTime, double, HealthGoalAttribute>(
+            DateTime(2024, 4, 4), 100, HealthGoalAttribute.protein),
+        Tuple3<DateTime, double, HealthGoalAttribute>(
+            DateTime(2024, 4, 2), 50, HealthGoalAttribute.carbs),
       ]
   );
 
@@ -64,7 +82,7 @@ class _MyAppState extends State<MyApp> {
       LogScreen(controller: _foodItemController),
     ];
   }
-  
+
   /// Function to handle tab tap event
   void onTabTapped(int index) {
     setState(() {
@@ -81,7 +99,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Git Healthy'),
         ),
-        
+
         body: _children[_currentIndex],
         bottomNavigationBar: NavigationBar(
           onDestinationSelected: onTabTapped,
@@ -108,4 +126,8 @@ class _MyAppState extends State<MyApp> {
               label: 'Log',
             ),
           ],
-  
+        ),
+      ),
+    );
+  }
+}
