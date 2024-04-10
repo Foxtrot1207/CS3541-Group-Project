@@ -1,5 +1,6 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:healthapp/model/food_item.dart';
 import 'package:healthapp/model/nutrition_tracker.dart';
@@ -22,6 +23,7 @@ class FoodItemController with ChangeNotifier {
   /// @param foodItem The FoodItem to add.
   void addFoodItem(FoodItem foodItem) {
     foodItems.add(foodItem);
+    FirebaseFirestore.instance.collection('/daily_log').add(foodItem.toMap());
     nutritonTracker.logFood(foodItem);
     notifyListeners();
   }
