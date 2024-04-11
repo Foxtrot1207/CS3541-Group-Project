@@ -81,6 +81,11 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
                         child: Text('Add to Log'),
                         onPressed: (){
                           widget.controller.addFoodToLog(data);
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Added to Log!'))
+                          );
+
                         },
                       )
                     );

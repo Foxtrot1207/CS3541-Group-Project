@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/model/food_item.dart';
@@ -34,21 +35,42 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
             //TODO: Add TextFormField widgets for each nutrient
 
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
 
-                  // widget.controller.addFoodItem(FoodItem(
-                  //   name: name,
-                  //   servingSize: servingSize,
-                  //   calories: calories,
-                  //   protein_g: protein,
-                  //   fat_g: fat,
-                  //   carbohydrates_g: carbohydrates,
-                  //   sugar_g: sugar,
-                  //   caffeine_mg: caffeine,
-                  //   water_ml: water,
-                  // ));
+                  FoodItem newFoodItem = FoodItem(
+                    name: name,
+                    servingSize: servingSize,
+                    calories: calories,
+                    protein_g: protein,
+                    fat_g: fat,
+                    carbohydrates_g: carbohydrates,
+                    sugar_g: sugar,
+                    caffeine_mg: caffeine,
+                    water_ml: water,
+                  );
+                  widget.controller.addFoodItem(newFoodItem);
+
+                  // Add food item to Firestore
+                  CollectionReference foods =
+                  FirebaseFirestore.instance.collection('/default');
+                  await foods.add({
+                    'name': newFoodItem.name,
+                    'servingSize': newFoodItem.servingSize,
+                    'calories': newFoodItem.calories,
+                    'protein_g': newFoodItem.protein_g,
+                    'fat_g': newFoodItem.fat_g,
+                    'carbohydrates_g': newFoodItem.carbohydrates_g,
+                    'sugar_g': newFoodItem.sugar_g,
+                    'caffeine_mg': newFoodItem.caffeine_mg,
+                    'water_ml': newFoodItem.water_ml,
+                  });
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Saved to Food List!'))
+                  );
+
                   Navigator.pop(context);
                 }
               },
