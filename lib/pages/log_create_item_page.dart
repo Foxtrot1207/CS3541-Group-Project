@@ -38,17 +38,17 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
 
-                  widget.controller.addFoodItem(FoodItem(
-                    name: name,
-                    servingSize: servingSize,
-                    calories: calories,
-                    protein_g: protein,
-                    fat_g: fat,
-                    carbohydrates_g: carbohydrates,
-                    sugar_g: sugar,
-                    caffeine_mg: caffeine,
-                    water_ml: water,
-                  ));
+                  // widget.controller.addFoodItem(FoodItem(
+                  //   name: name,
+                  //   servingSize: servingSize,
+                  //   calories: calories,
+                  //   protein_g: protein,
+                  //   fat_g: fat,
+                  //   carbohydrates_g: carbohydrates,
+                  //   sugar_g: sugar,
+                  //   caffeine_mg: caffeine,
+                  //   water_ml: water,
+                  // ));
                   Navigator.pop(context);
                 }
               },
