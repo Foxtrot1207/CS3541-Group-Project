@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/pages/profile_bmi_page.dart';
 
 class ProfileScreen extends StatefulWidget {
   PersonInfoController controller;
@@ -16,12 +17,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(),
       body: Column(
         children: [
-          Placeholder( //User info
-            //size of box
-            fallbackHeight:100,
-            fallbackWidth:10,
-            //color of box
-            color: Colors.blue!,
+          Align(
+            alignment: Alignment.centerRight, //Centered right like wireframe
+            child: TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileBMIScreen(controller: widget.controller),
+                  ),
+                );
+              },
+              child: Text('Calculate BMI'), // Button text
+            ),
           ),
 
           const SizedBox(height: 100), //Space between placeholders
