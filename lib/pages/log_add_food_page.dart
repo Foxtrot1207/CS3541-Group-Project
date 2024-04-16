@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
-import 'package:healthapp/view/food_item_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'log_create_item_page.dart';
@@ -75,8 +74,19 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
                   children: snapshot.data!.docs.map((DocumentSnapshot document) {
                     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
                     return ListTile(
-                      title: Text(data['Food Item Name']),
-                      subtitle: Text('Calories: ${data['calories']}, Serving: ${data['serving_size']}'),
+                      title: Text(data['name']),
+                      subtitle: Text('Serving: ${data['serving_size']}, Calories: ${data['calories']}'),
+                      trailing: ElevatedButton(
+                        child: Text('Add to Log'),
+                        onPressed: (){
+                          widget.controller.addFoodToLog(data);
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Added to Log!'))
+                          );
+
+                        },
+                      )
                     );
                   }).toList(),
                 );
