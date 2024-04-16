@@ -1,6 +1,7 @@
-//import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+
 import 'package:healthapp/model/food_item.dart';
 import 'package:healthapp/model/nutrition_tracker.dart';
 
@@ -8,6 +9,7 @@ import 'package:healthapp/model/nutrition_tracker.dart';
 ///
 /// This controller is designed to be used with Flutter's ChangeNotifierProvider for state management.
 class FoodItemController with ChangeNotifier {
+  String formattedDate = DateFormat.yMd().format(DateTime.now()); //DateFormat('yMd')
   /// A list of FoodItem objects managed by this controller.
   List<FoodItem> foodItems;
   NutritionTracker nutritonTracker = NutritionTracker();
@@ -21,9 +23,14 @@ class FoodItemController with ChangeNotifier {
   ///
   /// @param foodItem The FoodItem to add.
   void addFoodItem(FoodItem foodItem) {
-    foodItems.add(foodItem);
+    (foodItem.toMap());
     nutritonTracker.logFood(foodItem);
     notifyListeners();
+  }
+
+  void addFoodToLog(Map<String, dynamic> foodItem) {
+    String formattedDate = DateFormat.yMd().format(DateTime.now());
+    FirebaseFirestore.instance.collection('/user_log/$formattedDate').add(foodItem);
   }
 
   /// Removes a FoodItem from the list of food items managed by this controller.
@@ -33,5 +40,11 @@ class FoodItemController with ChangeNotifier {
     foodItems.remove(foodItem);
     nutritonTracker.removeFood(foodItem);
     notifyListeners();
+  }
+
+
+  Stream<QuerySnapshot> getLog() {
+    String formattedDate = DateFormat.yMd().format(DateTime.now());
+    return FirebaseFirestore.instance.collection('/user_log/$formattedDate').snapshots();
   }
 }

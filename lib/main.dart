@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 import 'package:healthapp/pages/health_goal_page.dart';
 import 'package:healthapp/pages/home_page.dart';
 import 'package:healthapp/pages/log_page.dart';
@@ -18,7 +21,9 @@ import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/bmi_Calc.dart';
 
 /// Entry point of the application.
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -38,14 +43,32 @@ class _MyAppState extends State<MyApp> {
   );
   final FoodItemController _foodItemController = FoodItemController(
       foodItems: [
-        FoodItem(name: "Apple", servingSize: '1 apple', calories: 122, fat: 0, protein: 0, carbohydrates: 30, sugar: 24.2, water: 0, caffeine: 0),
-        FoodItem(name: "Scrambled Eggs", servingSize: '2 eggs', calories: 192, fat: 15.8, protein: 11.6, carbohydrates: 1, sugar: 0, water: 0, caffeine: 0),
+        FoodItem(name: "Apple",
+            servingSize: '1 apple',
+            calories: 122,
+            fat_g: 0,
+            protein_g: 0,
+            carbohydrates_g: 30,
+            sugar_g: 24.2,
+            water_ml: 0,
+            caffeine_mg: 0),
+        FoodItem(name: "Scrambled Eggs",
+            servingSize: '2 eggs',
+            calories: 192,
+            fat_g: 15.8,
+            protein_g: 11.6,
+            carbohydrates_g: 1,
+            sugar_g: 0,
+            water_ml: 0,
+            caffeine_mg: 0),
       ]
   );
   final NutrientGraphController _nutrientGraphController = NutrientGraphController(
       nutrientData: [
-        Tuple3<DateTime, double, HealthGoalAttribute>(DateTime(2024, 4, 4), 100, HealthGoalAttribute.protein),
-        Tuple3<DateTime, double, HealthGoalAttribute>(DateTime(2024, 4, 2), 50, HealthGoalAttribute.carbs),
+        Tuple3<DateTime, double, HealthGoalAttribute>(
+            DateTime(2024, 4, 4), 100, HealthGoalAttribute.protein),
+        Tuple3<DateTime, double, HealthGoalAttribute>(
+            DateTime(2024, 4, 2), 50, HealthGoalAttribute.carbs),
       ]
   );
 
@@ -61,7 +84,7 @@ class _MyAppState extends State<MyApp> {
       LogScreen(controller: _foodItemController),
     ];
   }
-  
+
   /// Function to handle tab tap event
   void onTabTapped(int index) {
     setState(() {
@@ -78,7 +101,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Git Healthy'),
         ),
-        
+
         body: _children[_currentIndex],
         bottomNavigationBar: NavigationBar(
           onDestinationSelected: onTabTapped,

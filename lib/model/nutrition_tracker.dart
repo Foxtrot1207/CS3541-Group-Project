@@ -10,23 +10,23 @@ class NutritionTracker {
     dailyValues['calories'] = (dailyValues['calories'] ?? 0) + food.calories;
     weeklyValues['calories'] = (weeklyValues['calories'] ?? 0) + food.calories;
     ///Fat
-    dailyValues['fat'] = (dailyValues['fat'] ?? 0) + food.fat;
-    weeklyValues['fat'] = (weeklyValues['fat'] ?? 0) + food.fat;
+    dailyValues['fat'] = (dailyValues['fat'] ?? 0) + food.fat_g;
+    weeklyValues['fat'] = (weeklyValues['fat'] ?? 0) + food.fat_g;
     ///Carbs
-    dailyValues['carbohydrates'] = (dailyValues['carbohydrates'] ?? 0) + food.carbohydrates;
-    weeklyValues['carbohydrates'] = (weeklyValues['carbohydrates'] ?? 0) + food.carbohydrates;
+    dailyValues['carbohydrates'] = (dailyValues['carbohydrates'] ?? 0) + food.carbohydrates_g;
+    weeklyValues['carbohydrates'] = (weeklyValues['carbohydrates'] ?? 0) + food.carbohydrates_g;
     ///Protein
-    dailyValues['protein'] = (dailyValues['protein'] ?? 0) + food.protein;
-    weeklyValues['protein'] = (weeklyValues['protein'] ?? 0) + food.protein;
+    dailyValues['protein'] = (dailyValues['protein'] ?? 0) + food.protein_g;
+    weeklyValues['protein'] = (weeklyValues['protein'] ?? 0) + food.protein_g;
     ///Sugar
-    dailyValues['sugar'] = (dailyValues['sugar'] ?? 0) + food.sugar;
-    weeklyValues['sugar'] = (weeklyValues['sugar'] ?? 0) + food.sugar;
+    dailyValues['sugar'] = (dailyValues['sugar'] ?? 0) + food.sugar_g;
+    weeklyValues['sugar'] = (weeklyValues['sugar'] ?? 0) + food.sugar_g;
     ///Caffeine
-    dailyValues['caffeine'] = (dailyValues['caffeine'] ?? 0) + food.caffeine;
-    weeklyValues['caffeine'] = (weeklyValues['caffeine'] ?? 0) + food.caffeine;
+    dailyValues['caffeine'] = (dailyValues['caffeine'] ?? 0) + food.caffeine_mg;
+    weeklyValues['caffeine'] = (weeklyValues['caffeine'] ?? 0) + food.caffeine_mg;
     ///Water
-    dailyValues['water'] = (dailyValues['water'] ?? 0) + food.water;
-    weeklyValues['water'] = (weeklyValues['water'] ?? 0) + food.water;
+    dailyValues['water'] = (dailyValues['water'] ?? 0) + food.water_ml;
+    weeklyValues['water'] = (weeklyValues['water'] ?? 0) + food.water_ml;
   }
 
   void removeFood(FoodItem food) {
@@ -34,23 +34,23 @@ class NutritionTracker {
     dailyValues['calories'] = (dailyValues['calories'] ?? 0) - food.calories;
     weeklyValues['calories'] = (weeklyValues['calories'] ?? 0) - food.calories;
     ///Fat
-    dailyValues['fat'] = (dailyValues['fat'] ?? 0) - food.fat;
-    weeklyValues['fat'] = (weeklyValues['fat'] ?? 0) - food.fat;
+    dailyValues['fat'] = (dailyValues['fat'] ?? 0) - food.fat_g;
+    weeklyValues['fat'] = (weeklyValues['fat'] ?? 0) - food.fat_g;
     ///Carbs
-    dailyValues['carbohydrates'] = (dailyValues['carbohydrates'] ?? 0) - food.carbohydrates;
-    weeklyValues['carbohydrates'] = (weeklyValues['carbohydrates'] ?? 0) - food.carbohydrates;
+    dailyValues['carbohydrates'] = (dailyValues['carbohydrates'] ?? 0) - food.carbohydrates_g;
+    weeklyValues['carbohydrates'] = (weeklyValues['carbohydrates'] ?? 0) - food.carbohydrates_g;
     ///Protein
-    dailyValues['protein'] = (dailyValues['protein'] ?? 0) - food.protein;
-    weeklyValues['protein'] = (weeklyValues['protein'] ?? 0) - food.protein;
+    dailyValues['protein'] = (dailyValues['protein'] ?? 0) - food.protein_g;
+    weeklyValues['protein'] = (weeklyValues['protein'] ?? 0) - food.protein_g;
     ///Sugar
-    dailyValues['sugar'] = (dailyValues['sugar'] ?? 0) - food.sugar;
-    weeklyValues['sugar'] = (weeklyValues['sugar'] ?? 0) - food.sugar;
+    dailyValues['sugar'] = (dailyValues['sugar'] ?? 0) - food.sugar_g;
+    weeklyValues['sugar'] = (weeklyValues['sugar'] ?? 0) - food.sugar_g;
     ///Caffeine
-    dailyValues['caffeine'] = (dailyValues['caffeine'] ?? 0) - food.caffeine;
-    weeklyValues['caffeine'] = (weeklyValues['caffeine'] ?? 0) - food.caffeine;
+    dailyValues['caffeine'] = (dailyValues['caffeine'] ?? 0) - food.caffeine_mg;
+    weeklyValues['caffeine'] = (weeklyValues['caffeine'] ?? 0) - food.caffeine_mg;
     ///Water
-    dailyValues['water'] = (dailyValues['water'] ?? 0) - food.water;
-    weeklyValues['water'] = (weeklyValues['water'] ?? 0) - food.water;
+    dailyValues['water'] = (dailyValues['water'] ?? 0) - food.water_ml;
+    weeklyValues['water'] = (weeklyValues['water'] ?? 0) - food.water_ml;
   }
 
   void resetDaily() {
