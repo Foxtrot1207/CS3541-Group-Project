@@ -22,11 +22,11 @@ class FoodItemController with ChangeNotifier {
   /// Adds a new FoodItem to the list of food items managed by this controller.
   ///
   /// @param foodItem The FoodItem to add.
-  // void addFoodtoTracker(FoodItem foodItem) {
-  //   (foodItem.toMap());
-  //   nutritonTracker.logFood(foodItem);
-  //   notifyListeners();
-  // }
+  void addFoodItem(FoodItem foodItem) {
+    (foodItem.toMap());
+    nutritonTracker.logFood(foodItem);
+    notifyListeners();
+  }
 
   void addFoodToLog(Map<String, dynamic> foodItem) {
     String formattedDate = DateFormat.yMd().format(DateTime.now());
@@ -41,6 +41,7 @@ class FoodItemController with ChangeNotifier {
     nutritonTracker.removeFood(foodItem);
     notifyListeners();
   }
+
 
   Stream<QuerySnapshot> getLog() {
     String formattedDate = DateFormat.yMd().format(DateTime.now());
