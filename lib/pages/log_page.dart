@@ -22,17 +22,27 @@ class _LogScreenState extends State<LogScreen> {
         children: [
         Align(
         alignment: Alignment.centerRight, //Centered right like wireframe
-        child: TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => LogAddFoodScreen(controller: widget.controller),
+          child: TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LogAddFoodScreen(controller: widget.controller),
+                ),
+              );
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.lightGreenAccent.shade100), // Background color
+              foregroundColor: MaterialStateProperty.all(Colors.black), // Text color
+              textStyle: MaterialStateProperty.all(
+                TextStyle(
+                  fontSize: 20, // Text font size
+                  fontWeight: FontWeight.bold, // Text weight
+                ),
               ),
-            );
-          },
-          child: Text('Add Food'), // Button text
-        ),
+            ),
+            child: const Text('Add Food'), // Button text
+          ),
       ),
 
           Expanded(

@@ -100,12 +100,15 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Git Healthy'),
+          backgroundColor: Colors.lightGreenAccent.shade100,
+          centerTitle: true,
         ),
 
         body: _children[_currentIndex],
         bottomNavigationBar: NavigationBar(
           onDestinationSelected: onTabTapped,
           selectedIndex: _currentIndex,
+          backgroundColor: Colors.grey.shade100,
           destinations: const <Widget>[
             NavigationDestination(
               icon: Icon(Icons.person),

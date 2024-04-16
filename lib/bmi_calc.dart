@@ -16,7 +16,7 @@ class CalcBMIModel {
  /// This class is the controller for the BMI calculator.
  /// It takes in the user's height and weight and calculates the BMI.
 class CalcBMIController extends StatefulWidget {
-  const CalcBMIController({super.key});
+   CalcBMIController({super.key});
   @override
   State<CalcBMIController> createState() => _CalcBMIControllerState();
 }
@@ -40,8 +40,6 @@ class _CalcBMIControllerState extends State<CalcBMIController> {
       resultBMI = "Your BMI is ${bmi.toStringAsFixed(1)}";
     });
   }
-
-
    /// This function builds the widget for the BMI calculator.
    /// It includes text fields for the user to input their height and weight,
    /// a text button to calculate the BMI, and a text field to display the calculated BMI.
@@ -51,10 +49,10 @@ class _CalcBMIControllerState extends State<CalcBMIController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          padding:  EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextFormField(
             controller: heightController, /// takes Height value
-            decoration: const InputDecoration(
+            decoration:  InputDecoration(
               border: UnderlineInputBorder(),
               labelText: 'Enter Height in Inches:',
             ),
@@ -62,10 +60,10 @@ class _CalcBMIControllerState extends State<CalcBMIController> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          padding:  EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextFormField(
             controller: weightController, /// takes Weight value
-            decoration: const InputDecoration(
+            decoration:  InputDecoration(
               border: UnderlineInputBorder(),
               labelText: 'Enter Weight in Pounds:',
             ),
@@ -73,15 +71,22 @@ class _CalcBMIControllerState extends State<CalcBMIController> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          padding:  EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: Text(resultBMI),
         ),
         TextButton(
-          style: ButtonStyle(
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-          ),
           onPressed: calculateBMI,
-          child: const Text('Calculate BMI'),
+          child: Text('Calculate BMI'),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.lightGreenAccent.shade100), // Background color
+            foregroundColor: MaterialStateProperty.all(Colors.black), // Text color
+            textStyle: MaterialStateProperty.all(
+               TextStyle(
+                fontSize: 20, // Text font size
+                fontWeight: FontWeight.bold, // Text weight
+              ),
+            ),
+          ),
         )
       ],
     );
