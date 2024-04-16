@@ -3,96 +3,58 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:healthapp/controller/nutrient_graph_controller.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+
+class ChartData {
+  ChartData(this.x, this.y);
+  final DateTime  x;
+  final double y;
+}
 
 class NutrientGraphView extends StatelessWidget {
   final NutrientGraphController controller;
 
   const NutrientGraphView({super.key, required this.controller});
 
+
   @override
   Widget build(BuildContext context) {
-    // Assuming you have a method in your controller to get the attribute name
+
     String attributeName = controller.getAttributeName(1);
-    return LineChart(
-          LineChartData(
-            gridData: FlGridData(
-              show: true,
-              drawVerticalLine: true,
-              getDrawingHorizontalLine: (value) {
-                return const FlLine(
-                  color: Colors.grey,
-                  strokeWidth: 1,
-                );
-              },
-              getDrawingVerticalLine: (value) {
-                return const FlLine(
-                  color: Colors.grey,
-                  strokeWidth: 1,
-                );
-              },
-            ),
-            titlesData: FlTitlesData(
-              bottomTitles: AxisTitles(
-                sideTitles: SideTitles(
-                  showTitles: true,
-                  reservedSize: 22,
-                  getTitlesWidget: (value, meta) {
-                    return Transform.rotate(
-                      angle: -pi / 6, // 60 degrees
-                      child: Text(
-                        '${value.toInt()}',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 10,
-                        ),
-                      ),
-                    );
-                  },
+    DateTime endDate = DateTime.now();
+    DateTime startDate = endDate.subtract(const Duration(days: 6));
+
+// Generate chart data for the last 7 days
+    List<ChartData> chartData = [];
+    for (DateTime date = startDate; date.isBefore(endDate.add(const Duration(days: 1))); date = date.add(const Duration(days: 1))) {
+      // Generate some random values for demonstration
+      double value = Random().nextInt(50).toDouble();
+      chartData.add(ChartData(date, value));
+    }
+
+
+    return Scaffold(
+        body: Center(
+            child: SfCartesianChart(
+                primaryXAxis: const DateTimeAxis(),
+                legend: Legend(
+                    isVisible: true,
+                    title: LegendTitle(
+                        text: attributeName
+                    )
                 ),
-              ),
-              leftTitles: AxisTitles(
-                sideTitles: SideTitles(
-                  showTitles: false,
-                  reservedSize: 22,
-                  getTitlesWidget: (value, meta) {
-                    return Text(
-                      '${value.toInt()}', // Assuming this is the attribute being displayed
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 10,
-                      ),
-                    );
-                  },
-                ),
-              ),
-              topTitles: const AxisTitles(
-                sideTitles: SideTitles(
-                  showTitles: false,
-                ),),
-            ),
-            borderData: FlBorderData(
-              border: Border.all(color: Colors.black, width: 1),
-            ),
-            lineBarsData: [
-              LineChartBarData(
-                spots: controller.getNutrientData().map((data) {
-                  return FlSpot(data.item1.millisecondsSinceEpoch.toDouble(), data.item2);
-                }).toList(),
-                isCurved: true,
-                color: Colors.blue, // Updated to use 'color' instead of 'colors'
-                barWidth: 2,
-                isStrokeCapRound: true,
-                dotData: const FlDotData(
-                  show: false,
-                ),
-                belowBarData: BarAreaData(
-                  show: true,
-                  color: Colors.blue.withOpacity(0.3), // Updated to use 'color' instead of 'colors'
-                ),
-              ),
-            ],
-            // Add a legend
-          ),
+                series: <LineSeries>[
+                  LineSeries<ChartData, DateTime>(
+                      dataSource: chartData,
+                      xValueMapper: (ChartData data, _) => data.x,
+                      yValueMapper: (ChartData data, _) => data.y
+                  )
+                ]
+            )
+        )
     );
   }
+
+
 }
