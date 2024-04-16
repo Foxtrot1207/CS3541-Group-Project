@@ -108,7 +108,7 @@ class _MyAppState extends State<MyApp> {
         bottomNavigationBar: NavigationBar(
           onDestinationSelected: onTabTapped,
           selectedIndex: _currentIndex,
-          backgroundColor: Colors.lightGreenAccent.shade100,
+          backgroundColor: Colors.grey.shade100,
           destinations: const <Widget>[
             NavigationDestination(
               icon: Icon(Icons.person),
