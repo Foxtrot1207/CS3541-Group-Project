@@ -18,27 +18,27 @@ class _LogScreenState extends State<LogScreen> {
       appBar: AppBar(),
       body: Column(
         children: [
-        Align(
-        alignment: Alignment.centerRight, //Centered right like wireframe
-        child: TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => LogAddFoodScreen(controller: widget.controller),
-              ),
-            );
-          },
-          child: Text('Add Food'), // Button text
-        ),
-      ),
+          Align(
+            alignment: Alignment.centerRight, //Centered right like wireframe
+            child: TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LogAddFoodScreen(controller: widget.controller),
+                  ),
+                );
+              },
+              child: Text('Add Food'), // Button text
+            ),
+          ),
 
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance.collection('loggedFood').snapshots(),
+              stream: FirebaseFirestore.instance.collection('Daily Logs').doc('your_date_here').collection('Food Items').snapshots(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
-                  return Text('Something went wrong (log_page: L41)');
+                  return Text('Something went wrong');
                 }
 
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -50,7 +50,6 @@ class _LogScreenState extends State<LogScreen> {
                     DocumentSnapshot foodItem = snapshot.data!.docs[index];
                     return ListTile(
                       title: Text(foodItem['name']),
-
                     );
                   },
                 );

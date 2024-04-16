@@ -21,9 +21,13 @@ class FoodItemController with ChangeNotifier {
   /// Adds a new FoodItem to the list of food items managed by this controller.
   ///
   /// @param foodItem The FoodItem to add.
-  void addFoodItem(FoodItem foodItem) {
+  void addFoodItem(FoodItem foodItem, String date) {
     foodItems.add(foodItem);
-    FirebaseFirestore.instance.collection('/daily_log').add(foodItem.toMap());
+    FirebaseFirestore.instance
+        .collection('Daily Logs')
+        .doc(date)
+        .collection('Food Items')
+        .add(foodItem.toMap());
     nutritonTracker.logFood(foodItem);
     notifyListeners();
   }

@@ -180,7 +180,7 @@ class _FoodItemScreenState extends State<FoodItemScreen> {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           // Call the function to add the food item
-                          widget.controller.addFoodItem(FoodItem(name: _name, calories: _calories, fat_g: _fat, protein_g: _protein, carbohydrates_g: _carbohydrates, servingSize: _servingSize, sugar_g: _sugar, caffeine_mg: _caffeine, water_ml: _water));
+                          widget.controller.addFoodItem(FoodItem(name: _name, calories: _calories, fat_g: _fat, protein_g: _protein, carbohydrates_g: _carbohydrates, servingSize: _servingSize, sugar_g: _sugar, caffeine_mg: _caffeine, water_ml: _water), 'date');
                           // Clear the form fields
                           _formKey.currentState!.reset();
                         }

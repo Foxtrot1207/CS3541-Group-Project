@@ -48,7 +48,7 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
                     sugar_g: sugar,
                     caffeine_mg: caffeine,
                     water_ml: water,
-                  ));
+                  ), 'your_date_here'); // Pass the date here
                   Navigator.pop(context);
                 }
               },

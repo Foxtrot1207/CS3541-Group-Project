@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:intl/intl.dart';
 
 import 'package:healthapp/pages/health_goal_page.dart';
 import 'package:healthapp/pages/home_page.dart';
@@ -20,6 +21,7 @@ import 'package:healthapp/view/nutrient_graph_view.dart';
 import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/bmi_Calc.dart';
 
+String formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
 /// Entry point of the application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
