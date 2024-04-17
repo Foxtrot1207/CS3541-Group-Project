@@ -5,8 +5,9 @@ import 'package:healthapp/view/nutrient_graph_view.dart';
 
 class StatsGraphScreen extends StatefulWidget {
   NutrientGraphController controller;
-  
-  StatsGraphScreen({required this.controller});
+  PersonInfoController inputcontroller;
+
+  StatsGraphScreen({required this.controller, required this.inputcontroller});
 
   @override
   _StatsScreenState createState() => _StatsScreenState();
