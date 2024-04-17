@@ -36,7 +36,7 @@ class _LogScreenState extends State<LogScreen> {
               child: Text('Add Food'), // Button text
             ),
           ),
-
+//TODO: Get removal and duplicates working
           Expanded(
             child: StreamBuilder<List<QuerySnapshot>>(
               stream: widget.controller.getLog(),
