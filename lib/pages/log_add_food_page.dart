@@ -58,8 +58,6 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
             child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('Food Catalog')
-                  .orderBy('Food Item Name')
-                  .where('Food Item Name', isGreaterThanOrEqualTo: search)
                   .snapshots(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
@@ -74,17 +72,16 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
                   children: snapshot.data!.docs.map((DocumentSnapshot document) {
                     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
                     return ListTile(
-                      title: Text(data['name']),
+                      title: Text(document.id),
                       subtitle: Text('Serving: ${data['serving_size']}, Calories: ${data['calories']}'),
                       trailing: ElevatedButton(
                         child: Text('Add to Log'),
                         onPressed: (){
+                          data['name'] = document.id;
                           widget.controller.addFoodToLog(data);
-
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text('Added to Log!'))
                           );
-
                         },
                       )
                     );

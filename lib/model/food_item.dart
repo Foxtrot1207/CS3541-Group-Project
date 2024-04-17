@@ -28,6 +28,17 @@ class FoodItem {
     required this.caffeine_mg
   });
 
+  FoodItem.fromMap(Map<String, dynamic> map)
+      : name = map['name'],
+        servingSize = map['servingSize'],
+        calories = map['calories'],
+        fat_g = map['fat_g'],
+        protein_g = map['protein_g'],
+        carbohydrates_g = map['carbohydrates_g'],
+        sugar_g = map['sugar_g'],
+        water_ml = map['water_ml_ml'],
+        caffeine_mg = map['caffeine_mg'];
+
   /// Converts the FoodItem object into a Map.
   ///
   /// Returns a map where the keys are the property names of the FoodItem and the values are the corresponding property values.

@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import 'package:healthapp/model/food_item.dart';
 import 'package:healthapp/model/nutrition_tracker.dart';
+import 'package:rxdart/rxdart.dart';
 
 /// A controller for managing a list of FoodItem objects.
 ///
@@ -28,13 +29,33 @@ class FoodItemController with ChangeNotifier {
         .collection('Daily Logs')
         .doc(date)
         .collection('Food Items')
-        .add(foodItem.toMap());
+        .doc(foodItem.name)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        FirebaseFirestore.instance
+            .collection('Daily Logs')
+            .doc(date)
+            .collection('Food Items')
+            .doc(foodItem.name)
+            .update(foodItem.toMap());
+      } else {
+        FirebaseFirestore.instance
+            .collection('Daily Logs')
+            .doc(date)
+            .collection('Food Items')
+            .doc(foodItem.name)
+            .set(foodItem.toMap());
+      }
+    });
+    foodItems.add(foodItem);
     notifyListeners();
   }
 
   void addFoodToLog(Map<String, dynamic> foodItem) {
-    String formattedDate = DateFormat.yMd().format(DateTime.now());
-    FirebaseFirestore.instance.collection('/user_log/$formattedDate').add(foodItem);
+    String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
+    String foodName = foodItem['name'];
+    FirebaseFirestore.instance.collection('Daily Logs').doc(formattedDate).collection('Food Items').doc(foodName).set(foodItem);
   }
 
   /// Removes a FoodItem from the list of food items managed by this controller.
@@ -43,12 +64,22 @@ class FoodItemController with ChangeNotifier {
   void removeFoodItem(FoodItem foodItem) {
     foodItems.remove(foodItem);
     nutritonTracker.removeFood(foodItem);
+    FirebaseFirestore.instance
+        .collection('Daily Logs')
+        .doc(formattedDate)
+        .collection('Food Items')
+        .doc(foodItem.name)
+        .delete();
     notifyListeners();
   }
 
 
-  Stream<QuerySnapshot> getLog() {
-    String formattedDate = DateFormat.yMd().format(DateTime.now());
-    return FirebaseFirestore.instance.collection('/user_log/$formattedDate').snapshots();
+  Stream<List<QuerySnapshot>> getLog() {
+    List<Stream<QuerySnapshot>> streams = [];
+    for (int i = 0; i < 7; i++) {
+      String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now().subtract(Duration(days: i)));
+      streams.add(FirebaseFirestore.instance.collection('Daily Logs').doc(formattedDate).collection('Food Items').snapshots());
+    }
+    return CombineLatestStream.list(streams);
   }
 }

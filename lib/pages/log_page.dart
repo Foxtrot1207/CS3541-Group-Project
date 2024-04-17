@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rxdart/rxdart.dart';
 
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/pages/log_add_food_page.dart';
+import 'package:healthapp/model/food_item.dart';
 
 
 class LogScreen extends StatefulWidget {
@@ -36,9 +38,9 @@ class _LogScreenState extends State<LogScreen> {
           ),
 
           Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance.collection('Daily Logs').doc('your_date_here').collection('Food Items').snapshots(),
-              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            child: StreamBuilder<List<QuerySnapshot>>(
+              stream: widget.controller.getLog(),
+              builder: (BuildContext context, AsyncSnapshot<List<QuerySnapshot>> snapshot) {
                 if (snapshot.hasError) {
                   return Text('Something went wrong');
                 }
@@ -46,11 +48,18 @@ class _LogScreenState extends State<LogScreen> {
                   return Text("Loading");
                 }
                 return ListView(
-                  children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                  children: snapshot.data!.expand((querySnapshot) => querySnapshot.docs).map((DocumentSnapshot document) {
                     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
                     return ListTile(
-                      title: Text(data['name']),
+                      title: Text(document.id),
                       subtitle: Text('Serving: ${data['serving_size']}, Calories: ${data['calories']}'),
+                      trailing: IconButton(
+                        icon: Icon(Icons.remove_circle_outline),
+                        onPressed: () {
+                          FoodItem foodItem = FoodItem.fromMap(data);
+                          widget.controller.removeFoodItem(foodItem);
+                        },
+                      ),
                     );
                   }).toList(),
                 );
