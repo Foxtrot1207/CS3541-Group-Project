@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:healthapp/model/food_item.dart';
+import 'package:intl/intl.dart';
 
 import 'log_create_item_page.dart';
+import 'package:healthapp/controller/food_item_controller.dart';
 
 class LogAddFoodScreen extends StatefulWidget {
   FoodItemController controller;
@@ -78,9 +81,10 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
                         child: Text('Add to Log'),
                         onPressed: (){
                           data['name'] = document.id;
-                          widget.controller.addFoodToLog(data);
+                          String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
+                          widget.controller.logFoodItem(data, formattedDate); // Pass the date to addFoodToLog
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Added to Log!'))
+                              SnackBar(content: Text('Added to Log!'))
                           );
                         },
                       )

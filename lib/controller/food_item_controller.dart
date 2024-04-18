@@ -12,7 +12,7 @@ import 'package:rxdart/rxdart.dart';
 class FoodItemController with ChangeNotifier {
   String formattedDate = DateFormat.yMd().format(DateTime.now()); //DateFormat('yMd')
   /// A list of FoodItem objects managed by this controller.
-  List<FoodItem> foodItems;
+  List<FoodItem> foodItems = [];
   NutritionTracker nutritonTracker = NutritionTracker();
 
   /// Creates a new FoodItemController with the given list of FoodItem objects.
@@ -20,42 +20,26 @@ class FoodItemController with ChangeNotifier {
   /// @param foodItems The initial list of FoodItem objects to manage.
   FoodItemController({required this.foodItems});
 
-  /// Adds a new FoodItem to the list of food items managed by this controller.
+  /// Adds a new FoodItem to the "Food Catalog".
   ///
   /// @param foodItem The FoodItem to add.
-  void addFoodItem(FoodItem foodItem, String date) {
-    foodItems.add(foodItem);
+  void createFoodItem(FoodItem foodItem) {
     FirebaseFirestore.instance
-        .collection('Daily Logs')
-        .doc(date)
-        .collection('Food Items')
+        .collection('Food Catalog')
         .doc(foodItem.name)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        FirebaseFirestore.instance
-            .collection('Daily Logs')
-            .doc(date)
-            .collection('Food Items')
-            .doc(foodItem.name)
-            .update(foodItem.toMap());
-      } else {
-        FirebaseFirestore.instance
-            .collection('Daily Logs')
-            .doc(date)
-            .collection('Food Items')
-            .doc(foodItem.name)
-            .set(foodItem.toMap());
-      }
-    });
+        .set(foodItem.toMap());
     foodItems.add(foodItem);
     notifyListeners();
   }
 
-  void addFoodToLog(Map<String, dynamic> foodItem) {
-    String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
+  void logFoodItem(Map<String, dynamic> foodItem, String date) {
     String foodName = foodItem['name'];
-    FirebaseFirestore.instance.collection('Daily Logs').doc(formattedDate).collection('Food Items').doc(foodName).set(foodItem);
+    FirebaseFirestore.instance
+        .collection('Daily Logs')
+        .doc(date)
+        .collection('Food Items')
+        .doc(foodName)
+        .set(foodItem);
   }
 
   /// Removes a FoodItem from the list of food items managed by this controller.
@@ -78,7 +62,11 @@ class FoodItemController with ChangeNotifier {
     List<Stream<QuerySnapshot>> streams = [];
     for (int i = 0; i < 7; i++) {
       String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now().subtract(Duration(days: i)));
-      streams.add(FirebaseFirestore.instance.collection('Daily Logs').doc(formattedDate).collection('Food Items').snapshots());
+      streams.add(FirebaseFirestore.instance
+          .collection('Daily Logs')
+          .doc(formattedDate)
+          .collection('Food Items')
+          .snapshots());
     }
     return CombineLatestStream.list(streams);
   }

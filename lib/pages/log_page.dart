@@ -9,11 +9,17 @@ import 'package:healthapp/model/food_item.dart';
 
 class LogScreen extends StatefulWidget {
   FoodItemController controller;
+
   LogScreen({required this.controller});
 
   @override
   _LogScreenState createState() => _LogScreenState();
 }
+
+//TODO: • ONLY SHOW CURRENT DAY LOG LIST
+//TODO: • CLEAR LOG LIST IF THERE IS NO CURRENT DAY LIST/CREATE NEW DATABASE WHEN DAY CHANGES
+//TODO: • REMOVE BUTTONS WORK ON DISPLAYED DAY
+//TODO: !MAYBE! • ADD BUTTON TOOL TO SWITCH BETWEEN DAYS, ONLY CAN ADD TO CURRENT DAY
 
 class _LogScreenState extends State<LogScreen> {
   @override
@@ -47,8 +53,15 @@ class _LogScreenState extends State<LogScreen> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Text("Loading");
                 }
+
+                List<DocumentSnapshot> currentDayFoodItems = snapshot.data![0].docs;
+
+                if (currentDayFoodItems.isEmpty) {
+                  return Text("No food items for today");
+                }
+
                 return ListView(
-                  children: snapshot.data!.expand((querySnapshot) => querySnapshot.docs).map((DocumentSnapshot document) {
+                  children: currentDayFoodItems.map((DocumentSnapshot document) {
                     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
                     return ListTile(
                       title: Text(document.id),

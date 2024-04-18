@@ -11,6 +11,8 @@ class LogCreateItemScreen extends StatefulWidget {
   _LogCreateItemScreenState createState() => _LogCreateItemScreenState();
 }
 
+//TODO: CREATION OF FOOD ITEM DOES NOT NEED DATE PASSED
+
 class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
   final _formKey = GlobalKey<FormState>();
   String name = '';
@@ -37,8 +39,7 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
-
-                  widget.controller.addFoodItem(FoodItem(
+                  widget.controller.createFoodItem(FoodItem(
                     name: name,
                     servingSize: servingSize,
                     calories: calories,
@@ -48,7 +49,10 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
                     sugar_g: sugar,
                     caffeine_mg: caffeine,
                     water_ml: water,
-                  ), 'your_date_here'); // Pass the date here
+                  ));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Food item saved successfully')),
+                  );
                   Navigator.pop(context);
                 }
               },
