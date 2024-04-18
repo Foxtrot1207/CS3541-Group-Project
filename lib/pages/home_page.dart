@@ -24,8 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(height: 100), //Space between placeholders
 
           Placeholder( //Quick Add Placeholder
-            fallbackHeight:350,  //size of box
-            color: Colors.red!,  //color of box
+            fallbackHeight:200,  //size of box
+            color: Colors.deepOrange!,  //color of box
           ),
         ],
       ),

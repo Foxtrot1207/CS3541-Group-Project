@@ -21,7 +21,7 @@ class _HealthGoalScreenState extends State<HealthGoalScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Align(
-            alignment: Alignment.centerRight, //Centered right like wireframe
+            alignment: Alignment.centerRight,
             child: TextButton(
               onPressed: () {
                 Navigator.push(
@@ -31,19 +31,26 @@ class _HealthGoalScreenState extends State<HealthGoalScreen> {
                   ),
                 );
               },
-              child: Text('Create Health Goal'), // Button text
+              child: Text('Create Health Goal'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.lightGreenAccent.shade100,), //Background color
+                foregroundColor: MaterialStateProperty.all(Colors.black), // Text color
+                textStyle: MaterialStateProperty.all(
+                  TextStyle(
+                    fontSize: 20, // Text font size
+                    fontWeight: FontWeight.bold, // Text weight
+                  ),
+                ),
+              ),
             ),
           ),
-          
           Expanded(
             child: HealthGoalView(
               controller: widget.controller,
             ),
           ),
-
-          SizedBox(height: 100), //Space between placeholders
-
-          GoalProgressView( 
+          SizedBox(height: 100),
+          GoalProgressView(
             controller: widget.controller,
           ),
         ],

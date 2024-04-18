@@ -4,7 +4,9 @@ import 'package:healthapp/controller/person_info_controller.dart';
 
 class StatsComparisonScreen extends StatefulWidget {
   NutrientGraphController controller;
-  StatsComparisonScreen({required this.controller});
+  PersonInfoController inputcontroller;
+
+  StatsComparisonScreen({required this.controller,required this.inputcontroller});
 
   @override
   _StatsComparisonScreenState createState() => _StatsComparisonScreenState();

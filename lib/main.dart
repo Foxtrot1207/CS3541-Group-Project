@@ -15,11 +15,7 @@ import 'package:healthapp/controller/person_info_controller.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/model/food_item.dart';
 import 'package:healthapp/model/person_info.dart';
-
-import 'package:healthapp/model/nutrient_graph.dart';
-import 'package:healthapp/view/nutrient_graph_view.dart';
 import 'package:healthapp/controller/nutrient_graph_controller.dart';
-import 'package:healthapp/bmi_Calc.dart';
 
 String formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
 /// Entry point of the application.
@@ -82,7 +78,7 @@ class _MyAppState extends State<MyApp> {
       ProfileScreen(controller: _personInfoController),
       HealthGoalScreen(controller: _personInfoController),
       HomeScreen(controller: _personInfoController),
-      StatsOverviewScreen(controller: _nutrientGraphController),
+      StatsOverviewScreen(controller: _nutrientGraphController, inputcontroller: _personInfoController,),
       LogScreen(controller: _foodItemController),
     ];
   }
@@ -102,12 +98,15 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Git Healthy'),
+          backgroundColor: Colors.lightGreenAccent.shade100,
+          centerTitle: true,
         ),
 
         body: _children[_currentIndex],
         bottomNavigationBar: NavigationBar(
           onDestinationSelected: onTabTapped,
           selectedIndex: _currentIndex,
+          backgroundColor: Colors.grey.shade100,
           destinations: const <Widget>[
             NavigationDestination(
               icon: Icon(Icons.person),
