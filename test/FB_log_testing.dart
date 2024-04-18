@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:intl/intl.dart';
-import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/model/food_item.dart';
@@ -16,10 +15,10 @@ void main() {
     test('Clicking add on a food item should create a daily log collection if not exist', () {
       // Setup
       final mockController = MockFoodItemController();
-      final logAddFoodPage = LogAddFoodPage(controller: mockController);
+      final logAddFoodPage = LogAddFoodScreen(controller: mockController);
 
       // Action
-      logAddFoodPage.addFoodItem();
+      logAddFoodPage.logFoodItem();
 
       // Assertion
       verify(mockController.createOrUpdateDailyLog(any));
@@ -30,7 +29,7 @@ void main() {
     test('Clicking remove on a food item should remove it from the current date\'s collection', () {
       // Setup
       final mockController = MockFoodItemController();
-      final logPage = LogPage(controller: mockController);
+      final logPage = LogScreen(controller: mockController);
 
       // Action
       logPage.removeFoodItem();

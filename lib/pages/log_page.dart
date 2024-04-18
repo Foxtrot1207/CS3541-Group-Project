@@ -44,9 +44,9 @@ class _LogScreenState extends State<LogScreen> {
           ),
 //TODO: Get removal and duplicates working
           Expanded(
-            child: StreamBuilder<List<QuerySnapshot>>(
+            child: StreamBuilder<QuerySnapshot>(
               stream: widget.controller.getLog(),
-              builder: (BuildContext context, AsyncSnapshot<List<QuerySnapshot>> snapshot) {
+              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
                   return Text('Something went wrong');
                 }
@@ -54,7 +54,7 @@ class _LogScreenState extends State<LogScreen> {
                   return Text("Loading");
                 }
 
-                List<DocumentSnapshot> currentDayFoodItems = snapshot.data![0].docs;
+                List<DocumentSnapshot> currentDayFoodItems = snapshot.data!.docs;
 
                 if (currentDayFoodItems.isEmpty) {
                   return Text("No food items for today");

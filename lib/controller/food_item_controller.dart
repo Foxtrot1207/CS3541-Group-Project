@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
@@ -58,16 +61,12 @@ class FoodItemController with ChangeNotifier {
   }
 
 
-  Stream<List<QuerySnapshot>> getLog() {
-    List<Stream<QuerySnapshot>> streams = [];
-    for (int i = 0; i < 7; i++) {
-      String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now().subtract(Duration(days: i)));
-      streams.add(FirebaseFirestore.instance
-          .collection('Daily Logs')
-          .doc(formattedDate)
-          .collection('Food Items')
-          .snapshots());
-    }
-    return CombineLatestStream.list(streams);
+  Stream<QuerySnapshot> getLog() {
+     String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
+     return FirebaseFirestore.instance
+         .collection('Daily Logs')
+         .doc(formattedDate)
+         .collection('Food Items')
+         .snapshots();
   }
 }
