@@ -40,7 +40,7 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
             ),
           ),
           Align(
-            alignment: Alignment.centerRight, //Centered right like wireframe
+            alignment: Alignment.centerRight,
             child: TextButton(
               onPressed: () {
                 Navigator.push(
@@ -50,10 +50,22 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
                   ),
                 );
               },
-              child: Text('Create Item'), // Button text
+              child: Text('Create Item'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.lightGreenAccent.shade100,), //Background color
+                foregroundColor: MaterialStateProperty.all(Colors.black), // Text color
+                textStyle: MaterialStateProperty.all(
+                  TextStyle(
+                    fontSize: 20, // Text font size
+                    fontWeight: FontWeight.bold, // Text weight
+                  ),
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 20), //Space between placeholders
+          //LogCreateItemScreen
+          //Create Item
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
