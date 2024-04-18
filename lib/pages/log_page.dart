@@ -14,7 +14,8 @@ class LogScreen extends StatefulWidget {
   @override
   _LogScreenState createState() => _LogScreenState();
 }
-
+//LogAddFoodScreen
+//Add Food
 class _LogScreenState extends State<LogScreen> {
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class _LogScreenState extends State<LogScreen> {
       body: Column(
         children: [
           Align(
-            alignment: Alignment.centerRight, //Centered right like wireframe
+            alignment: Alignment.centerRight,
             child: TextButton(
               onPressed: () {
                 Navigator.push(
@@ -33,7 +34,17 @@ class _LogScreenState extends State<LogScreen> {
                   ),
                 );
               },
-              child: Text('Add Food'), // Button text
+              child: Text('Add Food'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.lightGreenAccent.shade100,), //Background color
+                foregroundColor: MaterialStateProperty.all(Colors.black), // Text color
+                textStyle: MaterialStateProperty.all(
+                  TextStyle(
+                    fontSize: 18, // Text font size
+                    fontWeight: FontWeight.bold, // Text weight
+                  ),
+                ),
+              ),
             ),
           ),
 //TODO: Get removal and duplicates working
