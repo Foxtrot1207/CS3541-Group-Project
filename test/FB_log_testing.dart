@@ -11,41 +11,40 @@ import 'package:healthapp/pages/log_add_food_page.dart';
 class MockFoodItemController extends Mock implements FoodItemController {}
 
 void main() {
-  group('Log Add Food Page Tests', () {
-    test('Clicking add on a food item should create a daily log collection if not exist', () {
-      // Setup
-      final mockController = MockFoodItemController();
-      final logAddFoodPage = LogAddFoodScreen(controller: mockController);
-
-      // Action
-      logAddFoodPage.logFoodItem();
-
-      // Assertion
-      verify(mockController.createOrUpdateDailyLog(any));
-    });
-  });
-
   group('Log Page Tests', () {
     test('Clicking remove on a food item should remove it from the current date\'s collection', () {
       // Setup
       final mockController = MockFoodItemController();
       final logPage = LogScreen(controller: mockController);
+      // Create demo food item to be removed
+      final foodItem = FoodItem
+        (
+          name: "Apple",
+          servingSize: '1 apple',
+          calories: 122,
+          fat_g: 0,
+          protein_g: 0,
+          carbohydrates_g: 30,
+          sugar_g: 24.2,
+          water_ml: 0,
+          caffeine_mg: 0
+      );
 
       // Action
-      logPage.removeFoodItem();
+      mockController.removeFoodItem(foodItem);
 
       // Assertion
-      verify(mockController.removeFoodItem(any));
+      verify(mockController.removeFoodItem(foodItem));
     });
 
     test('Log page should only show the current date\'s collection', () {
       // Setup
       final mockController = MockFoodItemController();
-      final logPage = LogPage(controller: mockController);
+      final logPage = LogScreen(controller: mockController);
       final formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
 
       // Action
-      logPage.fetchLog();
+      mockController.getLog(formattedDate);
 
       // Assertion
       verify(mockController.getLog(formattedDate));

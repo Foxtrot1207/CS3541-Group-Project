@@ -61,7 +61,7 @@ class FoodItemController with ChangeNotifier {
   }
 
 
-  Stream<QuerySnapshot> getLog() {
+  Stream<QuerySnapshot> getLog(String formattedDate) {
      String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
      return FirebaseFirestore.instance
          .collection('Daily Logs')
