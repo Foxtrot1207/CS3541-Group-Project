@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:healthapp/main.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:healthapp/controller/food_item_controller.dart';
@@ -45,7 +46,7 @@ class _LogScreenState extends State<LogScreen> {
 //TODO: Get removal and duplicates working
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: widget.controller.getLog(),
+              stream: widget.controller.getLog(formattedDate),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
                   return Text('Something went wrong');
