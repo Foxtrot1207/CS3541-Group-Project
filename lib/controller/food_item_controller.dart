@@ -50,7 +50,7 @@ class FoodItemController with ChangeNotifier {
   /// Removes a FoodItem from the list of food items managed by this controller.
   ///
   /// @param foodItem The FoodItem to remove.
-  void removeFoodItem(FoodItem foodItem, String docId, String selectedDate) {
+  void removeFoodItem(FoodItem foodItem, String docId, selectedDate) {
     foodItems.remove(foodItem);
     nutritonTracker.removeFood(foodItem);
     FirebaseFirestore.instance

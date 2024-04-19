@@ -96,7 +96,7 @@ class _LogScreenState extends State<LogScreen> {
                       key: Key(document.id),
                       onDismissed: (direction) {
                         FoodItem foodItem = FoodItem.fromMap(data);
-                        widget.controller.removeFoodItem(foodItem, document.id, selectedDate as String);
+                        widget.controller.removeFoodItem(foodItem, document.id, selectedDate);
                       },
                       background: Container(color: Colors.red,),
                       child: ListTile(
