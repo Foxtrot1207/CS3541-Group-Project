@@ -35,31 +35,21 @@ class FoodItemController with ChangeNotifier {
     notifyListeners();
   }
 
-  void logFoodItem(Map<String, dynamic> foodItem, String date, int servings) {
+  void logFoodItem(Map<String, dynamic> foodItem, String formattedDate, int servings) {
     foodItem['servings'] = servings;
     calculateNutrientByServing(foodItem, servings);
 
     FirebaseFirestore.instance
         .collection('Daily Logs')
-        .doc(date)
+        .doc(formattedDate)
         .collection('Food Items')
         .add(foodItem);
   }
 
-void calculateNutrientByServing(Map<String, dynamic> foodItem, int servings) {
-  foodItem['calories'] *= servings;
-  foodItem['protein_g'] *= servings;
-  foodItem['fat_g'] *= servings;
-  foodItem['carbohydrates_g'] *= servings;
-  foodItem['sugar_g'] *= servings;
-  foodItem['water_ml'] *= servings;
-  foodItem['caffeine_mg'] *= servings;
-}
-
   /// Removes a FoodItem from the list of food items managed by this controller.
   ///
   /// @param foodItem The FoodItem to remove.
-  void removeFoodItem(FoodItem foodItem, String docId) {
+  void removeFoodItem(FoodItem foodItem, String docId, String selectedDate) {
     foodItems.remove(foodItem);
     nutritonTracker.removeFood(foodItem);
     FirebaseFirestore.instance
@@ -69,6 +59,16 @@ void calculateNutrientByServing(Map<String, dynamic> foodItem, int servings) {
         .doc(docId)
         .delete();
     notifyListeners();
+  }
+
+  void calculateNutrientByServing(Map<String, dynamic> foodItem, int servings) {
+    foodItem['calories'] *= servings;
+    foodItem['protein_g'] *= servings;
+    foodItem['fat_g'] *= servings;
+    foodItem['carbohydrates_g'] *= servings;
+    foodItem['sugar_g'] *= servings;
+    foodItem['water_ml'] *= servings;
+    foodItem['caffeine_mg'] *= servings;
   }
 
   void setLogDate(DateTime date) {
