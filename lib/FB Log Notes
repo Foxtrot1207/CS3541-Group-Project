@@ -1,0 +1,4 @@
+
+
+formattedDate = the variable used to set the created firebase document to the current day
+selectedDate = the date the user wants to get to/view

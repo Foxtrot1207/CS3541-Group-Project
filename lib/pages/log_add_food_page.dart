@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:healthapp/model/food_item.dart';
@@ -59,7 +60,12 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
           const SizedBox(height: 20), //Space between placeholders
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
+              stream: (search != "" && search != null) ? FirebaseFirestore.instance
+                  .collection('Food Catalog')
+                  .where('name', isGreaterThanOrEqualTo: search)
+                  .where('name', isLessThan: search + 'z')
+                  .snapshots()
+                  : FirebaseFirestore.instance
                   .collection('Food Catalog')
                   .snapshots(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -71,23 +77,67 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
                   return Text("Loading");
                 }
 
+                final servingsController = TextEditingController();
+
                 return ListView(
                   children: snapshot.data!.docs.map((DocumentSnapshot document) {
                     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
                     return ListTile(
-                      title: Text(document.id),
-                      subtitle: Text('Serving: ${data['serving_size']}, Calories: ${data['calories']}'),
-                      trailing: ElevatedButton(
-                        child: Text('Add to Log'),
-                        onPressed: (){
-                          data['name'] = document.id;
-                          String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
-                          widget.controller.logFoodItem(data, formattedDate); // Pass the date to addFoodToLog
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Added to Log!'))
-                          );
-                        },
-                      )
+                        title: Text(document.id),
+                        subtitle: Text('Serving: ${data['serving_size']}, Calories: ${data['calories']}'),
+                        trailing: ElevatedButton(
+                          child: Text('Add to Log'),
+
+                          onPressed: () async {
+                            await showDialog<int>(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('${data['name']} (${data['serving_size']})'), // Display the name & serving size
+                                  content: Column(
+
+                                    mainAxisSize: MainAxisSize.min, // Set to min to prevent the column from expanding
+                                    children: <Widget>[
+                                      SizedBox(height: 20), // Add some spacing
+                                      Text("Number of Servings:"),
+                                      TextField(
+                                        controller: servingsController,
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: <TextInputFormatter>[
+                                          FilteringTextInputFormatter.digitsOnly
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text('Cancel'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text('OK'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop(int.parse(servingsController.text));
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            int servings = int.parse(servingsController.text);
+                            if (servings != null) {
+                              data['name'] = document.id;
+                              String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
+                              widget.controller.logFoodItem(data, formattedDate, servings); // Pass the servings to logFoodItem
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Added to Log!'))
+                              );
+                            }
+                            servingsController.clear();
+                          },
+                        )
                     );
                   }).toList(),
                 );

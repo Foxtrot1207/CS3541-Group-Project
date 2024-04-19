@@ -51,7 +51,7 @@ class FoodItem {
       'protein_g': protein_g,
       'carbohydrates_g': carbohydrates_g,
       'sugar_g': sugar_g,
-      'water_ml_ml': water_ml,
+      'water_ml': water_ml,
       'caffeine_mg': caffeine_mg
     };
   }

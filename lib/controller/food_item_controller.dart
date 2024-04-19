@@ -35,34 +35,48 @@ class FoodItemController with ChangeNotifier {
     notifyListeners();
   }
 
-  void logFoodItem(Map<String, dynamic> foodItem, String date) {
-    String foodName = foodItem['name'];
+  void logFoodItem(Map<String, dynamic> foodItem, String date, int servings) {
+    foodItem['servings'] = servings;
+    calculateNutrientByServing(foodItem, servings);
+
     FirebaseFirestore.instance
         .collection('Daily Logs')
         .doc(date)
         .collection('Food Items')
-        .doc(foodName)
-        .set(foodItem);
+        .add(foodItem);
   }
+
+void calculateNutrientByServing(Map<String, dynamic> foodItem, int servings) {
+  foodItem['calories'] *= servings;
+  foodItem['protein_g'] *= servings;
+  foodItem['fat_g'] *= servings;
+  foodItem['carbohydrates_g'] *= servings;
+  foodItem['sugar_g'] *= servings;
+  foodItem['water_ml'] *= servings;
+  foodItem['caffeine_mg'] *= servings;
+}
 
   /// Removes a FoodItem from the list of food items managed by this controller.
   ///
   /// @param foodItem The FoodItem to remove.
-  void removeFoodItem(FoodItem foodItem) {
+  void removeFoodItem(FoodItem foodItem, String docId) {
     foodItems.remove(foodItem);
     nutritonTracker.removeFood(foodItem);
     FirebaseFirestore.instance
         .collection('Daily Logs')
         .doc(formattedDate)
         .collection('Food Items')
-        .doc(foodItem.name)
+        .doc(docId)
         .delete();
     notifyListeners();
   }
 
+  void setLogDate(DateTime date) {
+    formattedDate = DateFormat('yyyyMMdd').format(date);
+    notifyListeners();
+  }
 
-  Stream<QuerySnapshot> getLog(String formattedDate) {
-     String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
+  Stream<QuerySnapshot> getLog(String selectedDate) {
      return FirebaseFirestore.instance
          .collection('Daily Logs')
          .doc(formattedDate)

@@ -15,7 +15,6 @@ void main() {
     test('Clicking remove on a food item should remove it from the current date\'s collection', () {
       // Setup
       final mockController = MockFoodItemController();
-      final logPage = LogScreen(controller: mockController);
       // Create demo food item to be removed
       final foodItem = FoodItem
         (
