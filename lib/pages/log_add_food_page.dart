@@ -22,7 +22,26 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: Text('Food Catalog'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LogCreateItemScreen(controller: widget.controller),
+                ),
+              );
+            },
+            child: Text('Create Item'),
+          ),
+        ],
+      ),
       body: Column(
         children: [
           Padding(
@@ -43,22 +62,9 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.centerRight, //Centered right like wireframe
-            child: TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LogCreateItemScreen(controller: widget.controller),
-                  ),
-                );
-              },
-              child: Text('Create Item'), // Button text
-            ),
-          ),
-          const SizedBox(height: 20), //Space between placeholders
+          const SizedBox(height: 15), // Space between search bar and list
           Expanded(
+            // child: Container
             child: StreamBuilder<QuerySnapshot>(
               stream: (search != "" && search != null) ? FirebaseFirestore.instance
                   .collection('Food Catalog')
@@ -83,61 +89,59 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
                   children: snapshot.data!.docs.map((DocumentSnapshot document) {
                     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
                     return ListTile(
-                        title: Text(document.id),
-                        subtitle: Text('Serving: ${data['serving_size']}, Calories: ${data['calories']}'),
-                        trailing: ElevatedButton(
-                          child: Text('Add to Log'),
-
-                          onPressed: () async {
-                            await showDialog<int>(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text('${data['name']} (${data['serving_size']})'), // Display the name & serving size
-                                  content: Column(
-
-                                    mainAxisSize: MainAxisSize.min, // Set to min to prevent the column from expanding
-                                    children: <Widget>[
-                                      SizedBox(height: 20), // Add some spacing
-                                      Text("Number of Servings:"),
-                                      TextField(
-                                        controller: servingsController,
-                                        keyboardType: TextInputType.number,
-                                        inputFormatters: <TextInputFormatter>[
-                                          FilteringTextInputFormatter.digitsOnly
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text('Cancel'),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: Text('OK'),
-                                      onPressed: () {
-                                        Navigator.of(context).pop(int.parse(servingsController.text));
-                                      },
+                      title: Text(document.id),
+                      subtitle: Text('Serving: ${data['serving_size']}, Calories: ${data['calories']}'),
+                      trailing: ElevatedButton(
+                        child: Text('Add to Log'),
+                        onPressed: () async {
+                          await showDialog<int>(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('${data['name']} (${data['serving_size']})'),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    SizedBox(height: 20),
+                                    Text("Number of Servings:"),
+                                    TextField(
+                                      controller: servingsController,
+                                      keyboardType: TextInputType.number,
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.digitsOnly
+                                      ],
                                     ),
                                   ],
-                                );
-                              },
-                            );
-                            int servings = int.parse(servingsController.text);
-                            if (servings != null) {
-                              data['name'] = document.id;
-                              String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
-                              widget.controller.logFoodItem(data, formattedDate, servings); // Pass the servings to logFoodItem
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('Added to Log!'))
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: Text('Cancel'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: Text('OK'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop(int.parse(servingsController.text));
+                                    },
+                                  ),
+                                ],
                               );
-                            }
-                            servingsController.clear();
-                          },
-                        )
+                            },
+                          );
+                          int servings = int.parse(servingsController.text);
+                          if (servings != null) {
+                            data['name'] = document.id;
+                            String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
+                            widget.controller.logFoodItem(data, formattedDate, servings);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Added to Log!'))
+                            );
+                          }
+                          servingsController.clear();
+                        },
+                      ),
                     );
                   }).toList(),
                 );
