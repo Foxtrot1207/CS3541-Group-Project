@@ -35,7 +35,8 @@ class FoodItemController with ChangeNotifier {
     notifyListeners();
   }
 
-  void logFoodItem(Map<String, dynamic> foodItem, String formattedDate, int servings) {
+  void logFoodItem(Map<String, dynamic> foodItem, String selectedDate, int servings) {
+
     foodItem['servings'] = servings;
     calculateNutrientByServing(foodItem, servings);
 
