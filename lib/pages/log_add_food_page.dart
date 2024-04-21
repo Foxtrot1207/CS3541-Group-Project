@@ -106,9 +106,9 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
                                     Text("Number of Servings:"),
                                     TextField(
                                       controller: servingsController,
-                                      keyboardType: TextInputType.number,
+                                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                                       inputFormatters: <TextInputFormatter>[
-                                        FilteringTextInputFormatter.digitsOnly
+                                        FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*')),
                                       ],
                                     ),
                                   ],

@@ -13,7 +13,7 @@ import 'package:rxdart/rxdart.dart';
 ///
 /// This controller is designed to be used with Flutter's ChangeNotifierProvider for state management.
 class FoodItemController with ChangeNotifier {
-  String formattedDate = DateFormat.yMd().format(DateTime.now()); //DateFormat('yMd')
+  String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now()); //DateFormat('yMd')
   /// A list of FoodItem objects managed by this controller.
   List<FoodItem> foodItems = [];
   NutritionTracker nutritonTracker = NutritionTracker();

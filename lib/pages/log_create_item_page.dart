@@ -14,7 +14,7 @@ class LogCreateItemScreen extends StatefulWidget {
 class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
   final _formKey = GlobalKey<FormState>();
   String name = '';
-  String servingSize = '';
+  String serving_size = '';
   double calories = 0;
   double protein = 0;
   double fat = 0;
@@ -64,7 +64,7 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
                 'Serving Size',
                 'What would a single serving of this item be?',
                     (value) {
-                  servingSize = value!;
+                  serving_size = value!;
                 },
               ),
               SizedBox(height: 8.0),
@@ -84,6 +84,7 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
                   protein = double.parse(value!);
                 },
                 keyboardType: TextInputType.number,
+                unit: 'gram(s)',
               ),
               SizedBox(height: 8.0),
               _buildTextField(
@@ -93,6 +94,7 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
                   fat = double.parse(value!);
                 },
                 keyboardType: TextInputType.number,
+                unit: 'gram(s)',
               ),
               SizedBox(height: 8.0),
               _buildTextField(
@@ -102,6 +104,7 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
                   carbohydrates = double.parse(value!);
                 },
                 keyboardType: TextInputType.number,
+                unit: 'gram(s)',
               ),
               SizedBox(height: 8.0),
               _buildTextField(
@@ -111,6 +114,7 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
                   sugar = double.parse(value!);
                 },
                 keyboardType: TextInputType.number,
+                unit: 'gram(s)',
               ),
               SizedBox(height: 8.0),
               _buildTextField(
@@ -120,6 +124,7 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
                   caffeine = double.parse(value!);
                 },
                 keyboardType: TextInputType.number,
+                unit: 'milligram(s)',
               ),
             ],
           ),
@@ -128,7 +133,7 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
     );
   }
 
-  Widget _buildTextField(String label, String helperText, Function(String?) onSaved, {TextInputType keyboardType = TextInputType.text}) {
+  Widget _buildTextField(String label, String helperText, Function(String?) onSaved, {TextInputType keyboardType = TextInputType.text, String unit = ''}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -146,6 +151,7 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
               decoration: InputDecoration(
                 hintText: helperText,
                 border: OutlineInputBorder(),
+                suffixText: unit,
               ),
               onSaved: onSaved,
               validator: (value) {
@@ -168,7 +174,7 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
       _formKey.currentState!.save();
       widget.controller.createFoodItem(FoodItem(
         name: name,
-        servingSize: servingSize,
+        serving_size: serving_size,
         calories: calories,
         protein_g: protein,
         fat_g: fat,
