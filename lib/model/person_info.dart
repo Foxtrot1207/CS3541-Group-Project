@@ -11,15 +11,19 @@ class PersonInfo {
   /// A list of the person's current health goals.
   List<HealthGoal> currentGoals = [];
 
+  /// Last calculated BMI of the person.
+  int lastBMI = 0;
+
+  /// Last measured weight of the person in pounds.
+  int lastWeight = 0;
+
   /// Creates a new PersonInfo instance.
   ///
   /// Initializes the currentAttributes with blank values.
   PersonInfo() {
-    // TODO: Pull this data from elsewhere?
     // Fill in the currentAttributes with blank values
     for(var attribute in HealthGoalAttribute.values) {
       currentAttributes[attribute] = 0;
     }
   }
-
 }

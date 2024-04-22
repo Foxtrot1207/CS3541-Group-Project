@@ -73,6 +73,7 @@ class _MyAppState extends State<MyApp> {
   late List<Widget> _children;
 
   /// Constructor for _MyAppState
+  /// This order sets the bottom nav bar
   _MyAppState() {
     _children = [
       ProfileScreen(controller: _personInfoController),
@@ -104,6 +105,7 @@ class _MyAppState extends State<MyApp> {
 
         body: _children[_currentIndex],
         bottomNavigationBar: NavigationBar(
+          /// Nav set to button press and sets UI
           onDestinationSelected: onTabTapped,
           selectedIndex: _currentIndex,
           backgroundColor: Colors.grey.shade100,
