@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:healthapp/bmi_calc_view.dart';
+import 'package:healthapp/view/bmi_calc_view.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
 
 class ProfileBMIScreen extends StatefulWidget {
@@ -11,13 +11,18 @@ class ProfileBMIScreen extends StatefulWidget {
 }
 
 class _ProfileBMIScreenState extends State<ProfileBMIScreen> {
+
+  void handleBMIUpdated(double bmi, double weight) {
+    widget.controller.updateLastBMIAndWeight(bmi.round(), weight.round());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
         children: [
-          CalcBMIController()
+          CalcBMIController(onBMIUpdated: handleBMIUpdated)
         ],
       ),
     );

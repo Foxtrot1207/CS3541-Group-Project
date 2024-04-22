@@ -1,6 +1,7 @@
 import 'package:healthapp/model/person_info.dart';
 import 'package:healthapp/model/health_goal.dart';
 import 'package:flutter/material.dart';
+import 'package:healthapp/pages/profile_bmi_page.dart';
 
 /// Controller for managing person's health information and goals.
 class PersonInfoController extends ChangeNotifier {
@@ -50,4 +51,25 @@ class PersonInfoController extends ChangeNotifier {
     personInfo.currentAttributes[attribute] = (personInfo.currentAttributes[attribute]!) + value;
     notifyListeners();
   }
+
+  ///Holds last calculated BMI
+  int LastBMI() {
+    return personInfo.lastBMI;
+  }
+
+///Holds last inputted weight
+  int LastWeight(){
+    return personInfo.lastWeight;
+  }
+
+///updates BMI and Weight on profile screen
+  void updateLastBMIAndWeight(int bmi, int weight) {
+    personInfo.lastBMI = bmi;
+    personInfo.lastWeight = weight;
+    notifyListeners();
+  }
+
 }
+
+
+
