@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:intl/intl.dart';
 
 import 'package:healthapp/pages/health_goal_page.dart';
@@ -21,7 +21,9 @@ String formattedDate = DateFormat.yMd().format(DateTime.now());
 /// Entry point of the application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 

@@ -41,7 +41,7 @@ class _CalcBMIControllerState extends State<CalcBMIController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 20),
           child: TextFormField(
             controller: heightController,
 
@@ -75,22 +75,27 @@ class _CalcBMIControllerState extends State<CalcBMIController> {
           child: Text(resultBMI),
         ),
         TextButton(
-          onPressed: calculateBMI,
-          child: Text('Calculate BMI'),
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(
-                Colors.lightGreenAccent.shade100),
-            // Background color
-            foregroundColor: MaterialStateProperty.all(Colors.black),
-            // Text color
-            textStyle: MaterialStateProperty.all(
-              TextStyle(
-                fontSize: 20, // Text font size
-                fontWeight: FontWeight.bold, // Text weight
-              ),
+            backgroundColor: MaterialStateProperty.all(Colors.lightGreenAccent.shade100), // Background color
+            foregroundColor: MaterialStateProperty.all(Colors.black), // Text color
+          ),
+          onPressed: calculateBMI,
+          child: const Text('Calculate BMI'),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(left: 10.0),
+          child: Text(
+            "0 - 18.5 = Underweight\n"
+                "18.5 - 24.9 = Healthy\n"
+                "25 - 29.9 = Overweight\n"
+                "30+ = Obese",
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
             ),
           ),
-        )
+        ),
       ],
     );
   }

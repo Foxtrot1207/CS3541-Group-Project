@@ -16,12 +16,6 @@ class LogScreen extends StatefulWidget {
   @override
   _LogScreenState createState() => _LogScreenState();
 }
-
-//TODO: • ONLY SHOW CURRENT DAY LOG LIST
-//TODO: • CLEAR LOG LIST IF THERE IS NO CURRENT DAY LIST/CREATE NEW DATABASE WHEN DAY CHANGES
-//TODO: • REMOVE BUTTONS WORK ON DISPLAYED DAY
-//TODO: !MAYBE! • ADD BUTTON TOOL TO SWITCH BETWEEN DAYS, ONLY CAN ADD TO CURRENT DAY
-
 class _LogScreenState extends State<LogScreen> {
   DateTime selectedDate = DateTime.now();
 
@@ -58,7 +52,7 @@ class _LogScreenState extends State<LogScreen> {
       body: Column(
         children: [
           Align(
-            alignment: Alignment.centerRight, //Centered right like wireframe
+            alignment: Alignment.centerRight,
             child: TextButton(
               onPressed: () {
                 Navigator.push(
@@ -68,7 +62,17 @@ class _LogScreenState extends State<LogScreen> {
                   ),
                 );
               },
-              child: const Text('Add Food'), // Button text
+              child: Text('Add Food'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.lightGreenAccent.shade100,), //Background color
+                foregroundColor: MaterialStateProperty.all(Colors.black), // Text color
+                textStyle: MaterialStateProperty.all(
+                  TextStyle(
+                    fontSize: 18, // Text font size
+                    fontWeight: FontWeight.bold, // Text weight
+                  ),
+                ),
+              ),
             ),
           ),
 //TODO: Get removal and duplicates working
