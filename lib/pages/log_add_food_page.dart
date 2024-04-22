@@ -39,6 +39,7 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
               );
             },
             child: Text('Create Item'),
+            
           ),
         ],
       ),
