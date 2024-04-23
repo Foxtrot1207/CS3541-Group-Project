@@ -26,25 +26,6 @@ final dailyLogsRef = firestore.collection('Daily Logs');
 // Initialize an empty list to store the data points
 List<Tuple2<DateTime, double>> dataPoints = [];
 
-// Loop through each date in the dateList
-// for (String date in dateList) {
-//   // Get the collection for the current date
-//   final currentDayFood = dailyLogsRef.collection(date);
-//   // Get the documents in the 'Food Items' collection
-//   final foodItemsQuery = currentDayFood.collectionGroup('Food Items');
-//   // Get the documents
-//   final foodItems = await foodItemsQuery.get();
-//     // Loop through each document and add its data to the dataPoints list
-//   for (var doc in foodItems.docs) {
-//     // Assuming the document has a 'value' field that represents the point you want to plot
-//     double value = doc.data()['value'];
-//     // Convert the date string back to a DateTime object for plotting
-//     DateTime dateTime = DateFormat('yyyyMMdd').parse(date);
-//     // Add the data point to the list
-//     dataPoints.add(Tuple2(dateTime, value));
-//   }
-// }
-
 
 
 class NutrientGraphController {
