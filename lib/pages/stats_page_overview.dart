@@ -16,11 +16,10 @@ class StatsOverviewScreen extends StatefulWidget {
 
 class _StatsOverviewScreenState extends State<StatsOverviewScreen> { // Corrected here
   // Initial Selected Value
-  String dropdownValue = 'Overview';
+  String dropdownValue = 'Graphs';
 
   // List of items in our dropdown menu
   var items = [
-    'Overview',
     'Graphs',
     'Comparison',
     'Input'
@@ -37,7 +36,7 @@ class _StatsOverviewScreenState extends State<StatsOverviewScreen> { // Correcte
      {
       return Container(
         alignment: Alignment.center,
-        child: Text('Overview '),
+        child: Text('Graphs '),
       );
     }
   }

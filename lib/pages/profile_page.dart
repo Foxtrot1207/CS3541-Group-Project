@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
 import 'package:healthapp/pages/profile_bmi_page.dart';
+import 'package:healthapp/view/pet_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
   final PersonInfoController controller;
@@ -21,6 +22,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(),
       body: Column(
         children: [
+          Text(
+            'Profile Statisitcs',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 24), // Optional: Set a specific style for the text
+          ),
           Align(
             alignment: Alignment.centerRight, // Centered right like wireframe
             child: TextButton(
@@ -51,7 +57,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: <Widget>[
                   Text('Last BMI: $lastBMI', style: TextStyle(fontSize: 24, color: Colors.black)),
                   Text('Last Weight: $lastWeight lbs', style: TextStyle(fontSize: 24, color: Colors.black)),
-        ],
+                  PetWidget()
+              ],
       ),
            )
     ])
