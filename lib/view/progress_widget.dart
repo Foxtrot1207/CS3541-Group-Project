@@ -32,7 +32,7 @@ class _GoalProgressWidgetState extends State<GoalProgressView> {
       children: <Widget>[
         Text(goal.attribute.title),
         LinearProgressIndicator(
-          value: (widget.controller.getStat(goal.attribute) / goal.target.toDouble()), // Temporary value!
+          value: (widget.controller.getHeathGoalProgress(goal) / goal.target.toDouble()), // Temporary value!
           semanticsLabel: 'Goal progress indicator',
         ),
       ],

@@ -1,14 +1,14 @@
 /// Represents a food item with its name, serving size, calories, and macros.
 class FoodItem {
   final String name;
-  final String serving_size;
-  final double calories;
-  final double fat_g;
-  final double protein_g;
-  final double carbohydrates_g;
-  final double sugar_g;
-  final double water_ml;
-  final double caffeine_mg;
+  final String servingSize;
+  double calories = 0;
+  double fat_g = 0;
+  double protein_g = 0;
+  double carbohydrates_g = 0;
+  double sugar_g = 0;
+  double water_ml = 0;
+  double caffeine_mg = 0;
 
   /// Creates a new FoodItem with the specified name, serving size, calories, and macros.
   ///
@@ -18,14 +18,14 @@ class FoodItem {
   /// The [macros] parameter specifies the macros of the food item.
   FoodItem({
     required this.name,
-    required this.serving_size,
-    required this.calories,
-    required this.fat_g,
-    required this.protein_g,
-    required this.carbohydrates_g,
-    required this.sugar_g,
-    required this.water_ml,
-    required this.caffeine_mg
+    required this.servingSize,
+    this.calories = 0,
+    this.fat_g = 0,
+    this.protein_g = 0,
+    this.carbohydrates_g = 0,
+    this.sugar_g = 0,
+    this.water_ml = 0,
+    this.caffeine_mg = 0
   });
 
   FoodItem.fromMap(Map<String, dynamic> map)
@@ -54,5 +54,17 @@ class FoodItem {
       'water_ml': water_ml,
       'caffeine_mg': caffeine_mg
     };
+  }
+
+  FoodItem operator +(FoodItem other) {
+    FoodItem f = FoodItem(name: name, servingSize: servingSize);
+    f.calories        = other.calories + calories;
+    f.fat_g           = other.fat_g + fat_g;
+    f.protein_g       = other.protein_g + protein_g;
+    f.carbohydrates_g = other.carbohydrates_g + carbohydrates_g;
+    f.sugar_g         = other.sugar_g + sugar_g;
+    f.water_ml        = other.water_ml + water_ml;
+    f.caffeine_mg     = other.caffeine_mg + caffeine_mg;
+    return f;
   }
 }
