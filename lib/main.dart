@@ -81,7 +81,7 @@ class _MyAppState extends State<MyApp> {
       ProfileScreen(controller: _personInfoController),
       HealthGoalScreen(controller: _personInfoController),
       HomeScreen(controller: _personInfoController),
-      StatsOverviewScreen(controller: _nutrientGraphController, inputcontroller: _personInfoController,),
+      StatsOverviewScreen(controller: _nutrientGraphController, inputcontroller: _personInfoController, foodItemController: _foodItemController,),
       LogScreen(controller: _foodItemController),
     ];
   }

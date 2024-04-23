@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/pages/stats_comparison_page.dart';
 import 'package:healthapp/pages/stats_graphs_page.dart';
 import 'package:healthapp/pages/stats_input_page.dart';
@@ -8,7 +9,8 @@ import 'package:healthapp/pages/stats_input_page.dart';
 class StatsOverviewScreen extends StatefulWidget {
   final NutrientGraphController controller;
   final PersonInfoController inputcontroller;
-  StatsOverviewScreen({required this.controller, required this.inputcontroller});
+  final FoodItemController foodItemController;
+  StatsOverviewScreen({required this.controller, required this.inputcontroller, required this.foodItemController});
 
   @override
   _StatsOverviewScreenState createState() => _StatsOverviewScreenState();
@@ -30,7 +32,7 @@ class _StatsOverviewScreenState extends State<StatsOverviewScreen> { // Correcte
     if (dropdownValue == 'Graphs') {
       return StatsGraphScreen(controller: widget.controller, inputcontroller: widget.inputcontroller,);
     } else if (dropdownValue == 'Comparison') {
-      return StatsComparisonScreen(controller: widget.controller, inputcontroller: widget.inputcontroller,);
+      return StatsComparisonScreen(controller: widget.controller, inputcontroller: widget.inputcontroller, foodItemController: widget.foodItemController,);
     } else if (dropdownValue == 'Input'){
       return StatsInputScreen(controller: widget.controller, inputcontroller: widget.inputcontroller);
     }else
@@ -80,3 +82,4 @@ class _StatsOverviewScreenState extends State<StatsOverviewScreen> { // Correcte
     );
   }
 }
+
