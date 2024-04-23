@@ -40,7 +40,7 @@ class _HealthGoalInputScreenState extends State<HealthGoalInputScreen> {
               keyboardType: TextInputType.number,
               onChanged: (value) {
                 setState(() {
-                  _target = int.parse(value);
+                  _target = int.tryParse(value) ?? 0;
                 });
               },
               decoration: InputDecoration(
