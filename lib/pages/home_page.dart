@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/view/pet_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   PersonInfoController controller;
@@ -16,17 +17,9 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(),
       body: Column(
         children: [
-          Placeholder( //Health Goals Placeholder
-            fallbackHeight:200, //size of box
-            color: Colors.black!, //color of box
-          ),
-
-          SizedBox(height: 100), //Space between placeholders
-
-          Placeholder( //Quick Add Placeholder
-            fallbackHeight:350,  //size of box
-            color: Colors.red!,  //color of box
-          ),
+          
+          PetWidget(),
+          
         ],
       ),
     );
