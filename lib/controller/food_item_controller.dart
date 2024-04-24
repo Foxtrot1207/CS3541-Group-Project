@@ -39,6 +39,9 @@ class FoodItemController with ChangeNotifier {
 
     foodItem['servings'] = servings;
     calculateNutrientByServing(foodItem, servings);
+    //foodItem['date'] = selectedDate;
+
+    nutritonTracker.logFood(FoodItem.fromMap(foodItem));
 
     FirebaseFirestore.instance
         .collection('Daily Logs')

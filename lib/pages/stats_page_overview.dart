@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/pages/stats_comparison_page.dart';
 import 'package:healthapp/pages/stats_graphs_page.dart';
 import 'package:healthapp/pages/stats_input_page.dart';
@@ -8,7 +9,8 @@ import 'package:healthapp/pages/stats_input_page.dart';
 class StatsOverviewScreen extends StatefulWidget {
   final NutrientGraphController controller;
   final PersonInfoController inputcontroller;
-  StatsOverviewScreen({required this.controller, required this.inputcontroller});
+  final FoodItemController foodItemController;
+  StatsOverviewScreen({required this.controller, required this.inputcontroller, required this.foodItemController});
 
   @override
   _StatsOverviewScreenState createState() => _StatsOverviewScreenState();
@@ -16,11 +18,10 @@ class StatsOverviewScreen extends StatefulWidget {
 
 class _StatsOverviewScreenState extends State<StatsOverviewScreen> { // Corrected here
   // Initial Selected Value
-  String dropdownValue = 'Overview';
+  String dropdownValue = 'Graphs';
 
   // List of items in our dropdown menu
   var items = [
-    'Overview',
     'Graphs',
     'Comparison',
     'Input'
@@ -30,14 +31,14 @@ class _StatsOverviewScreenState extends State<StatsOverviewScreen> { // Correcte
     if (dropdownValue == 'Graphs') {
       return StatsGraphScreen(controller: widget.controller, inputcontroller: widget.inputcontroller,);
     } else if (dropdownValue == 'Comparison') {
-      return StatsComparisonScreen(controller: widget.controller, inputcontroller: widget.inputcontroller,);
+      return StatsComparisonScreen(controller: widget.controller, inputcontroller: widget.inputcontroller, foodItemController: widget.foodItemController,);
     } else if (dropdownValue == 'Input'){
       return StatsInputScreen(controller: widget.controller, inputcontroller: widget.inputcontroller);
     }else
      {
       return Container(
         alignment: Alignment.center,
-        child: Text('Overview '),
+        child: Text('Graphs '),
       );
     }
   }
@@ -80,3 +81,4 @@ class _StatsOverviewScreenState extends State<StatsOverviewScreen> { // Correcte
     );
   }
 }
+

@@ -5,6 +5,8 @@ class NutritionTracker {
   Map<String, double> dailyValues = {};
   Map<String, double> weeklyValues = {};
 
+
+
   void logFood(FoodItem food) {
     ///Calories
     dailyValues['calories'] = (dailyValues['calories'] ?? 0) + food.calories;
@@ -51,6 +53,23 @@ class NutritionTracker {
     ///Water
     dailyValues['water'] = (dailyValues['water'] ?? 0) - food.water_ml;
     weeklyValues['water'] = (weeklyValues['water'] ?? 0) - food.water_ml;
+  }
+
+
+  Map<String, double> getDailyTotals() {
+    Map<String, double> dailyTotals = {};
+    dailyValues.forEach((key, value) {
+      dailyTotals[key] = value ?? 0.0;
+    });
+    return dailyTotals;
+  }
+
+  Map<String, double> getWeeklyTotals() {
+    Map<String, double> weeklyTotals = {};
+    weeklyValues.forEach((key, value) {
+      weeklyTotals[key] = value ?? 0.0;
+    });
+    return weeklyTotals;
   }
 
   void resetDaily() {
