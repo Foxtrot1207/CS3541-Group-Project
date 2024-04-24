@@ -13,7 +13,8 @@ import 'package:rxdart/rxdart.dart';
 ///
 /// This controller is designed to be used with Flutter's ChangeNotifierProvider for state management.
 class FoodItemController with ChangeNotifier {
-  String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now()); //DateFormat('yMd')
+  String formattedDate = DateFormat('yyyyMMdd').format(
+      DateTime.now()); //DateFormat('yMd')
   /// A list of FoodItem objects managed by this controller.
   List<FoodItem> foodItems = [];
   NutritionTracker nutritonTracker = NutritionTracker();
@@ -35,11 +36,11 @@ class FoodItemController with ChangeNotifier {
     notifyListeners();
   }
 
-  void logFoodItem(Map<String, dynamic> foodItem, String selectedDate, int servings) {
-
+  void logFoodItem(Map<String, dynamic> foodItem, String selectedDate,
+      int servings) {
     foodItem['servings'] = servings;
     calculateNutrientByServing(foodItem, servings);
-    //foodItem['date'] = selectedDate;
+    foodItem['date'] = selectedDate;
 
     nutritonTracker.logFood(FoodItem.fromMap(foodItem));
 
@@ -75,16 +76,65 @@ class FoodItemController with ChangeNotifier {
     foodItem['caffeine_mg'] *= servings;
   }
 
+
   void setLogDate(DateTime date) {
     formattedDate = DateFormat('yyyyMMdd').format(date);
     notifyListeners();
   }
 
   Stream<QuerySnapshot> getLog(String selectedDate) {
-     return FirebaseFirestore.instance
-         .collection('Daily Logs')
-         .doc(formattedDate)
-         .collection('Food Items')
-         .snapshots();
+    return FirebaseFirestore.instance
+        .collection('Daily Logs')
+        .doc(formattedDate)
+        .collection('Food Items')
+        .snapshots();
   }
+
+  Future<Map<String, double>> getNutritionDataForDate(DateTime date) async {
+    try {
+      String formattedDate = DateFormat('yyyyMMdd').format(date);
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('Daily Logs')
+          .doc(formattedDate)
+          .collection('Food Items')
+          .get();
+
+      double totalCalories = 0;
+      double totalFat = 0;
+      double totalProtein = 0;
+      double totalCarbohydrates = 0;
+      double totalSugar = 0;
+      double totalWater = 0;
+      double totalCaffeine = 0;
+
+      querySnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        totalCalories += data['calories'];
+        totalFat += data['fat_g'];
+        totalProtein += data['protein_g'];
+        totalCarbohydrates += data['carbohydrates_g'];
+        totalSugar += data['sugar_g'];
+        totalWater += data['water_ml'];
+        totalCaffeine += data['caffeine_mg'];
+      });
+
+      Map<String, double> nutritionData = {
+        'calories': totalCalories,
+        'fat': totalFat,
+        'protein': totalProtein,
+        'carbohydrates': totalCarbohydrates,
+        'sugar': totalSugar,
+        'water': totalWater,
+        'caffeine': totalCaffeine,
+      };
+
+      return nutritionData;
+    } catch (error) {
+      print('Error retrieving food items: $error');
+      return {};
+    }
+  }
+
 }
+
+

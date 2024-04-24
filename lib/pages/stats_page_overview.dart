@@ -18,30 +18,31 @@ class StatsOverviewScreen extends StatefulWidget {
 
 class _StatsOverviewScreenState extends State<StatsOverviewScreen> { // Corrected here
   // Initial Selected Value
-  String dropdownValue = 'Graphs';
+  String dropdownValue = 'Comparison';
 
   // List of items in our dropdown menu
   var items = [
-    'Graphs',
     'Comparison',
+    'Graphs',
     'Input'
   ];
 
   Widget _getSelectedPage() {
-    if (dropdownValue == 'Graphs') {
-      return StatsGraphScreen(controller: widget.controller, inputcontroller: widget.inputcontroller,);
-    } else if (dropdownValue == 'Comparison') {
+    if (dropdownValue == 'Comparison') {
       return StatsComparisonScreen(controller: widget.controller, inputcontroller: widget.inputcontroller, foodItemController: widget.foodItemController,);
+    } else if (dropdownValue == 'Graphs') {
+      return StatsGraphScreen(controller: widget.controller, inputcontroller: widget.inputcontroller,);
     } else if (dropdownValue == 'Input'){
       return StatsInputScreen(controller: widget.controller, inputcontroller: widget.inputcontroller);
     }else
      {
       return Container(
         alignment: Alignment.center,
-        child: Text('Graphs '),
+        child: Text('Comparison'),
       );
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
