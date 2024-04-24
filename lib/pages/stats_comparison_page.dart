@@ -57,7 +57,7 @@ class _StatsComparisonScreenState extends State<StatsComparisonScreen> {
           ),
         ],
       ),
-      body: Column(
+      body: ListView(
         children: [
           Container(
             alignment: Alignment.center,
@@ -91,8 +91,8 @@ class _StatsComparisonScreenState extends State<StatsComparisonScreen> {
                           final yesterdayIntake = yesterdayData[entry.key] ?? 0.0;
                           return DataRow(cells: [
                             DataCell(Text(entry.key)),
-                            DataCell(Text(entry.value.toString())),
-                            DataCell(Text(yesterdayIntake.toString())),
+                            DataCell(Text(entry.value.toStringAsFixed(2))),
+                            DataCell(Text(yesterdayIntake.toStringAsFixed(2))),
                           ]);
                         }).toList(),
                       );
