@@ -1,7 +1,7 @@
 /// Represents a food item with its name, serving size, calories, and macros.
 class FoodItem {
   final String name;
-  final String servingSize;
+  final String serving_size;
   double calories = 0;
   double fat_g = 0;
   double protein_g = 0;
@@ -13,12 +13,12 @@ class FoodItem {
   /// Creates a new FoodItem with the specified name, serving size, calories, and macros.
   ///
   /// The [name] parameter specifies the name of the food item.
-  /// The [servingSize] parameter specifies the serving size of the food item.
+  /// The [serving_size] parameter specifies the serving size of the food item.
   /// The [calories] parameter specifies the calories of the food item.
   /// The [macros] parameter specifies the macros of the food item.
   FoodItem({
     required this.name,
-    required this.servingSize,
+    required this.serving_size,
     this.calories = 0,
     this.fat_g = 0,
     this.protein_g = 0,
@@ -57,7 +57,7 @@ class FoodItem {
   }
 
   FoodItem operator +(FoodItem other) {
-    FoodItem f = FoodItem(name: name, servingSize: servingSize);
+    FoodItem f = FoodItem(name: name, serving_size: serving_size);
     f.calories        = other.calories + calories;
     f.fat_g           = other.fat_g + fat_g;
     f.protein_g       = other.protein_g + protein_g;

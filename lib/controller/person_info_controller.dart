@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 /// Controller for managing person's health information and goals.
 class PersonInfoController extends ChangeNotifier {
   PersonInfo personInfo;
-  FoodItem _foodIntakeToday = FoodItem(name: "", servingSize: "");
+  FoodItem _foodIntakeToday = FoodItem(name: "", serving_size: "");
 
   /// Constructor for PersonInfoController.
   ///
@@ -25,7 +25,7 @@ class PersonInfoController extends ChangeNotifier {
       .collection('Food Items')
       .snapshots()
       .listen((event) {
-        FoodItem aggregate = FoodItem(name: "", servingSize: "");
+        FoodItem aggregate = FoodItem(name: "", serving_size: "");
         for (var doc in event.docs) {
           aggregate = aggregate + FoodItem.fromMap(doc.data());
         }
