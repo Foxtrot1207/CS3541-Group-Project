@@ -135,6 +135,13 @@ class FoodItemController with ChangeNotifier {
     }
   }
 
+
+  Future<Map<String, double>> getNutritionDataForYesterday() async {
+    DateTime yesterday = DateTime.now().subtract(Duration(days: 1));
+    return getNutritionDataForDate(yesterday);
+  }
+
+
 }
 
 

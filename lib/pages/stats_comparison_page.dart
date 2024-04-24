@@ -18,8 +18,18 @@ class StatsComparisonScreen extends StatefulWidget {
   _StatsComparisonScreenState createState() => _StatsComparisonScreenState();
 }
 
+
 class _StatsComparisonScreenState extends State<StatsComparisonScreen> {
   DateTime selectedDate = DateTime.now();
+  late Future<Map<String, double>> todayNutritionData;
+  late Future<Map<String, double>> yesterdayNutritionData;
+
+  @override
+  void initState() {
+    super.initState();
+    todayNutritionData = fetchNutritionData(selectedDate);
+    yesterdayNutritionData = fetchYesterdayNutritionData(selectedDate);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +42,6 @@ class _StatsComparisonScreenState extends State<StatsComparisonScreen> {
             onPressed: () async {
               final DateTime? pickedDate = await showDatePicker(
                 context: context,
-
                 initialDate: selectedDate,
                 firstDate: DateTime(2000),
                 lastDate: DateTime(2101),
@@ -41,8 +50,8 @@ class _StatsComparisonScreenState extends State<StatsComparisonScreen> {
                 setState(() {
                   selectedDate = pickedDate;
                 });
-
-                fetchNutritionData(selectedDate);
+                todayNutritionData = fetchNutritionData(selectedDate);
+                yesterdayNutritionData = fetchYesterdayNutritionData(selectedDate);
               }
             },
           ),
@@ -55,25 +64,40 @@ class _StatsComparisonScreenState extends State<StatsComparisonScreen> {
             child: Text('Comparison for ${DateFormat.yMd().format(selectedDate)}'),
           ),
           FutureBuilder<Map<String, double>>(
-            future: fetchNutritionData(selectedDate),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
+            future: todayNutritionData,
+            builder: (context, todaySnapshot) {
+              if (todaySnapshot.connectionState == ConnectionState.waiting) {
                 return CircularProgressIndicator();
-              } else if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
+              } else if (todaySnapshot.hasError) {
+                return Text('Error: ${todaySnapshot.error}');
               } else {
-                final nutritionData = snapshot.data!;
-                return DataTable(
-                  columns: const <DataColumn>[
-                    DataColumn(label: Text('Nutrient')),
-                    DataColumn(label: Text('Daily Intake')),
-                  ],
-                  rows: nutritionData.entries.map((entry) {
-                    return DataRow(cells: [
-                      DataCell(Text(entry.key)),
-                      DataCell(Text(entry.value.toString())),
-                    ]);
-                  }).toList(),
+                final todayData = todaySnapshot.data!;
+                return FutureBuilder<Map<String, double>>(
+                  future: yesterdayNutritionData,
+                  builder: (context, yesterdaySnapshot) {
+                    if (yesterdaySnapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    } else if (yesterdaySnapshot.hasError) {
+                      return Text('Error: ${yesterdaySnapshot.error}');
+                    } else {
+                      final yesterdayData = yesterdaySnapshot.data!;
+                      return DataTable(
+                        columns: const <DataColumn>[
+                          DataColumn(label: Text('Nutrient')),
+                          DataColumn(label: Text('Today\'s Intake')),
+                          DataColumn(label: Text('Yesterday\'s Intake')),
+                        ],
+                        rows: todayData.entries.map((entry) {
+                          final yesterdayIntake = yesterdayData[entry.key] ?? 0.0;
+                          return DataRow(cells: [
+                            DataCell(Text(entry.key)),
+                            DataCell(Text(entry.value.toString())),
+                            DataCell(Text(yesterdayIntake.toString())),
+                          ]);
+                        }).toList(),
+                      );
+                    }
+                  },
                 );
               }
             },
@@ -83,12 +107,12 @@ class _StatsComparisonScreenState extends State<StatsComparisonScreen> {
     );
   }
 
-  Future<Map<String, double>> fetchNutritionData(DateTime date) async {
-    try {
-      return await widget.foodItemController.getNutritionDataForDate(date);
-    } catch (error) {
-      print('Error fetching nutrition data: $error');
-      throw error;
-    }
+  Future<Map<String, double>> fetchNutritionData(DateTime date) {
+    return widget.foodItemController.getNutritionDataForDate(date);
+  }
+
+  Future<Map<String, double>> fetchYesterdayNutritionData(DateTime date) {
+    final yesterday = date.subtract(Duration(days: 1));
+    return widget.foodItemController.getNutritionDataForDate(yesterday);
   }
 }
