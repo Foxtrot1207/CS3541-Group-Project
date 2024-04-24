@@ -15,6 +15,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    //Controllers to hold last calc BMI and input weight
     final lastBMI = widget.controller.LastBMI();
     final lastWeight = widget.controller.LastWeight();
 
@@ -25,7 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Text(
             'Profile Statisitcs',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 24), // Optional: Set a specific style for the text
+            style: TextStyle(fontSize: 24),
           ),
           Align(
             alignment: Alignment.centerRight, // Centered right like wireframe
@@ -34,6 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
+                    //Route to the subpage
                     builder: (context) => ProfileBMIScreen(controller: widget.controller),
                   ),
                 ).then((value) => setState(() {}));
@@ -44,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 textStyle: MaterialStateProperty.all(
                   const TextStyle(
                     fontSize: 20, // Text font size
-                    fontWeight: FontWeight.bold, // Text weight
+                    fontWeight: FontWeight.bold, // Text style
                   ),
                 ),
               ),
@@ -55,6 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                //Text fields to display last weight and BMI
                   Text('Last BMI: $lastBMI', style: TextStyle(fontSize: 24, color: Colors.black)),
                   Text('Last Weight: $lastWeight lbs', style: TextStyle(fontSize: 24, color: Colors.black)),
                   PetWidget()

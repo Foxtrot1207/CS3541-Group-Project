@@ -11,14 +11,17 @@ class CalcBMIController extends StatefulWidget {
 }
 
 class _CalcBMIControllerState extends State<CalcBMIController> {
+  //Controllers to take input weight and height
   final TextEditingController heightController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
+  //Text prompt to input
   String resultBMI = "Please enter your details";
 
-  final CalcBMIModel bmiCalculator = CalcBMIModel();  // BMI Calculator instance
+  final CalcBMIModel bmiCalculator = CalcBMIModel();  // BMI Calculator
 
   void calculateBMI() {
     try {
+      //Processing user input
       double? height = double.tryParse(heightController.text);
       double? weight = double.tryParse(weightController.text);
       if (height == null || weight == null) {
@@ -28,9 +31,10 @@ class _CalcBMIControllerState extends State<CalcBMIController> {
       setState(() {
         resultBMI = "Your BMI is ${bmi.toStringAsFixed(1)}";
       });
-      widget.onBMIUpdated(bmi, weight); // Triggering the callback with the new BMI and weight
+      widget.onBMIUpdated(bmi, weight); //callback with the new BMI and weight
     } catch (e) {
       setState(() {
+        //Error case handling
         resultBMI = e is ArgumentError ? e.message : "Invalid input. Please enter valid numbers.";
       });
     }
@@ -42,6 +46,7 @@ class _CalcBMIControllerState extends State<CalcBMIController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
+          //Input text field for height
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 20),
           child: TextFormField(
             controller: heightController,
@@ -53,6 +58,7 @@ class _CalcBMIControllerState extends State<CalcBMIController> {
           ),
         ),
         Padding(
+          //Input text field for weight
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextFormField(
             controller: weightController,
@@ -64,10 +70,12 @@ class _CalcBMIControllerState extends State<CalcBMIController> {
           ),
         ),
         Padding(
+          //Output for BMU
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: Text(resultBMI),
         ),
         ElevatedButton(
+          //Calculate button
           onPressed: calculateBMI,
           child: Text('Calculate BMI'),
           style: ButtonStyle(
@@ -75,6 +83,7 @@ class _CalcBMIControllerState extends State<CalcBMIController> {
             foregroundColor: MaterialStateProperty.all(Colors.black),
           ),
         ),
+        //Reference scale
         const Text(
           "0 - 18.5 = Underweight\n"
               "18.5 - 24.9 = Healthy\n"
