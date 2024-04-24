@@ -71,6 +71,8 @@ class PersonInfoController extends ChangeNotifier {
     
     switch(goal.attribute)
     {
+      case HealthGoalAttribute.calories:
+        return _foodIntakeToday.calories;
       case HealthGoalAttribute.protein:
         return _foodIntakeToday.protein_g;
       case HealthGoalAttribute.fat:
@@ -88,6 +90,11 @@ class PersonInfoController extends ChangeNotifier {
     }
   //  return personInfo.currentAttributes[attribute]??0;
     return -1;
+  }
+
+  /// Returns true if a [goal] is completed.
+  bool isHealthGoalComplete(HealthGoal goal) {
+    return getHeathGoalProgress(goal) > goal.target;
   }
 
   /// Adds a [value] to the stat for a particular [attribute].

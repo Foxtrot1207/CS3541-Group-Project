@@ -13,6 +13,9 @@ class PersonInfo {
   /// Last measured weight of the person in pounds.
   int lastWeight = 0;
 
+  /// How long until we need a reminder that we should eat in hours
+  int eatReminderHours = 6;
+
   /// Creates a new PersonInfo instance.
   PersonInfo() {
   }

@@ -29,10 +29,13 @@ class _EnumSelectorState<T extends Enum> extends State<EnumSelector> {
             (MapEntry<String, dynamic> entry) {
               return DropdownMenuItem<T>(
                 value: entry.value,
-                child: Text(entry.key),
+                child: Text( entry.key )
               );
             }
           ).toList()),
+
+          // Hide the icon
+          icon: const Visibility(visible: false, child: Icon(Icons.arrow_downward)),
         );
       },
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:healthapp/controller/pet_controller.dart';
+import 'package:healthapp/pages/base_page.dart';
 import 'firebase_options.dart';
 import 'package:intl/intl.dart';
 
@@ -37,7 +39,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _currentIndex = 2;
 
-  // TODO: Remove these two later!
   PersonInfoController _personInfoController = PersonInfoController(
       personInfo: PersonInfo()
   );
@@ -72,11 +73,12 @@ class _MyAppState extends State<MyApp> {
       ]
   );
 
-  late List<Widget> _children;
+  late List<BaseStatefulPage> _children;
 
   /// Constructor for _MyAppState
   /// This order sets the bottom nav bar
   _MyAppState() {
+    PetController.instance.init(_personInfoController);
     _children = [
       ProfileScreen(controller: _personInfoController),
       HealthGoalScreen(controller: _personInfoController),
@@ -89,7 +91,14 @@ class _MyAppState extends State<MyApp> {
   /// Function to handle tab tap event
   void onTabTapped(int index) {
     setState(() {
+      // Notify old page
+      _children[_currentIndex].deactivatePage();
+
+      // Change page
       _currentIndex = index;
+      
+      // Notify new page
+      _children[_currentIndex].activatePage();
     });
   }
 

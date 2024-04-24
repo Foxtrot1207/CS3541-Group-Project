@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/pages/base_page.dart';
 import 'package:healthapp/pages/profile_bmi_page.dart';
 import 'package:healthapp/view/pet_widget.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends BaseStatefulPage {
   final PersonInfoController controller;
 
   ProfileScreen({required this.controller});

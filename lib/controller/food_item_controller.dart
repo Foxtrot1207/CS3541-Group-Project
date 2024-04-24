@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:healthapp/controller/pet_controller.dart';
 import 'package:intl/intl.dart';
 
 import 'package:healthapp/model/food_item.dart';
@@ -36,11 +37,11 @@ class FoodItemController with ChangeNotifier {
     notifyListeners();
   }
 
-  void logFoodItem(Map<String, dynamic> foodItem, String selectedDate,
-      int servings) {
+  void logFoodItem(Map<String, dynamic> foodItem, int servings, DateTime time) {
     foodItem['servings'] = servings;
     calculateNutrientByServing(foodItem, servings);
-    foodItem['date'] = selectedDate;
+
+    foodItem['date'] = DateFormat('yyyyMMdd').format(time);
 
     nutritonTracker.logFood(FoodItem.fromMap(foodItem));
 
@@ -49,6 +50,10 @@ class FoodItemController with ChangeNotifier {
         .doc(formattedDate)
         .collection('Food Items')
         .add(foodItem);
+
+    PetController.instance.updateLogTime();
+
+    notifyListeners();
   }
 
   /// Removes a FoodItem from the list of food items managed by this controller.
