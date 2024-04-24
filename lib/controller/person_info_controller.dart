@@ -99,8 +99,45 @@ class PersonInfoController extends ChangeNotifier {
 
   /// Adds a [value] to the stat for a particular [attribute].
   void addStat(HealthGoalAttribute attribute, double value) {
-    // Is there a nicer way to do this in dart?
-    //personInfo.currentAttributes[attribute] = (personInfo.currentAttributes[attribute]!) + value;
+
+    // Redirect into DB for now.
+    FoodItem item = FoodItem(name: "Manual Entry", serving_size: "1");
+    switch(attribute)
+    {
+      case HealthGoalAttribute.calories:
+        item.calories = value;
+        break;
+      case HealthGoalAttribute.protein:
+        item.protein_g = value;
+        break;
+      case HealthGoalAttribute.fat:
+        item.fat_g = value;
+        break;
+      case HealthGoalAttribute.carbs:
+        item.carbohydrates_g = value;
+        break;
+      case HealthGoalAttribute.sugar:
+        item.sugar_g = value;
+        break;
+      case HealthGoalAttribute.water:
+        item.water_ml = value;
+        break;
+      case HealthGoalAttribute.caffeine:
+        item.caffeine_mg = value;
+        break;
+    }
+
+    // NOTE: This should be moved into part of food item controller
+    var date = DateFormat('yyyyMMdd').format(DateTime.now());
+    var foodItem = item.toMap();
+    foodItem['date'] = date;
+    foodItem['servings'] = 1;
+    FirebaseFirestore.instance
+        .collection('Daily Logs')
+        .doc(date)
+        .collection('Food Items')
+        .add(foodItem);
+
     notifyListeners();
   }
 
