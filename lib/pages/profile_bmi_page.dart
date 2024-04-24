@@ -12,6 +12,7 @@ class ProfileBMIScreen extends StatefulWidget {
 
 class _ProfileBMIScreenState extends State<ProfileBMIScreen> {
 
+  //Function to update last BMI and weight
   void handleBMIUpdated(double bmi, double weight) {
     widget.controller.updateLastBMIAndWeight(bmi.round(), weight.round());
   }
@@ -22,6 +23,7 @@ class _ProfileBMIScreenState extends State<ProfileBMIScreen> {
       appBar: AppBar(),
       body: Column(
         children: [
+          //BMI controller with update function call
           CalcBMIController(onBMIUpdated: handleBMIUpdated)
         ],
       ),
