@@ -43,7 +43,7 @@ class _HealthGoalViewState extends State<HealthGoalView> {
           HealthGoal goal = widget.controller.getHealthGoalAt(index);
           return ListTile(
             title: Text('${goal.cadence == HealthGoalCadence.daily ? 'Daily' : 'Weekly'} ${goal.attribute.title} Goal'),
-            subtitle: Text('Target: ${goal.target}'),
+            subtitle: Text('Target: ${goal.target} (${goal.attribute.units})'),
             trailing: IconButton(
               icon: Icon(Icons.delete),
               onPressed: () => widget.controller.removeHealthGoalAt(index),

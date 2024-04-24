@@ -53,10 +53,6 @@ class _GoalProgressWidgetState extends State<GoalProgressView> {
 
   /// Builds the widget tree for this widget.
   Widget rebuild(BuildContext context) {
-    
-    if(widget.controller.getHealthGoalCount() == 0)
-      return Text("No Active Goals");
-
     List<TableRow> children = <TableRow>[];
     for(int i = 0; i < widget.controller.getHealthGoalCount(); i++) {
       HealthGoal goal = widget.controller.getHealthGoalAt(i);
@@ -67,6 +63,9 @@ class _GoalProgressWidgetState extends State<GoalProgressView> {
       
       children.add(buildRow(goal));
     }
+
+    if(children.isEmpty)
+      return Text("No Active Goals");
 
     return Padding(
         padding: const EdgeInsets.all(8.0),
