@@ -17,7 +17,7 @@ import 'package:healthapp/model/food_item.dart';
 import 'package:healthapp/model/person_info.dart';
 import 'package:healthapp/controller/nutrient_graph_controller.dart';
 
-String formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+String formattedDate = DateFormat.yMd().format(DateTime.now());
 /// Entry point of the application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
   final FoodItemController _foodItemController = FoodItemController(
       foodItems: [
         FoodItem(name: "Apple",
-            servingSize: '1 apple',
+            serving_size: '1 apple',
             calories: 122,
             fat_g: 0,
             protein_g: 0,
@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
             water_ml: 0,
             caffeine_mg: 0),
         FoodItem(name: "Scrambled Eggs",
-            servingSize: '2 eggs',
+            serving_size: '2 eggs',
             calories: 192,
             fat_g: 15.8,
             protein_g: 11.6,

@@ -1,7 +1,7 @@
 /// Represents a food item with its name, serving size, calories, and macros.
 class FoodItem {
   final String name;
-  final String servingSize;
+  final String serving_size;
   final double calories;
   final double fat_g;
   final double protein_g;
@@ -18,7 +18,7 @@ class FoodItem {
   /// The [macros] parameter specifies the macros of the food item.
   FoodItem({
     required this.name,
-    required this.servingSize,
+    required this.serving_size,
     required this.calories,
     required this.fat_g,
     required this.protein_g,
@@ -30,7 +30,7 @@ class FoodItem {
 
   FoodItem.fromMap(Map<String, dynamic> map)
       : name = map['name'] ?? '',
-        servingSize = map['servingSize'] ?? '',
+        serving_size = map['serving_size'] ?? '',
         calories = (map['calories'] ?? 0).toDouble(),
         fat_g = (map['fat_g'] ?? 0).toDouble(),
         protein_g = (map['protein_g'] ?? 0).toDouble(),
@@ -45,7 +45,7 @@ class FoodItem {
   Map<String, dynamic> toMap() {
     return {
       'name': name,
-      'servingSize': servingSize,
+      'serving_size': serving_size,
       'calories': calories,
       'fat_g': fat_g,
       'protein_g': protein_g,
@@ -54,34 +54,5 @@ class FoodItem {
       'water_ml': water_ml,
       'caffeine_mg': caffeine_mg
     };
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is FoodItem &&
-        other.name == name &&
-        other.servingSize == servingSize &&
-        other.calories == calories &&
-        other.fat_g == fat_g &&
-        other.protein_g == protein_g &&
-        other.carbohydrates_g == carbohydrates_g &&
-        other.sugar_g == sugar_g &&
-        other.water_ml == water_ml &&
-        other.caffeine_mg == caffeine_mg;
-  }
-
-  @override
-  int get hashCode {
-    return name.hashCode ^
-    servingSize.hashCode ^
-    calories.hashCode ^
-    fat_g.hashCode ^
-    protein_g.hashCode ^
-    carbohydrates_g.hashCode ^
-    sugar_g.hashCode ^
-    water_ml.hashCode ^
-    caffeine_mg.hashCode;
   }
 }

@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:healthapp/model/food_item.dart';
 import 'package:intl/intl.dart';
-
 import 'log_create_item_page.dart';
-import 'package:healthapp/controller/food_item_controller.dart';
 
 class LogAddFoodScreen extends StatefulWidget {
   FoodItemController controller;
@@ -39,7 +36,7 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
               );
             },
             child: Text('Create Item'),
-            
+
           ),
         ],
       ),
@@ -107,9 +104,9 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
                                     Text("Number of Servings:"),
                                     TextField(
                                       controller: servingsController,
-                                      keyboardType: TextInputType.number,
+                                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                                       inputFormatters: <TextInputFormatter>[
-                                        FilteringTextInputFormatter.digitsOnly
+                                        FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*')),
                                       ],
                                     ),
                                   ],
