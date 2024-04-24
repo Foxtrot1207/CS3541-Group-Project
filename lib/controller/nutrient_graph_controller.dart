@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 
-<<<<<<< Updated upstream
-=======
 import '../view/nutrient_graph_view.dart';
 
 Future<void> main() async {
@@ -32,8 +30,6 @@ DateTime formattedStartDate = DateFormat('yyyyMMdd').parse(formattedStartDateStr
 
 // Initialize an empty list to store the data points
 
-
->>>>>>> Stashed changes
 class NutrientGraphController {
   List<Tuple3<DateTime, double, HealthGoalAttribute>> nutrientData = [];
   NutrientGraphController({required this.nutrientData});
