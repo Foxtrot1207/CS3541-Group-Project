@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
 import 'package:healthapp/model/food_item.dart';
-import 'package:healthapp/view/food_screen.dart';
 
 class LogCreateItemScreen extends StatefulWidget {
   FoodItemController controller;
@@ -124,7 +123,7 @@ class _LogCreateItemScreenState extends State<LogCreateItemScreen> {
                   caffeine = double.parse(value!);
                 },
                 keyboardType: TextInputType.number,
-                unit: 'milligram(s)',
+                unit: "milligram(s)",
               ),
             ],
           ),

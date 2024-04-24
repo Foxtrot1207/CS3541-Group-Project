@@ -97,22 +97,22 @@ class _LogScreenState extends State<LogScreen> {
                   children: currentDayFoodItems.map((DocumentSnapshot document) {
                     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
                     return Dismissible(
-                      key: Key(document.id),
-                      onDismissed: (direction) {
-                        FoodItem foodItem = FoodItem.fromMap(data);
-                        widget.controller.removeFoodItem(foodItem, document.id, selectedDate);
-                      },
-                      background: Container(color: Colors.red,),
-                      child: ListTile(
-                        title: Text(data['name']),
-                        subtitle: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text('Servings: ${data['servings']}'),
-                            Text('Calories: ${data['calories']}'),
-                          ],
+                        key: Key(document.id),
+                        onDismissed: (direction) {
+                          FoodItem foodItem = FoodItem.fromMap(data);
+                          widget.controller.removeFoodItem(foodItem, document.id, selectedDate);
+                        },
+                        background: Container(color: Colors.red,),
+                        child: ListTile(
+                            title: Text(data['name']),
+                            subtitle: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text('Servings: ${data['servings']}'),
+                                Text('Calories: ${data['calories']}'),
+                              ],
+                            )
                         )
-                      )
                     );
                   }).toList(),
                 );
