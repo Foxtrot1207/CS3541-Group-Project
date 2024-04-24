@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:math';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
+import 'package:healthapp/controller/pet_controller.dart';
 
 
 class PetWidget extends StatefulWidget {
@@ -16,10 +18,15 @@ class PetWidget extends StatefulWidget {
 class _PetWidgetState extends State<PetWidget> with TickerProviderStateMixin {
   late AnimationController controller;
   ui.Image? spritesheet = null;
+  double _animationTime = 0;
+  double _lastUpdateTime = 0;
 
   @override
   void initState() {
     super.initState();
+
+    // Set the initial time, so our anim time is consistent
+    _lastUpdateTime = DateTime.now().millisecondsSinceEpoch / 1000.0;
 
     loadImage('assets/pet_spritesheet.png').then((img) {
       setState(() {
@@ -31,6 +38,21 @@ class _PetWidgetState extends State<PetWidget> with TickerProviderStateMixin {
       vsync: this,
       duration: Duration(milliseconds: 1000)
     )..repeat();
+
+  }
+
+  /// Calculate our steady clock for animation consistency
+  void calcAnimationTime() {
+    // Calculate the animation timer
+    double curTime = DateTime.now().millisecondsSinceEpoch / 1000.0;
+    double dt = curTime - _lastUpdateTime;
+    
+    // Timer modifier to make the pet move faster
+    dt = dt * PetController.instance.getWalkSpeed();
+
+    // Accumulate and update last time
+    _animationTime += dt;
+    _lastUpdateTime = curTime;
   }
 
   @override
@@ -66,9 +88,9 @@ class _PetWidgetState extends State<PetWidget> with TickerProviderStateMixin {
     if (spritesheet == null)
       return Placeholder();
 
-    double timeSeconds = DateTime.now().millisecondsSinceEpoch / 1000.0;
+    calcAnimationTime();
     return CustomPaint(
-      painter: _PetPainter(spritesheet: spritesheet!, time: timeSeconds),
+      painter: _PetPainter(spritesheet: spritesheet!, time: _animationTime),
       size: Size(256, 256)
     );
   }
@@ -82,24 +104,29 @@ class _PetPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
+    double t = time;
     
     // Width and Height for each tile
     const double tW = 256;
     const double tH = 256;
-    
-    // Timer modifier to make the pet move faster
-    double t = time * 2;
 
-    // X/Y index into the tileset 
-    int iX = t.round() % 3; 
-    int iY = (t.round() % 7 == 6) ? 1 : 0;
+    // If we should throw our hands in the air like we just don't care!
+    bool isDancing = PetController.instance.isCelebrating();
+    bool isHappy = PetController.instance.isPlaytime() || isDancing;
 
-    // Bump the height up and down to go with the 
-    double bump = (t.round() % 2 == 0) ? -4.0 : 0.0; 
+    // X/Y index into the tileset
+    int iX = t.round() % 3;
+    int iY = isHappy ? 1 : 0;
+
+    // Bump the height up and down to go with the walk cycle
+    double bump = (t.round() % 2 == 0) ? -4.0 : 0.0;
     
-    // Draw the pet 
+    // Dancing offset
+    double danceX = isDancing ? 4 * cos(t) : 0;
+
+    // Draw the pet
     Rect src = Rect.fromLTWH(iX * tW, iY * tH, tW, tH);
-    Rect dst = Rect.fromLTWH(0, bump, size.width, size.height);
+    Rect dst = Rect.fromLTWH(danceX, bump, size.width, size.height);
     canvas.drawImageRect(spritesheet, src, dst, paint);
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:healthapp/controller/pet_controller.dart';
 import 'firebase_options.dart';
 import 'package:intl/intl.dart';
 
@@ -77,6 +78,7 @@ class _MyAppState extends State<MyApp> {
   /// Constructor for _MyAppState
   /// This order sets the bottom nav bar
   _MyAppState() {
+    PetController.instance.init(_personInfoController);
     _children = [
       ProfileScreen(controller: _personInfoController),
       HealthGoalScreen(controller: _personInfoController),

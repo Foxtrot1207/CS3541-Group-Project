@@ -131,8 +131,7 @@ class _LogAddFoodScreenState extends State<LogAddFoodScreen> {
                           int servings = int.parse(servingsController.text);
                           if (servings != null) {
                             data['name'] = document.id;
-                            String formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
-                            widget.controller.logFoodItem(data, formattedDate, servings);
+                            widget.controller.logFoodItem(data, servings, DateTime.now());
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text('Added to Log!'))
                             );

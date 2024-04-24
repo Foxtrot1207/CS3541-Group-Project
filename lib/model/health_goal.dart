@@ -45,6 +45,9 @@ class HealthGoal {
   final HealthGoalCadence cadence;
   final HealthGoalAttribute attribute;
   final int target; //amount the user wants to be at at the end of the goal's period
+  
+  // When the goal was hit
+  DateTime? achievedAt = null;
 
   /// Constructor for HealthGoal class.
   ///

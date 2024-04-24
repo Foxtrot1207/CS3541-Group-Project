@@ -90,6 +90,11 @@ class PersonInfoController extends ChangeNotifier {
     return -1;
   }
 
+  /// Returns true if a [goal] is completed.
+  bool isHealthGoalComplete(HealthGoal goal) {
+    return getHeathGoalProgress(goal) > goal.target;
+  }
+
   /// Adds a [value] to the stat for a particular [attribute].
   void addStat(HealthGoalAttribute attribute, double value) {
     // Is there a nicer way to do this in dart?

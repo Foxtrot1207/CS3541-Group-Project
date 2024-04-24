@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/view/pet_status.dart';
 import 'package:healthapp/view/pet_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           
           PetWidget(),
+          PetStatusWidget(),
           
         ],
       ),
