@@ -71,6 +71,8 @@ class PersonInfoController extends ChangeNotifier {
     
     switch(goal.attribute)
     {
+      case HealthGoalAttribute.calories:
+        return _foodIntakeToday.calories;
       case HealthGoalAttribute.protein:
         return _foodIntakeToday.protein_g;
       case HealthGoalAttribute.fat:

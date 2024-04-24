@@ -24,20 +24,21 @@ enum HealthGoalCadence {
 
 /// Enum representing the attribute of a health goal.
 enum HealthGoalAttribute {
-  weight("Weight"),
-  protein("Protein"),
-  fat("Fat"),
-  carbs("Carbs"),
-  sugar("Sugar"),
-  water("Water"),
-  caffeine("Caffeine");
+  calories("Calories", "kcal"),
+  protein("Protein", "g"),
+  fat("Fat", "g"),
+  carbs("Carbs", "g"),
+  sugar("Sugar", "g"),
+  water("Water", "ml"),
+  caffeine("Caffeine", "mg");
 
   /// Constructor for HealthGoalAttribute enum.
   ///
   /// @param title The title of the attribute.
-  const HealthGoalAttribute(this.title);
+  const HealthGoalAttribute(this.title, this.units);
 
   final String title;
+  final String units;
 }
 
 /// Class representing a health goal.

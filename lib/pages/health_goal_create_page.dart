@@ -16,7 +16,7 @@ class _HealthGoalCreateScreenState extends State<HealthGoalCreateScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32),
         child: HealthGoalInputScreen(controller: widget.controller)
       )
     );
