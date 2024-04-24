@@ -86,7 +86,7 @@ class _PetWidgetState extends State<PetWidget> with TickerProviderStateMixin {
   /// Builds the widget tree for this widget.
   Widget rebuild(BuildContext context) {
     if (spritesheet == null)
-      return Placeholder();
+      return Placeholder(fallbackHeight: 256, fallbackWidth: 256);
 
     calcAnimationTime();
     return CustomPaint(

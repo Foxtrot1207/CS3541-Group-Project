@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:healthapp/main.dart';
+import 'package:healthapp/pages/base_page.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:healthapp/controller/food_item_controller.dart';
@@ -8,7 +9,7 @@ import 'package:healthapp/pages/log_add_food_page.dart';
 import 'package:healthapp/model/food_item.dart';
 
 
-class LogScreen extends StatefulWidget {
+class LogScreen extends BaseStatefulPage {
   FoodItemController controller;
 
   LogScreen({required this.controller});

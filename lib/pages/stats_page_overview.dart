@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:healthapp/controller/nutrient_graph_controller.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
 import 'package:healthapp/controller/food_item_controller.dart';
+import 'package:healthapp/pages/base_page.dart';
 import 'package:healthapp/pages/stats_comparison_page.dart';
 import 'package:healthapp/pages/stats_graphs_page.dart';
 import 'package:healthapp/pages/stats_input_page.dart';
 
-class StatsOverviewScreen extends StatefulWidget {
+class StatsOverviewScreen extends BaseStatefulPage {
   final NutrientGraphController controller;
   final PersonInfoController inputcontroller;
   final FoodItemController foodItemController;

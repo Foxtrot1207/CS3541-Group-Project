@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/controller/person_info_controller.dart';
+import 'package:healthapp/pages/base_page.dart';
 import 'package:healthapp/view/health_goal_view.dart';
 import 'package:healthapp/view/progress_widget.dart';
 import 'health_goal_create_page.dart';
 
-class HealthGoalScreen extends StatefulWidget {
+class HealthGoalScreen extends BaseStatefulPage {
   final PersonInfoController controller;
   HealthGoalScreen({required this.controller});
 
@@ -57,6 +58,7 @@ class _HealthGoalScreenState extends State<HealthGoalScreen> {
           ),
           SizedBox(height: 100),
           GoalProgressView(
+            hideCompleted: false,
             controller: widget.controller,
           ),
         ],

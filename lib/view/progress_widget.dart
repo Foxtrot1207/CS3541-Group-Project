@@ -8,11 +8,12 @@ import 'package:healthapp/model/health_goal.dart';
 class GoalProgressView extends StatefulWidget {
   /// The [PersonInfoController] that this widget will use to retrieve health goal data.
   final PersonInfoController controller;
+  final bool hideCompleted;
 
   /// Creates a new [GoalProgressView].
   ///
   /// The [controller] argument must not be null.
-  GoalProgressView({super.key, required this.controller});
+  GoalProgressView({super.key, required this.hideCompleted, required this.controller});
 
   @override
   State<GoalProgressView> createState() => _GoalProgressWidgetState();
@@ -52,10 +53,18 @@ class _GoalProgressWidgetState extends State<GoalProgressView> {
 
   /// Builds the widget tree for this widget.
   Widget rebuild(BuildContext context) {
+    
+    if(widget.controller.getHealthGoalCount() == 0)
+      return Text("No Active Goals");
 
     List<TableRow> children = <TableRow>[];
     for(int i = 0; i < widget.controller.getHealthGoalCount(); i++) {
       HealthGoal goal = widget.controller.getHealthGoalAt(i);
+
+      // If the widget doesn't want completed goals, filter them out
+      if(widget.hideCompleted && widget.controller.isHealthGoalComplete(goal))
+        continue;
+      
       children.add(buildRow(goal));
     }
 

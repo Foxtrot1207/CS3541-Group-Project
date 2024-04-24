@@ -15,14 +15,17 @@ class PetController extends ChangeNotifier {
   late PersonInfoController _person;
   late Timer _timer;
 
+  // We track this to be able to delay celebrations
+  bool _viewingPet = false;
+
   /// Pet status variables.
   /// We don't store these in the model, as they are trivial to regenerate and do not need to be retained
-  bool _playtime = false;
-  bool _hungry   = true;
-  bool _celebrate  = false;
+  bool _playtime  = false;
+  bool _hungry    = true;
+  bool _celebrate = false;
   DateTime _celebrationEndTime = DateTime.now();
-  bool isPlaytime()  { return _playtime; }
-  bool isHungry()    { return _hungry;   }
+  bool isPlaytime()    { return _playtime; }
+  bool isHungry()      { return _hungry;   }
   bool isCelebrating() { return _celebrate;  }
 
   void init(PersonInfoController personInfoController) {
@@ -34,6 +37,11 @@ class PetController extends ChangeNotifier {
 
   void updateLogTime() {
     _pet.lastEatTime = DateTime.now();
+  }
+
+  void setViewingPet(bool viewing) {
+    _viewingPet = viewing;
+    print("Viewing: $viewing");
   }
 
   String getName() {
@@ -98,8 +106,8 @@ class PetController extends ChangeNotifier {
       celebrate = false;
     }
 
-    // Check if any goals have been hit
-    if(!celebrate) {
+    // Check if any goals have been hit, but only if we're viewing the pet
+    if(!celebrate && _viewingPet) {
       for(int i = 0; i < _person.getHealthGoalCount(); i++) {
         HealthGoal goal =_person.getHealthGoalAt(i);
         if(goal.achievedAt == null && _person.isHealthGoalComplete(goal)) {
