@@ -84,8 +84,8 @@ class _StatsComparisonScreenState extends State<StatsComparisonScreen> {
                       return DataTable(
                         columns: const <DataColumn>[
                           DataColumn(label: Text('Nutrient')),
-                          DataColumn(label: Text('Today\'s Intake')),
-                          DataColumn(label: Text('Yesterday\'s Intake')),
+                          DataColumn(label: Text('Today')),
+                          DataColumn(label: Text('Yesterday')),
                         ],
                         rows: todayData.entries.map((entry) {
                           final yesterdayIntake = yesterdayData[entry.key] ?? 0.0;
